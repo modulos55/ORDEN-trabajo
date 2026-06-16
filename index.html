@@ -1,0 +1,1384 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>Leonel Cell — DisplayFix</title>
+<meta name="application-name" content="Leonel Cell">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Leonel Cell">
+<meta name="theme-color" content="#0b0e18">
+<meta name="mobile-web-app-capable" content="yes">
+<link rel="manifest" href="data:application/json;base64,eyJuYW1lIjoiTGVvbmVsIENlbGwgRGlzcGxheUZpeCIsInNob3J0X25hbWUiOiJMZW9uZWwgQ2VsbCIsInN0YXJ0X3VybCI6Ii4iLCJkaXNwbGF5Ijoic3RhbmRhbG9uZSIsImJhY2tncm91bmRfY29sb3IiOiIjMGIwZTE4IiwidGhlbWVfY29sb3IiOiIjMDBkNGZmIiwiaWNvbnMiOlt7InNyYyI6ImRhdGE6aW1hZ2Uvc3ZnK3htbDtiYXNlNjQsUEhOMlp5QjRiV3h1Y3owaWFIUjBjRG92TDNkM2R5NTNNeTV2Y21jdk1qQXdNQzl6ZG1jaUlIQnlaWE5sY25abFFYTndaV04wVW1GMGFXODlJbmhOYVc1WlRXbHVJRzFsWlhRaUlIWnBaWGRDYjNnOUlqQWdNQ0F4TURBd0lERXdNREFpSUdacGJHdzlJbTl5Wm1GeVpTSWdkR1ZoYlMxaVlYTmxhVzQ5SWpBd0xqQWlQanh3WVhSb0lHUTlJazB3SURBdE1UQXdJREV3TUNBME1EQWlJR1pwYkd3OUltOXVZV3dpUGtSeVlYWmxZU0IvUGp4d1lYUm9JR1E5SWswd0lEQXRNamd3SURNNE1DQXlPREFpSUdacGJHdzlJbTF5Wldaa0lpUGtSMlZzWVhraUlEOCtQQzl6ZG1jKyIsIndpZHRoIjoxOTIsImhlaWdodCI6MTkyfV19">
+<link rel="apple-touch-icon" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMDAgMTAwIj48cmVjdCB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgcng9IjIwIiBmaWxsPSIjMGIwZTE4Ii8+PHRleHQgeD0iNTAiIHk9IjY1IiBmb250LXNpemU9IjYwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIj7wn5CyPC90ZXh0Pjwvc3ZnPg==">
+<style>
+*{box-sizing:border-box;margin:0;padding:0;}
+:root{
+  --bg:#0b0e18;--surface:#13172a;--surface2:#1c2140;--border:#252c4a;
+  --accent:#00d4ff;--accent2:#ff6b35;--green:#00c896;--yellow:#ffd166;
+  --red:#ff4d6d;--text:#e8eaf0;--muted:#6b729a;--radius:14px;
+}
+body{background:var(--bg);color:var(--text);font-family:'Segoe UI',system-ui,sans-serif;min-height:100vh;overflow-x:hidden;}
+#loginScreen{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:100vh;padding:24px;}
+.login-logo{font-size:2.8rem;margin-bottom:8px;}
+.login-title{font-size:1.6rem;font-weight:900;color:var(--accent);letter-spacing:-1px;margin-bottom:2px;text-align:center;}
+.login-sub{font-size:.78rem;color:var(--muted);margin-bottom:26px;text-align:center;}
+.login-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:24px 20px;width:100%;max-width:340px;}
+.login-card label{font-size:.7rem;color:var(--muted);text-transform:uppercase;letter-spacing:.8px;display:block;margin-bottom:6px;}
+.login-card input{width:100%;background:var(--bg);border:1px solid var(--border);border-radius:10px;color:var(--text);font-size:1.2rem;padding:13px;outline:none;text-align:center;letter-spacing:5px;margin-bottom:13px;}
+.login-card input:focus{border-color:var(--accent);}
+.btn-primary{width:100%;background:linear-gradient(135deg,var(--accent),#0099cc);border:none;border-radius:var(--radius);color:#000;font-size:1rem;font-weight:800;padding:14px;cursor:pointer;}
+.login-hint{font-size:.68rem;color:var(--muted);text-align:center;margin-top:10px;}
+.login-error{background:#2a0a0a;border:1px solid var(--red);border-radius:8px;color:var(--red);font-size:.76rem;padding:9px;text-align:center;margin-bottom:10px;display:none;}
+.sync-status{font-size:.7rem;text-align:center;margin-top:8px;padding:6px;border-radius:8px;}
+.sync-ok{background:#0a2a1a;color:var(--green);}
+.sync-err{background:#2a0a0a;color:var(--red);}
+.sync-wait{background:#1a1a0a;color:var(--yellow);}
+#app{display:none;}
+.topbar{background:var(--surface);border-bottom:1px solid var(--border);padding:10px 14px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100;}
+.topbar-title{font-size:.92rem;font-weight:900;color:var(--accent);}
+.topbar-sub{font-size:.6rem;color:var(--muted);}
+.topbar-right{display:flex;gap:6px;align-items:center;}
+.icon-btn{background:var(--surface2);border:1px solid var(--border);border-radius:8px;color:var(--text);font-size:.78rem;padding:6px 8px;cursor:pointer;}
+.sync-dot{width:8px;height:8px;border-radius:50%;background:var(--muted);display:inline-block;}
+.sync-dot.on{background:var(--green);}
+.sync-dot.err{background:var(--red);}
+.tabs{display:flex;background:var(--surface);border-bottom:1px solid var(--border);position:sticky;top:50px;z-index:99;}
+.tab{flex:1;padding:10px 3px;text-align:center;font-size:.65rem;font-weight:700;text-transform:uppercase;letter-spacing:.4px;color:var(--muted);cursor:pointer;border-bottom:2px solid transparent;}
+.tab.active{color:var(--accent);border-bottom-color:var(--accent);}
+.page{display:none;padding:12px;}
+.page.active{display:block;}
+.card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:14px;margin-bottom:10px;}
+.card-title{font-size:.64rem;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--muted);margin-bottom:10px;}
+.field{margin-bottom:10px;}
+.field label{font-size:.7rem;color:var(--muted);display:block;margin-bottom:4px;}
+.field input,.field select,.field textarea{width:100%;background:var(--bg);border:1px solid var(--border);border-radius:10px;color:var(--text);font-size:.88rem;padding:10px 11px;outline:none;}
+.field input:focus,.field select:focus,.field textarea:focus{border-color:var(--accent);}
+.field textarea{resize:vertical;min-height:58px;font-family:inherit;}
+.prefix-wrap{position:relative;}
+.prefix-wrap span{position:absolute;left:11px;top:50%;transform:translateY(-50%);color:var(--muted);pointer-events:none;font-size:.88rem;}
+.prefix-wrap input{padding-left:22px;}
+.field input::-webkit-inner-spin-button{-webkit-appearance:none;}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:8px;}
+.btn-block{width:100%;border:none;border-radius:var(--radius);font-size:.9rem;font-weight:800;padding:13px;cursor:pointer;margin-bottom:7px;}
+.btn-accent{background:linear-gradient(135deg,var(--accent),#0099cc);color:#000;}
+.btn-green{background:linear-gradient(135deg,var(--green),#009973);color:#000;}
+.btn-outline{background:transparent;border:1px solid var(--border);color:var(--muted);}
+/* CALIDAD TOGGLE */
+.calidad-toggle{display:flex;gap:6px;margin:4px 0 8px;}
+.cal-btn{flex:1;background:var(--bg);border:1px solid var(--border);border-radius:9px;color:var(--muted);font-size:.72rem;font-weight:700;padding:8px 4px;cursor:pointer;text-align:center;transition:all .15s;}
+.cal-btn.sel{background:var(--accent);border-color:var(--accent);color:#000;}
+.cal-btn.sel-orig{background:var(--yellow);border-color:var(--yellow);color:#000;}
+.cal-btn.sel-glass{background:var(--green);border-color:var(--green);color:#000;}
+.foto-btns{display:flex;gap:8px;margin-bottom:8px;}
+.foto-btn{flex:1;background:var(--surface2);border:1px solid var(--border);border-radius:10px;color:var(--text);font-size:.8rem;font-weight:600;padding:10px;cursor:pointer;text-align:center;}
+/* COSTO DB */
+.costo-card{background:linear-gradient(135deg,#0d1a2a,#0a1520);border:1px solid var(--accent);border-radius:12px;padding:12px;margin:7px 0;}
+.cc-label{font-size:.64rem;text-transform:uppercase;letter-spacing:1px;color:var(--accent);margin-bottom:4px;}
+.cc-main{display:flex;justify-content:space-between;align-items:center;}
+.cc-price{font-size:1.4rem;font-weight:900;color:#fff;}
+.cc-detail{font-size:.7rem;color:var(--muted);margin-top:2px;}
+.cc-confirm{background:var(--accent);border:none;border-radius:8px;color:#000;font-size:.72rem;font-weight:800;padding:7px 11px;cursor:pointer;}
+/* TABLA TOGGLE */
+.tabla-toggle{display:flex;gap:6px;margin:4px 0 7px;}
+.tt-btn{flex:1;background:var(--bg);border:1px solid var(--border);border-radius:9px;color:var(--muted);font-size:.72rem;font-weight:700;padding:8px 4px;cursor:pointer;text-align:center;}
+.tt-btn.sel{background:var(--accent2);border-color:var(--accent2);color:#fff;}
+/* PRECIO */
+.precio-badge{background:linear-gradient(135deg,#0d2137,#0a1a2e);border:1px solid var(--accent);border-radius:12px;padding:12px;text-align:center;margin:7px 0;}
+.pb-label{font-size:.64rem;text-transform:uppercase;letter-spacing:1px;color:var(--accent);margin-bottom:3px;}
+.pb-price{font-size:1.9rem;font-weight:900;color:#fff;letter-spacing:-1px;}
+.pb-sub{font-size:.68rem;color:var(--muted);margin-top:2px;}
+.cuotas-mini{display:flex;gap:5px;flex-wrap:wrap;margin-top:4px;}
+.cm-btn{background:var(--bg);border:1px solid var(--border);border-radius:7px;color:var(--muted);font-size:.7rem;padding:5px 8px;cursor:pointer;font-weight:600;}
+.cm-btn.sel{background:var(--accent2);border-color:var(--accent2);color:#fff;}
+/* FOTO */
+.foto-wrap{display:flex;gap:8px;flex-wrap:wrap;margin-top:6px;}
+.foto-thumb{width:70px;height:70px;border-radius:10px;object-fit:cover;border:1px solid var(--border);cursor:pointer;}
+.foto-add{width:70px;height:70px;border-radius:10px;border:2px dashed var(--border);display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:1.4rem;color:var(--muted);background:var(--bg);}
+.foto-add:active{border-color:var(--accent);}
+/* ORDEN CARD */
+.orden-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:12px;margin-bottom:8px;cursor:pointer;}
+.orden-header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:4px;}
+.orden-num{font-size:.62rem;font-weight:700;color:var(--muted);}
+.status-badge{font-size:.6rem;font-weight:700;padding:3px 8px;border-radius:20px;}
+.st-recibido{background:#1a2a0a;color:#7ddf4f;}
+.st-listo{background:#0a1a2a;color:var(--accent);}
+.st-entregado{background:#1a1a1a;color:var(--muted);}
+.orden-cliente{font-size:.9rem;font-weight:700;margin-bottom:2px;}
+.orden-equipo{font-size:.76rem;color:var(--muted);}
+.orden-footer{display:flex;justify-content:space-between;align-items:center;margin-top:6px;padding-top:6px;border-top:1px solid var(--border);}
+.orden-precio{font-size:.92rem;font-weight:800;color:var(--yellow);}
+/* MODAL */
+#modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,.9);z-index:200;overflow-y:auto;padding:13px;}
+#modal.show{display:flex;align-items:flex-start;justify-content:center;}
+.modal-inner{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);width:100%;max-width:480px;padding:16px;margin:auto;}
+.modal-close{float:right;background:var(--surface2);border:1px solid var(--border);border-radius:7px;color:var(--muted);padding:4px 8px;cursor:pointer;font-size:.72rem;}
+.modal-title{font-size:.95rem;font-weight:800;margin-bottom:13px;}
+.detail-row{display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid var(--border);font-size:.8rem;}
+.detail-row .dr-label{color:var(--muted);}
+.detail-row .dr-val{font-weight:600;text-align:right;max-width:58%;}
+.ganancia-highlight{background:linear-gradient(135deg,#0a2a1a,#051510);border:1px solid var(--green);border-radius:10px;padding:11px;text-align:center;margin:10px 0;}
+.gh-label{font-size:.64rem;text-transform:uppercase;letter-spacing:1px;color:var(--green);margin-bottom:3px;}
+.gh-val{font-size:1.4rem;font-weight:900;color:var(--green);}
+.status-select{width:100%;background:var(--bg);border:1px solid var(--border);border-radius:10px;color:var(--text);font-size:.86rem;padding:9px;outline:none;margin:8px 0;}
+.print-options{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-top:9px;}
+.btn-print-therm{background:linear-gradient(135deg,#2a1a00,#3a2500);border:1px solid var(--yellow);border-radius:10px;color:var(--yellow);font-size:.75rem;font-weight:700;padding:10px 7px;cursor:pointer;text-align:center;}
+.btn-print-a4{background:linear-gradient(135deg,#0a1a2a,#0d2137);border:1px solid var(--accent);border-radius:10px;color:var(--accent);font-size:.75rem;font-weight:700;padding:10px 7px;cursor:pointer;text-align:center;}
+.btn-wa-full{background:#25d366;border:none;border-radius:10px;color:#000;font-size:.78rem;font-weight:700;padding:10px;cursor:pointer;width:100%;margin-top:7px;}
+.btn-delete{background:#2a0a0a;border:1px solid var(--red);color:var(--red);width:100%;margin-top:6px;border-radius:10px;font-size:.76rem;font-weight:700;padding:10px;cursor:pointer;}
+.fotos-modal{display:flex;gap:6px;flex-wrap:wrap;margin-top:6px;}
+.fotos-modal img{width:80px;height:80px;border-radius:8px;object-fit:cover;cursor:pointer;}
+/* RESUMEN */
+.resumen-tabs{display:flex;gap:7px;margin-bottom:12px;}
+.rt-btn{flex:1;background:var(--surface2);border:1px solid var(--border);border-radius:10px;color:var(--muted);font-size:.76rem;font-weight:700;padding:9px;cursor:pointer;text-align:center;}
+.rt-btn.active{background:var(--accent);border-color:var(--accent);color:#000;}
+.stat-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:12px;}
+.stat-box{background:var(--surface2);border:1px solid var(--border);border-radius:12px;padding:12px;text-align:center;}
+.stat-label{font-size:.61rem;text-transform:uppercase;letter-spacing:.7px;color:var(--muted);margin-bottom:4px;}
+.stat-val{font-size:1.15rem;font-weight:900;}
+.sv-green{color:var(--green);}.sv-yellow{color:var(--yellow);}.sv-blue{color:var(--accent);}.sv-orange{color:var(--accent2);}
+.rep-item{display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid var(--border);font-size:.78rem;cursor:pointer;}
+.rep-item:last-child{border-bottom:none;}
+.ri-precio{font-weight:700;color:var(--yellow);}
+.ri-gan{font-size:.68rem;color:var(--green);}
+.db-item{display:flex;justify-content:space-between;align-items:center;padding:7px 0;border-bottom:1px solid var(--border);font-size:.78rem;}
+.db-item:last-child{border-bottom:none;}
+.db-edit{background:var(--surface2);border:1px solid var(--border);border-radius:6px;color:var(--text);font-size:.72rem;padding:3px 7px;cursor:pointer;}
+.upload-zone{border:2px dashed var(--border);border-radius:12px;padding:20px;text-align:center;color:var(--muted);font-size:.8rem;margin-bottom:10px;cursor:pointer;}
+.search-wrap{position:relative;margin-bottom:10px;}
+.search-wrap input{width:100%;background:var(--surface);border:1px solid var(--border);border-radius:10px;color:var(--text);font-size:.86rem;padding:9px 11px 9px 32px;outline:none;}
+.search-wrap .si{position:absolute;left:10px;top:50%;transform:translateY(-50%);color:var(--muted);font-size:.8rem;}
+.filter-row{display:flex;gap:5px;margin-bottom:10px;overflow-x:auto;padding-bottom:2px;}
+.filter-btn{background:var(--surface);border:1px solid var(--border);border-radius:20px;color:var(--muted);font-size:.68rem;font-weight:700;padding:5px 10px;cursor:pointer;white-space:nowrap;}
+.filter-btn.active{background:var(--accent);border-color:var(--accent);color:#000;}
+.empty-state{text-align:center;padding:40px 16px;color:var(--muted);}
+.empty-state .es-icon{font-size:2rem;margin-bottom:9px;}
+#toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%) translateY(80px);background:var(--green);color:#000;font-size:.8rem;font-weight:700;padding:10px 18px;border-radius:30px;z-index:999;opacity:0;transition:all .3s;pointer-events:none;white-space:nowrap;}
+#toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
+/* LIGHTBOX */
+#lightbox{display:none;position:fixed;inset:0;background:rgba(0,0,0,.95);z-index:300;align-items:center;justify-content:center;}
+#lightbox.show{display:flex;}
+#lightbox img{max-width:95vw;max-height:90vh;border-radius:10px;}
+#lightbox-close{position:absolute;top:16px;right:16px;background:rgba(255,255,255,.15);border:none;color:#fff;font-size:1.2rem;padding:8px 12px;border-radius:8px;cursor:pointer;}
+@media print{
+  body{background:#fff!important;color:#000!important;}
+  #loginScreen,#app,#modal,#toast,#lightbox{display:none!important;}
+  #printArea{display:block!important;}
+}
+#printArea{display:none;}
+</style>
+</head>
+<body>
+
+<!-- LOGIN -->
+<div id="loginScreen">
+  <div class="login-logo">📱</div>
+  <div class="login-title">Leonel Cell</div>
+  <div class="login-sub">DisplayFix · Sistema de Órdenes</div>
+  <div class="login-card">
+    <div class="login-error" id="loginError">Clave incorrecta.</div>
+    <label>Clave de acceso</label>
+    <input type="password" id="pinInput" placeholder="••••" maxlength="8" onkeydown="if(event.key==='Enter')doLogin()">
+    <button class="btn-primary" onclick="doLogin()">ENTRAR</button>
+    <div class="login-hint">Clave por defecto: <strong>1234</strong></div>
+    <div id="syncStatus" class="sync-status sync-wait">⏳ Conectando...</div>
+  </div>
+</div>
+
+<!-- APP -->
+<div id="app">
+  <div class="topbar">
+    <div>
+      <div class="topbar-title">📱 Leonel Cell <span style="color:var(--accent2);font-size:.7rem">DisplayFix</span></div>
+      <div class="topbar-sub" id="topbarDate"></div>
+    </div>
+    <div class="topbar-right">
+      <span class="sync-dot" id="syncDot"></span>
+      <button class="icon-btn" onclick="showPage('listas')">📋</button>
+      <button class="icon-btn" onclick="showPage('ajustes')">⚙️</button>
+      <button class="icon-btn" onclick="logout()">🔒</button>
+    </div>
+  </div>
+  <div class="tabs">
+    <div class="tab active" onclick="showPage('nueva')">+ Nueva</div>
+    <div class="tab" onclick="showPage('ordenes')">Órdenes</div>
+    <div class="tab" onclick="showPage('resumen')">Resumen</div>
+  </div>
+
+  <!-- NUEVA ORDEN -->
+  <div class="page active" id="page-nueva">
+    <div class="card">
+      <div class="card-title">Datos del cliente</div>
+      <div class="field"><label>Nombre y apellido</label><input type="text" id="n-nombre" placeholder="Ej: Juan Pérez"></div>
+      <div class="field"><label>WhatsApp</label><input type="tel" id="n-telefono" placeholder="Ej: 11 2345-6789" inputmode="tel"></div>
+    </div>
+    <div class="card">
+      <div class="card-title">Equipo</div>
+      <div class="row2">
+        <div class="field"><label>Marca</label>
+          <select id="n-marca" onchange="cargarModelos()">
+            <option value="">— Marca —</option>
+            <option>Samsung</option><option>iPhone</option><option>Motorola</option>
+            <option>Xiaomi</option><option>LG</option><option>Nokia</option>
+            <option>TCL</option><option>ZTE</option><option>Huawei</option>
+            <option>Oppo</option><option>Infinix</option><option>Alcatel</option><option>Otra</option>
+          </select>
+        </div>
+        <div class="field"><label>Modelo</label>
+          <select id="n-modelo" onchange="cargarCosto()"><option value="">— Modelo —</option></select>
+        </div>
+      </div>
+      <div class="field"><label>Color</label><input type="text" id="n-color" placeholder="Ej: Negro"></div>
+      <div class="field"><label>Observaciones del equipo</label>
+        <textarea id="n-obs" placeholder="Daños visibles, detalles importantes..."></textarea>
+      </div>
+      <!-- FOTOS -->
+      <div class="field">
+        <label>📷 Fotos del estado del equipo</label>
+        <div class="foto-btns">
+          <button class="foto-btn" onclick="document.getElementById('fotoGaleria').click()">🖼️ Galería</button>
+          <button class="foto-btn" onclick="document.getElementById('fotoCamara').click()">📷 Cámara</button>
+        </div>
+        <div class="foto-wrap" id="fotoWrap"></div>
+        <input type="file" id="fotoGaleria" accept="image/*" multiple style="display:none" onchange="agregarFotos(this)">
+        <input type="file" id="fotoCamara" accept="image/*" capture="environment" style="display:none" onchange="agregarFotos(this)">
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-title">Reparación y precio</div>
+      <div class="field"><label>Tipo de reparación</label>
+        <select id="n-tipo" onchange="cargarCosto()">
+          <option value="">— Seleccioná —</option>
+          <option value="modulo">Módulo / Pantalla completa</option>
+          <option value="vidrio_plano">Cambio de vidrio plano</option>
+          <option value="vidrio_curvo">Cambio de vidrio curvo</option>
+          <option value="bateria">Batería</option>
+          <option value="pin">Pin de carga</option>
+          <option value="tapa">Tapa trasera</option>
+          <option value="otro">Otro</option>
+        </select>
+      </div>
+      <!-- NOTA RIESGO VIDRIO -->
+      <div id="notaVidrio" style="display:none;background:linear-gradient(135deg,#2a1500,#1a0d00);border:1px solid var(--accent2);border-radius:12px;padding:12px;margin:8px 0;">
+        <div style="font-size:.72rem;font-weight:800;color:var(--accent2);margin-bottom:5px;">⚠️ AVISO IMPORTANTE — Cambio de vidrio</div>
+        <div style="font-size:.75rem;color:#ffcc99;line-height:1.5;">El cambio de vidrio es un trabajo delicado que conlleva un riesgo aproximado del <strong>10%</strong> de daño al módulo durante el proceso. En caso de que esto ocurra, se le ofrecerá al cliente el reemplazo del módulo a <strong>precio de costo</strong>, sin cargo de mano de obra.</div>
+      </div>
+      <!-- NOTA GARANTIA MÓDULO -->
+      <div id="notaModulo" style="display:none;background:linear-gradient(135deg,#0a1a2a,#051015);border:1px solid var(--accent);border-radius:12px;padding:12px;margin:8px 0;">
+        <div style="font-size:.72rem;font-weight:800;color:var(--accent);margin-bottom:5px;">ℹ️ GARANTÍA — Cambio de módulo</div>
+        <div style="font-size:.75rem;color:#99ddff;line-height:1.5;">La garantía es de <strong>30 días</strong>, únicamente por fallas de fábrica del repuesto. No cubre golpes, caídas, humedad, ni ningún otro tipo de daño externo.</div>
+      </div>
+        <div class="field">
+          <label>Calidad del repuesto</label>
+          <div class="calidad-toggle">
+            <button class="cal-btn sel-glass" id="cal-glass" onclick="setCalidad('glass',this)">Glass</button>
+            <button class="cal-btn" id="cal-std" onclick="setCalidad('std',this)">OLED</button>
+            <button class="cal-btn" id="cal-orig" onclick="setCalidad('orig',this)">Original</button>
+          </div>
+        </div>
+      </div>
+      <!-- COSTO DB -->
+      <!-- CALIDAD -->
+      <div id="calidadSection" style="display:none">
+        <div class="costo-card">
+          <div class="cc-label">💾 Costo del repuesto (base de datos)</div>
+          <div class="cc-main">
+            <div><div class="cc-price" id="cc-precio">—</div><div class="cc-detail" id="cc-detalle"></div></div>
+            <button class="cc-confirm" onclick="confirmarCosto()">Usar ✓</button>
+          </div>
+        </div>
+        <div style="font-size:.7rem;color:var(--muted);margin-bottom:7px;text-align:center;">o modificá el costo abajo</div>
+      </div>
+      <div class="field"><label>Costo del repuesto (reposición hoy)</label>
+        <div class="prefix-wrap"><span>$</span>
+          <input type="number" id="n-costo" placeholder="Ej: 12000" inputmode="numeric" oninput="calcPrecio()">
+        </div>
+      </div>
+      <div class="field"><label>Tabla de precios</label>
+        <div class="tabla-toggle">
+          <button class="tt-btn sel" id="tb-local" onclick="setTabla('local',this)">Tabla 1<br><small style="font-weight:400;font-size:.62rem">Solo local</small></button>
+          <button class="tt-btn" id="tb-sueldo" onclick="setTabla('sueldo',this)">Tabla 2<br><small style="font-weight:400;font-size:.62rem">Con sueldo</small></button>
+        </div>
+      </div>
+      <div id="precioSugerido" style="display:none">
+        <div class="precio-badge">
+          <div class="pb-label">💡 Precio sugerido efectivo</div>
+          <div class="pb-price" id="ps-price">—</div>
+          <div class="pb-sub" id="ps-sub"></div>
+        </div>
+        <div class="field" style="margin-top:3px;"><label>Tarjeta / cuotas</label>
+          <div class="cuotas-mini" id="cuotasMini">
+            <button class="cm-btn sel" data-c="1" onclick="setCuotaNueva(this)">Efect.</button>
+            <button class="cm-btn" data-c="2" onclick="setCuotaNueva(this)">2c</button>
+            <button class="cm-btn" data-c="3" onclick="setCuotaNueva(this)">3c</button>
+            <button class="cm-btn" data-c="6" onclick="setCuotaNueva(this)">6c</button>
+            <button class="cm-btn" data-c="12" onclick="setCuotaNueva(this)">12c</button>
+          </div>
+          <div id="ps-tarjeta" style="font-size:.76rem;color:var(--yellow);margin-top:5px;padding:7px;background:var(--surface2);border-radius:8px;display:none;"></div>
+        </div>
+      </div>
+      <div class="field"><label>Precio cobrado al cliente</label>
+        <div class="prefix-wrap"><span>$</span>
+          <input type="number" id="n-precio" placeholder="Podés modificarlo" inputmode="numeric" oninput="actualizarGanancia()">
+        </div>
+      </div>
+      <div id="ganancia-preview" style="display:none;font-size:.76rem;padding:7px;background:#0a2a1a;border-radius:8px;margin-top:3px;"></div>
+      <div class="field"><label>Forma de pago</label>
+        <select id="n-pago">
+          <option value="efectivo">Efectivo / Transferencia</option>
+          <option value="debito">Tarjeta débito</option>
+          <option value="credito1">Crédito 1 pago</option>
+          <option value="cuotas">Cuotas</option>
+        </select>
+      </div>
+    </div>
+    <button class="btn-block btn-accent" onclick="guardarOrden()">GUARDAR ORDEN</button>
+    <button class="btn-block btn-outline" onclick="limpiarNueva()">Limpiar formulario</button>
+  </div>
+
+  <!-- ORDENES -->
+  <div class="page" id="page-ordenes">
+    <div class="search-wrap"><span class="si">🔍</span>
+      <input type="text" id="searchInput" placeholder="Buscar cliente o equipo..." oninput="renderOrdenes()">
+    </div>
+    <div class="filter-row">
+      <button class="filter-btn active" data-f="todas" onclick="setFiltro(this)">Todas</button>
+      <button class="filter-btn" data-f="recibido" onclick="setFiltro(this)">Recibidas</button>
+      <button class="filter-btn" data-f="listo" onclick="setFiltro(this)">Listas</button>
+      <button class="filter-btn" data-f="entregado" onclick="setFiltro(this)">Entregadas</button>
+    </div>
+    <div id="listaOrdenes"></div>
+  </div>
+
+  <!-- RESUMEN -->
+  <div class="page" id="page-resumen">
+    <div class="resumen-tabs">
+      <button class="rt-btn active" onclick="setResumen('hoy',this)">Hoy</button>
+      <button class="rt-btn" onclick="setResumen('mes',this)">Este mes</button>
+    </div>
+    <div id="resumenContent"></div>
+  </div>
+
+  <!-- LISTAS -->
+  <div class="page" id="page-listas">
+    <div class="card">
+      <div class="card-title">📂 Importar lista de precios</div>
+      <p style="font-size:.76rem;color:var(--muted);margin-bottom:10px;">Formato TXT:<br>
+      <code style="background:var(--bg);padding:2px 6px;border-radius:4px;font-size:.7rem;">MARCA|MODELO|TIPO|COSTO_STD|COSTO_ORIG</code><br>
+      <span style="font-size:.7rem;">Ejemplo: Samsung|A12|modulo|16060|24820<br>Si no hay original, dejá el último en 0</span></p>
+      <div class="upload-zone" onclick="document.getElementById('fileInput').click()">📄 Subir archivo TXT</div>
+      <input type="file" id="fileInput" accept=".txt,.csv" style="display:none" onchange="importarArchivo(this)">
+      <div class="field"><label>O pegá el texto acá</label>
+        <textarea id="listaTexto" placeholder="Samsung|A12|modulo|16060|24820" style="min-height:90px;font-size:.78rem;font-family:monospace;"></textarea>
+      </div>
+      <button class="btn-block btn-green" onclick="importarTexto()">IMPORTAR LISTA</button>
+    </div>
+    <div class="card">
+      <div class="card-title">✏️ Editar precio individual</div>
+      <div class="field"><label>Marca</label>
+        <select id="aj-dbMarca" onchange="renderDbEdit()">
+          <option value="">— Seleccioná —</option>
+          <option>Samsung</option><option>iPhone</option><option>Motorola</option>
+          <option>Xiaomi</option><option>LG</option><option>Nokia</option>
+          <option>TCL</option><option>ZTE</option><option>Huawei</option>
+        </select>
+      </div>
+      <div id="dbEditList"></div>
+    </div>
+  </div>
+
+  <!-- AJUSTES -->
+  <div class="page" id="page-ajustes">
+    <div class="card">
+      <div class="card-title">Nombre del taller</div>
+      <div class="field"><input type="text" id="aj-nombre" placeholder="Leonel Cell (DisplayFix)"></div>
+      <button class="btn-block btn-accent" onclick="guardarNombreTaller()">Guardar</button>
+    </div>
+    <div class="card">
+      <div class="card-title">🔒 Cambiar clave</div>
+      <div class="field"><label>Nueva clave</label><input type="password" id="aj-clave1"></div>
+      <div class="field"><label>Repetir</label><input type="password" id="aj-clave2"></div>
+      <button class="btn-block btn-green" onclick="cambiarClave()">Cambiar clave</button>
+    </div>
+    <div class="card">
+      <div class="card-title">Gastos mensuales</div>
+      <div class="field"><label>Gastos del local ($)</label>
+        <div class="prefix-wrap"><span>$</span><input type="number" id="aj-gastos" inputmode="numeric"></div></div>
+      <div class="field"><label>Gastos personales ($)</label>
+        <div class="prefix-wrap"><span>$</span><input type="number" id="aj-personal" inputmode="numeric"></div></div>
+      <button class="btn-block btn-accent" onclick="guardarGastos()">Guardar gastos</button>
+    </div>
+    <div class="card">
+      <div class="card-title" style="color:var(--red)">Zona peligrosa</div>
+      <button style="width:100%;background:#2a0a0a;border:1px solid var(--red);color:var(--red);border-radius:var(--radius);padding:11px;cursor:pointer;font-weight:700;" onclick="borrarTodo()">🗑️ Borrar TODOS los registros</button>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL -->
+<div id="modal"><div class="modal-inner" id="modalInner"></div></div>
+<!-- LIGHTBOX -->
+<div id="lightbox" onclick="this.classList.remove('show')">
+  <button id="lightbox-close" onclick="document.getElementById('lightbox').classList.remove('show')">✕</button>
+  <img id="lightbox-img" src="">
+</div>
+<div id="printArea"></div>
+<div id="toast"></div>
+
+<!-- FIREBASE -->
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+import { getDatabase, ref, set, onValue, remove, update, off } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
+
+const firebaseConfig = {
+  apiKey:"AIzaSyDWqNyzD2SAZVqdq1SHntoMVmOfaJAGTuI",
+  authDomain:"taller-app-75c32.firebaseapp.com",
+  projectId:"taller-app-75c32",
+  storageBucket:"taller-app-75c32.firebasestorage.app",
+  messagingSenderId:"839390196228",
+  appId:"1:839390196228:web:947d28d1362077a86c7b51",
+  databaseURL:"https://taller-app-75c32-default-rtdb.firebaseio.com"
+};
+
+const fbApp = initializeApp(firebaseConfig);
+const db = getDatabase(fbApp);
+
+window._fbSet    = (path,data)=>set(ref(db,path),data);
+window._fbRemove = (path)=>remove(ref(db,path));
+window._fbUpdate = (path,data)=>update(ref(db,path),data);
+
+// Escuchar órdenes
+const ordenesRef = ref(db,'ordenes');
+onValue(ordenesRef, snap=>{
+  const data=snap.val();
+  window._state.ordenes = data ? Object.values(data).sort((a,b)=>new Date(b.fecha)-new Date(a.fecha)) : [];
+  if(window._appReady){ window.renderOrdenes(); window.renderResumen(); }
+});
+
+// Escuchar config
+const configRef = ref(db,'config');
+onValue(configRef, snap=>{
+  const data=snap.val();
+  if(data){
+    if(data.pin) window._state.pin=data.pin;
+    if(data.tallerNombre) window._state.tallerNombre=data.tallerNombre;
+    if(data.gastosLocal) window._state.gastosLocal=data.gastosLocal;
+    if(data.gastosPersonal) window._state.gastosPersonal=data.gastosPersonal;
+    if(data.precios) window._state.precios=data.precios;
+  }
+});
+
+// Conexión — fix: usar ref separado para no interferir
+const connRef = ref(db,'.info/connected');
+onValue(connRef, snap=>{
+  const ok=snap.val()===true;
+  const dot=document.getElementById('syncDot');
+  const st=document.getElementById('syncStatus');
+  if(dot){ dot.className='sync-dot'+(ok?' on':' err'); }
+  if(st){
+    st.className='sync-status '+(ok?'sync-ok':'sync-err');
+    st.textContent=ok?'☁️ Conectado y sincronizado':'⚠️ Sin conexión — modo local';
+  }
+  window._fbConnected=ok;
+});
+</script>
+
+<script>
+window._state={pin:'1234',tallerNombre:'Leonel Cell (DisplayFix)',gastosLocal:900000,gastosPersonal:1500000,ordenes:[],precios:null};
+window._appReady=false;
+window._fbConnected=false;
+
+const COEF_MC={1:1,2:1.1138,3:1.156,4:1.1996,5:1.2447,6:1.2913,9:1.4733,12:1.6524,18:2.0716,24:2.5888};
+const CONFIGS={
+  modulo:      {fL:1.70,moL:22000,fS:1.85,moS:32000},
+  vidrio_plano:{fL:2.50,moL:19000,fS:2.80,moS:26000},
+  vidrio_curvo:{fL:2.20,moL:25000,fS:2.50,moS:33000},
+  bateria:     {fL:2.00,moL:15000,fS:2.30,moS:22000},
+  pin:         {fL:2.50,moL:18000,fS:2.80,moS:25000},
+  tapa:        {fL:2.50,moL:12000,fS:2.80,moS:18000},
+  otro:        {fL:1.70,moL:18000,fS:1.90,moS:26000},
+};
+
+// ── BASE DE DATOS ACTUALIZADA CON NUEVAS LISTAS ──
+// Los costos tienen formato {std: precio_estandar, orig: precio_original}
+// Si no hay original, orig = 0
+const DB_DEFAULT={
+  Samsung:{
+    modelos:["A01 Core","A02","A02S","A03","A03 Core","A03S","A04","A04E","A04S","A05","A05S","A06","A07","A10","A10S","A11","A12","A13 4G","A14 5G","A15","A16 4G","A16 5G","A20","A20S","A21","A21S","A22 4G","A22 5G","A23 4G","A23 5G","A24","A25","A26","A30","A30S","A31","A32 4G","A33","A34","A35","A36","A51","A52","A53","A54","A55","A56","A70","A71","A72","S20","S20 FE","S21 FE","S22","S22 Ultra","S23","S23 Ultra","S24","S24 Ultra","S25 Ultra"],
+    costos:{
+      modulo:{
+        "A01 Core":{std:12848,orig:20148},"A02":{std:14600,orig:22192},"A02S":{std:13140,orig:22192},
+        "A03":{std:16060,orig:24820},"A03 Core":{std:14600,orig:24820},"A03S":{std:16060,orig:22192},
+        "A04":{std:16060,orig:24820},"A04E":{std:16060,orig:0},"A04S":{std:16060,orig:24820},
+        "A05":{std:17520,orig:26280},"A05S":{std:17520,orig:26280},"A06":{std:17520,orig:26280},
+        "A07":{std:23360,orig:0},"A10":{std:12410,orig:20440},"A10S":{std:15330,orig:19710},
+        "A11":{std:15330,orig:23360},"A12":{std:16060,orig:24820},"A13 4G":{std:16936,orig:0},
+        "A14 5G":{std:17520,orig:0},"A15":{std:52560,orig:131400},"A16 4G":{std:67160,orig:138700},
+        "A16 5G":{std:65700,orig:138700},"A20":{std:35040,orig:0},"A20S":{std:14600,orig:0},
+        "A21":{std:10220,orig:0},"A21S":{std:21170,orig:26280},"A22 4G":{std:36500,orig:73000},
+        "A22 5G":{std:20440,orig:25404},"A23 4G":{std:18396,orig:26280},"A23 5G":{std:19710,orig:0},
+        "A24":{std:58400,orig:124100},"A25":{std:55480,orig:131400},"A26":{std:70080,orig:138700},
+        "A30":{std:35040,orig:0},"A30S":{std:35040,orig:0},"A31":{std:36500,orig:116800},
+        "A32 4G":{std:40880,orig:124100},"A33":{std:51100,orig:148920},"A34":{std:0,orig:138700},
+        "A35":{std:73000,orig:160600},"A36":{std:58400,orig:153300},"A51":{std:40880,orig:146000},
+        "A52":{std:48180,orig:131400},"A53":{std:0,orig:160600},"A54":{std:55480,orig:146000},
+        "A55":{std:61320,orig:160600},"A56":{std:0,orig:160600},"A70":{std:0,orig:124100},
+        "A71":{std:65700,orig:160600},"A72":{std:0,orig:153300},
+        "S20":{std:0,orig:335800},"S20 FE":{std:58400,orig:0},"S21 FE":{std:146000,orig:335800},
+        "S22":{std:0,orig:306600},"S22 Ultra":{std:204400,orig:467200},
+        "S23":{std:106580,orig:306600},"S23 Ultra":{std:204400,orig:511000},
+        "S24":{std:0,orig:321200},"S24 Ultra":{std:262800,orig:448220},"S25 Ultra":{std:262800,orig:423400}
+      },
+      bateria:{
+        "A01 Core":{std:10220,orig:0},"A02":{std:14600,orig:0},"A02S":{std:14600,orig:17520},
+        "A03":{std:14600,orig:17520},"A04":{std:0,orig:17520},"A05":{std:17520,orig:0},
+        "A06":{std:17520,orig:0},"A10":{std:11680,orig:0},"A10S":{std:11680,orig:17520},
+        "A11":{std:11680,orig:17520},"A14 5G":{std:14600,orig:0},"A20S":{std:11680,orig:0},
+        "A21S":{std:11680,orig:17520},"A22 4G":{std:12410,orig:0},"A23 4G":{std:17520,orig:18980},
+        "A24":{std:14600,orig:18980},"A30":{std:11680,orig:17520},"A31":{std:12410,orig:17520},
+        "A32 4G":{std:12410,orig:0},"A33":{std:0,orig:17520},"A34":{std:14600,orig:18980},
+        "A36":{std:17520,orig:0},"A51":{std:14600,orig:18980},"A52":{std:14600,orig:17520},
+        "A54":{std:14600,orig:0},"A70":{std:14600,orig:18980},"A71":{std:14600,orig:0},
+        "A72":{std:0,orig:17520},"S21":{std:17520,orig:0},"S21 FE":{std:17520,orig:0},
+        "S22":{std:17520,orig:0},"S22 Ultra":{std:17520,orig:20440},"S23 Ultra":{std:26280,orig:0}
+      },
+      pin:{
+        "A02":{std:5000,orig:0},"A03":{std:5000,orig:0},"A04S":{std:8500,orig:0},
+        "A05":{std:5000,orig:0},"A10":{std:8500,orig:0},"A11":{std:8500,orig:0},
+        "A12":{std:8500,orig:0},"A13 4G":{std:8500,orig:0},"A14 5G":{std:5000,orig:0},
+        "A20S":{std:5000,orig:0},"A21S":{std:8500,orig:0},"A22 4G":{std:5000,orig:0},
+        "A25":{std:5000,orig:0},"A32 4G":{std:8000,orig:0},"A33":{std:9000,orig:0},
+        "A34":{std:9000,orig:0},"A51":{std:5000,orig:0},"A52":{std:16500,orig:0},
+        "A53":{std:10000,orig:0},"A55":{std:5000,orig:0},"S20":{std:8000,orig:0}
+      },
+      vidrio_plano:{
+        "A01 Core":{std:5600,orig:0},"A02":{std:5600,orig:0},"A03":{std:5600,orig:0},
+        "A05":{std:5600,orig:0},"A10":{std:5600,orig:0},"A11":{std:5600,orig:0},
+        "A12":{std:5600,orig:0},"A13 4G":{std:5600,orig:0},"A14 5G":{std:5600,orig:0}
+      },
+      vidrio_curvo:{
+        "A20":{std:13000,orig:0},"A21S":{std:13000,orig:0},"A22 4G":{std:13000,orig:0},
+        "A23 4G":{std:13000,orig:0},"A24":{std:13000,orig:0},"A25":{std:13000,orig:0},
+        "A32 4G":{std:13000,orig:0},"A33":{std:13000,orig:0},"A34":{std:13000,orig:0},
+        "A51":{std:13000,orig:0},"A52":{std:13000,orig:0},"A53":{std:13000,orig:0},
+        "A54":{std:13000,orig:0},"A55":{std:13000,orig:0},"S20":{std:13000,orig:0}
+      },
+      tapa:{
+        "A01 Core":{std:7300,orig:0},"A02":{std:7300,orig:0},"A02S":{std:7300,orig:0},
+        "A03":{std:7300,orig:0},"A04":{std:7300,orig:0},"A05":{std:7300,orig:0},
+        "A10":{std:5840,orig:0},"A11":{std:7300,orig:0},"A12":{std:7300,orig:0},
+        "A13 4G":{std:7300,orig:0},"A20":{std:7300,orig:0},"A20S":{std:7300,orig:0},
+        "A21S":{std:7300,orig:0},"A22 4G":{std:7300,orig:0},"A30":{std:7300,orig:0},
+        "A31":{std:7300,orig:0},"A32 4G":{std:7300,orig:0},"A33":{std:8760,orig:0},
+        "A34":{std:8760,orig:0},"A35":{std:10220,orig:0},"A51":{std:7300,orig:0},
+        "A52":{std:7300,orig:0},"A53":{std:8760,orig:0},"A54":{std:11680,orig:0},
+        "A55":{std:8760,orig:0},"A56":{std:11680,orig:0},"A70":{std:7300,orig:0},
+        "S20":{std:10220,orig:0},"S20 FE":{std:10220,orig:0},"S22":{std:11680,orig:0},
+        "S23":{std:11680,orig:0},"S24":{std:14600,orig:0},"S24 Ultra":{std:14600,orig:0}
+      }
+    }
+  },
+  iPhone:{
+    modelos:["6","6S","6 Plus","6S Plus","7","7 Plus","8","8 Plus","X","XS","XS Max","XR","11","11 Pro","11 Pro Max","12","12 Pro","12 Pro Max","13","13 Pro","13 Pro Max","14","14 Pro","14 Pro Max","14 Plus","15","15 Pro","15 Pro Max","15 Plus","16","16 Pro","16 Pro Max","17 Pro","17 Pro Max"],
+    costos:{
+      modulo:{
+        "6":{std:10220,orig:0},"6S":{std:10220,orig:0},"6 Plus":{std:9665,orig:0},"6S Plus":{std:11680,orig:0},
+        "7":{std:13140,orig:0},"7 Plus":{std:13140,orig:20440},"8":{std:13870,orig:0},"8 Plus":{std:14600,orig:17520},
+        "X":{std:29200,orig:30660},"XS":{std:20440,orig:32120},"XS Max":{std:43800,orig:62780},
+        "XR":{std:24820,orig:30660},"11":{std:26280,orig:37960},"11 Pro":{std:46720,orig:65700},
+        "11 Pro Max":{std:42340,orig:70080},"12":{std:48180,orig:75920},"12 Pro":{std:48180,orig:75920},
+        "12 Pro Max":{std:80300,orig:109500},"13":{std:55480,orig:90520},"13 Pro":{std:42340,orig:109500},
+        "13 Pro Max":{std:75920,orig:112420},"14":{std:51100,orig:94900},"14 Pro":{std:65700,orig:189800},
+        "14 Pro Max":{std:94900,orig:160600},"14 Plus":{std:124100,orig:0},
+        "15":{std:65700,orig:197100},"15 Pro":{std:80300,orig:160600},"15 Pro Max":{std:124100,orig:204400},
+        "16":{std:80300,orig:207320},"16 Pro":{std:146000,orig:219000},"16 Pro Max":{std:153300,orig:211700},
+        "17 Pro":{std:204400,orig:0},"17 Pro Max":{std:226300,orig:262800}
+      },
+      bateria:{
+        "6":{std:13140,orig:14600},"6S":{std:13140,orig:16060},"6 Plus":{std:13140,orig:16060},
+        "6S Plus":{std:14600,orig:17520},"7":{std:14600,orig:18980},"7 Plus":{std:16060,orig:20440},
+        "8":{std:14600,orig:16060},"8 Plus":{std:14600,orig:20440},"X":{std:16060,orig:0},
+        "XS":{std:20440,orig:29200},"XR":{std:16060,orig:29200},"XS Max":{std:20440,orig:29200},
+        "11":{std:14600,orig:0},"11 Pro":{std:23360,orig:0},"11 Pro Max":{std:21900,orig:0},
+        "12":{std:21900,orig:43800},"12 Pro":{std:21900,orig:43800},"12 Pro Max":{std:24820,orig:43800},
+        "13":{std:16060,orig:43800},"13 Pro":{std:0,orig:43800},"13 Pro Max":{std:29200,orig:43800},
+        "14":{std:0,orig:43800},"14 Pro":{std:0,orig:43800},"14 Pro Max":{std:0,orig:43800},
+        "15":{std:0,orig:43800},"15 Pro":{std:46720,orig:0},"15 Pro Max":{std:48180,orig:0}
+      },
+      pin:{
+        "6":{std:4500,orig:0},"6S":{std:4500,orig:0},"6 Plus":{std:4500,orig:0},
+        "7":{std:9000,orig:0},"7 Plus":{std:5000,orig:0},"8":{std:9000,orig:0},
+        "X":{std:6000,orig:0},"XS":{std:9000,orig:0},"XR":{std:9000,orig:0},
+        "XS Max":{std:12000,orig:0},"11":{std:12000,orig:0},"12":{std:12000,orig:0},
+        "13 Pro Max":{std:12000,orig:0},"14 Pro Max":{std:12000,orig:0}
+      },
+      tapa:{
+        "8":{std:8760,orig:0},"8 Plus":{std:10220,orig:0},"X":{std:10220,orig:0},
+        "XS":{std:10220,orig:0},"XS Max":{std:10220,orig:0},"XR":{std:10220,orig:0},
+        "11":{std:10220,orig:0},"11 Pro":{std:10220,orig:0},"11 Pro Max":{std:10220,orig:0},
+        "12":{std:10220,orig:0},"12 Pro":{std:10220,orig:0},"12 Pro Max":{std:10220,orig:0},
+        "13":{std:10220,orig:0},"13 Pro":{std:10220,orig:0},"13 Pro Max":{std:10220,orig:0},
+        "14":{std:10220,orig:0},"14 Pro":{std:10220,orig:0},"14 Pro Max":{std:10220,orig:0},
+        "15":{std:11680,orig:0},"15 Pro":{std:11680,orig:0},"15 Pro Max":{std:14600,orig:0},
+        "16":{std:24820,orig:0},"16 Pro":{std:24820,orig:0},"16 Pro Max":{std:24820,orig:0}
+      }
+    }
+  },
+  Motorola:{
+    modelos:["E5","E5 Plus","E6 Play","E6S","E6i","E7","E7i Power","E7 Plus","E13","E20","E22","E32","E40","G7","G7 Plus","G7 Play","G7 Power","G8","G8 Play","G8 Plus","G8 Power","G9 Play","G9 Plus","G9 Power","G13","G14","G15","G20","G22","G23","G24","G30","G31","G32","G35","G41","G42","G51","G52","G54","G56","G60S","G71","G72","G75","G82","G85","G100","Edge 20 Lite","Edge 20 Pro","Edge 30","Edge 30 Fusion","Edge 30 Neo","Edge 40","Edge 40 Neo","Edge 50 Fusion","Edge 50 Pro","Edge 60 Fusion"],
+    costos:{
+      modulo:{
+        "E5":{std:11972,orig:0},"E5 Plus":{std:11680,orig:0},"E6 Play":{std:10220,orig:10220},
+        "E6S":{std:12410,orig:14600},"E6i":{std:14600,orig:14600},"E7":{std:14600,orig:17520},
+        "E7i Power":{std:16060,orig:0},"E7 Plus":{std:16060,orig:33580},"E13":{std:16060,orig:27740},
+        "E20":{std:16060,orig:18250},"E22":{std:16060,orig:18250},"E32":{std:18250,orig:18250},
+        "E40":{std:16060,orig:21900},"G7":{std:14600,orig:0},"G7 Plus":{std:14600,orig:0},
+        "G7 Play":{std:17520,orig:0},"G7 Power":{std:19418,orig:27331},
+        "G8":{std:20440,orig:0},"G8 Play":{std:20440,orig:17520},"G8 Plus":{std:21900,orig:0},
+        "G8 Power":{std:21900,orig:17520},"G9 Play":{std:16060,orig:35040},
+        "G9 Plus":{std:19710,orig:0},"G9 Power":{std:16936,orig:40880},
+        "G13":{std:16060,orig:18250},"G14":{std:17520,orig:32558},"G15":{std:20440,orig:46720},
+        "G20":{std:16060,orig:42340},"G22":{std:16060,orig:18250},"G23":{std:16060,orig:18250},
+        "G24":{std:17520,orig:39420},"G30":{std:16060,orig:40880},"G31":{std:41172,orig:55480},
+        "G32":{std:16060,orig:39420},"G35":{std:19710,orig:39420},"G41":{std:45260,orig:62780},
+        "G42":{std:46720,orig:51100},"G51":{std:23360,orig:51100},"G52":{std:0,orig:51100},
+        "G54":{std:21900,orig:36500},"G56":{std:23360,orig:73000},"G60S":{std:19272,orig:21900},
+        "G71":{std:0,orig:51100},"G72":{std:62780,orig:81760},"G75":{std:0,orig:70080},
+        "G82":{std:0,orig:51100},"G85":{std:65700,orig:87600},"G100":{std:23360,orig:0},
+        "Edge 20 Lite":{std:73000,orig:99280},"Edge 20 Pro":{std:68620,orig:73000},
+        "Edge 30":{std:87600,orig:87600},"Edge 30 Fusion":{std:84680,orig:87600},
+        "Edge 30 Neo":{std:105120,orig:0},"Edge 40":{std:91980,orig:0},"Edge 40 Neo":{std:80300,orig:80300},
+        "Edge 50 Fusion":{std:65700,orig:124100},"Edge 50 Pro":{std:0,orig:131400},
+        "Edge 60 Fusion":{std:94900,orig:146000}
+      },
+      bateria:{
+        "E5":{std:11680,orig:0},"E5 Plus":{std:12410,orig:0},"E6 Play":{std:12410,orig:0},
+        "E6S":{std:12410,orig:17520},"E7":{std:11680,orig:0},"E7 Plus":{std:11680,orig:0},
+        "E13":{std:17520,orig:0},"E20":{std:13140,orig:20440},"E22":{std:14600,orig:20440},
+        "E32":{std:12410,orig:0},"E40":{std:12410,orig:0},"G7 Play":{std:11680,orig:0},
+        "G7 Power":{std:16060,orig:20440},"G8 Play":{std:12410,orig:17520},"G8 Plus":{std:12410,orig:17520},
+        "G8 Power":{std:12410,orig:17520},"G9 Play":{std:0,orig:0},"G9 Plus":{std:0,orig:20440},
+        "G9 Power":{std:14600,orig:20440},"G13":{std:17520,orig:18250},"G14":{std:17520,orig:21900},
+        "G20":{std:0,orig:42340},"G22":{std:17520,orig:20440},"G23":{std:17520,orig:18250},
+        "G24":{std:17520,orig:21900},"G30":{std:0,orig:40880},"G31":{std:14600,orig:55480},
+        "G32":{std:17520,orig:39420},"G35":{std:14600,orig:39420},"G41":{std:17520,orig:0},
+        "G42":{std:0,orig:0},"G52":{std:14600,orig:20440},"G54":{std:17520,orig:0},
+        "G60S":{std:17520,orig:21900},"G71":{std:17520,orig:51100},"G72":{std:0,orig:81760},
+        "G75":{std:20440,orig:0},"G82":{std:0,orig:51100},"G85":{std:0,orig:87600},
+        "G100":{std:14600,orig:20440},"Edge 30":{std:14600,orig:0},"Edge 30 Fusion":{std:17520,orig:87600},
+        "Edge 30 Neo":{std:20440,orig:0},"Edge 40":{std:0,orig:91980},"Edge 40 Neo":{std:20440,orig:80300},
+        "Edge 50 Fusion":{std:17520,orig:124100}
+      },
+      pin:{
+        "E6 Play":{std:5000,orig:0},"E7":{std:5000,orig:0},"G7 Play":{std:5000,orig:0},
+        "G8 Play":{std:5000,orig:0},"G9 Play":{std:5000,orig:0},"G9 Plus":{std:8500,orig:0},
+        "G9 Power":{std:8500,orig:0},"G13":{std:5000,orig:0},"G20":{std:5000,orig:0},
+        "G22":{std:9500,orig:0},"G31":{std:9500,orig:0},"G42":{std:5000,orig:0},
+        "G52":{std:5000,orig:0},"G72":{std:5000,orig:0},"G82":{std:5000,orig:0},
+        "Edge 30 Neo":{std:5000,orig:0},"Edge 50 Fusion":{std:10500,orig:0}
+      },
+      tapa:{
+        "E5":{std:5840,orig:0},"E5 Plus":{std:5840,orig:0},"E6 Play":{std:5840,orig:0},
+        "E6S":{std:7300,orig:0},"E7":{std:7300,orig:0},"E13":{std:7300,orig:0},
+        "E20":{std:8760,orig:0},"E22":{std:7300,orig:0},"E40":{std:7300,orig:0},
+        "G7 Play":{std:5840,orig:0},"G7 Power":{std:5840,orig:0},"G8":{std:7300,orig:0},
+        "G8 Power":{std:7300,orig:0},"G9 Play":{std:7300,orig:0},"G9 Plus":{std:7300,orig:0},
+        "G9 Power":{std:7300,orig:0},"G20":{std:7300,orig:0},"G22":{std:7300,orig:0},
+        "G30":{std:7300,orig:0},"G41":{std:7300,orig:0},"G51":{std:7300,orig:0},
+        "G60S":{std:7300,orig:0},"G71":{std:7300,orig:0},"G100":{std:8760,orig:0},
+        "Edge 30":{std:8760,orig:0},"Edge 40":{std:10220,orig:0},"Edge 40 Neo":{std:10220,orig:0},
+        "Edge 50 Fusion":{std:11680,orig:0}
+      },
+      vidrio_plano:{
+        "E6 Play":{std:5600,orig:0},"E7":{std:5600,orig:0},"E13":{std:5600,orig:0},
+        "G7 Play":{std:5600,orig:0},"G8 Play":{std:5600,orig:0},"G9 Play":{std:5600,orig:0},
+        "G9 Power":{std:5600,orig:0},"G13":{std:5600,orig:0},"G20":{std:5600,orig:0},"G22":{std:5600,orig:0}
+      },
+      vidrio_curvo:{
+        "G31":{std:13000,orig:0},"G42":{std:13000,orig:0},"G52":{std:13000,orig:0},
+        "G71":{std:13000,orig:0},"G72":{std:13000,orig:0},"G82":{std:13000,orig:0},
+        "Edge 30":{std:13000,orig:0},"Edge 40":{std:13000,orig:0},"Edge 40 Neo":{std:13000,orig:0},
+        "Edge 50 Fusion":{std:13000,orig:0}
+      }
+    }
+  },
+  Xiaomi:{
+    modelos:["Mi A1","Mi A2","Mi A2 Lite","Mi A3","Mi 7","Mi 8 Lite","Mi 9","Mi 9 Lite","Mi 9T","Mi 9T Pro","Mi 11 Lite","Redmi 5 Plus","Redmi 6","Redmi 6A","Redmi 7A","Redmi 8","Redmi 8A","Redmi 9","Redmi 9A","Redmi 9C","Redmi 10","Redmi 10C","Redmi 12","Redmi 12C","Redmi 13","Redmi 13C","Redmi 14C","Redmi 15C","Redmi A1","Redmi A2","Redmi A3","Redmi A5","Note 5","Note 7","Note 8","Note 8 Pro","Note 9","Note 9S","Note 9 Pro","Note 10 4G","Note 10 5G","Note 10S","Note 11","Note 11S","Note 12","Note 12 Pro","Note 13 4G","Note 13 Pro","Note 14 4G","Note 14 Pro","Poco M3","Poco X3","Poco F3","Poco X6 Pro","Poco X7 Pro"],
+    costos:{
+      modulo:{
+        "Mi A1":{std:9490,orig:0},"Mi A2":{std:14600,orig:0},"Mi A2 Lite":{std:14600,orig:0},
+        "Mi A3":{std:39420,orig:0},"Mi 7":{std:14600,orig:0},"Mi 8 Lite":{std:23360,orig:0},
+        "Mi 9":{std:46720,orig:0},"Mi 9 Lite":{std:29200,orig:46720},"Mi 9T":{std:21900,orig:49640},
+        "Mi 9T Pro":{std:21900,orig:49640},"Mi 11 Lite":{std:32120,orig:67160},
+        "Redmi 5 Plus":{std:16060,orig:0},"Redmi 6":{std:14600,orig:0},"Redmi 6A":{std:14600,orig:0},
+        "Redmi 7A":{std:13140,orig:0},"Redmi 8":{std:14600,orig:0},"Redmi 8A":{std:14600,orig:0},
+        "Redmi 9":{std:17520,orig:23360},"Redmi 9A":{std:16060,orig:21900},"Redmi 9C":{std:16060,orig:21900},
+        "Redmi 10":{std:16060,orig:0},"Redmi 10C":{std:14600,orig:23360},"Redmi 12":{std:17520,orig:0},
+        "Redmi 12C":{std:17520,orig:18980},"Redmi 13":{std:17520,orig:0},"Redmi 13C":{std:17520,orig:26280},
+        "Redmi 14C":{std:22630,orig:26280},"Redmi 15C":{std:21900,orig:23360},
+        "Redmi A1":{std:17520,orig:21900},"Redmi A2":{std:17520,orig:21900},"Redmi A3":{std:19710,orig:24820},
+        "Redmi A5":{std:20440,orig:21900},"Note 5":{std:14600,orig:0},"Note 7":{std:14308,orig:0},
+        "Note 8":{std:13140,orig:0},"Note 8 Pro":{std:19418,orig:0},"Note 9":{std:16060,orig:0},
+        "Note 9S":{std:14600,orig:0},"Note 9 Pro":{std:21170,orig:0},"Note 10 4G":{std:45260,orig:0},
+        "Note 10 5G":{std:19710,orig:0},"Note 10S":{std:45260,orig:0},"Note 11":{std:45260,orig:0},
+        "Note 11S":{std:45260,orig:0},"Note 12":{std:45260,orig:56210},"Note 12 Pro":{std:44092,orig:61320},
+        "Note 13 4G":{std:56940,orig:64240},"Note 13 Pro":{std:87600,orig:0},"Note 14 4G":{std:65700,orig:0},
+        "Note 14 Pro":{std:84680,orig:0},"Poco M3":{std:24820,orig:21900},"Poco X3":{std:17520,orig:0},
+        "Poco F3":{std:14600,orig:0},"Poco X6 Pro":{std:52560,orig:0},"Poco X7 Pro":{std:65700,orig:0}
+      },
+      bateria:{
+        "Mi A1":{std:10220,orig:0},"Mi A2":{std:11680,orig:0},"Mi A2 Lite":{std:11680,orig:0},
+        "Mi A3":{std:13140,orig:0},"Mi 7":{std:11680,orig:0},"Mi 8 Lite":{std:12410,orig:0},
+        "Mi 9":{std:12410,orig:0},"Mi 9 Lite":{std:13140,orig:0},"Mi 9T":{std:11680,orig:0},
+        "Redmi 5 Plus":{std:11680,orig:0},"Redmi 6":{std:11680,orig:0},"Redmi 6A":{std:11680,orig:0},
+        "Redmi 7A":{std:11680,orig:0},"Redmi 8":{std:14600,orig:0},"Redmi 8A":{std:12410,orig:0},
+        "Redmi 9":{std:0,orig:0},"Redmi 9A":{std:12410,orig:0},"Redmi 9C":{std:12410,orig:0},
+        "Redmi 10":{std:14600,orig:0},"Redmi 10C":{std:14600,orig:0},"Redmi 12C":{std:14600,orig:0},
+        "Redmi 13C":{std:17520,orig:0},"Redmi 14C":{std:17520,orig:0},"Note 7":{std:14600,orig:0},
+        "Note 8":{std:14600,orig:0},"Note 8 Pro":{std:11680,orig:0},"Note 9":{std:14892,orig:0},
+        "Note 9S":{std:14600,orig:0},"Note 10S":{std:14600,orig:0},"Note 11":{std:14600,orig:0},
+        "Note 11S":{std:14600,orig:0},"Note 12":{std:17520,orig:0},"Note 12 Pro":{std:17520,orig:0},
+        "Note 13 4G":{std:17520,orig:0},"Poco M3":{std:17520,orig:0},"Poco X3":{std:14600,orig:0}
+      },
+      pin:{
+        "Note 7":{std:8000,orig:0},"Mi 9T":{std:8000,orig:0},"Mi 9T Pro":{std:8000,orig:0}
+      }
+    }
+  },
+  LG:{
+    modelos:["K22","K40","K40S","K41S","K42","K50","K50S","K51S","K52","K61","K62"],
+    costos:{
+      modulo:{
+        "K22":{std:17520,orig:0},"K40":{std:16060,orig:0},"K40S":{std:17520,orig:0},
+        "K41S":{std:17520,orig:0},"K42":{std:17520,orig:0},"K50":{std:20440,orig:0},
+        "K50S":{std:19710,orig:0},"K51S":{std:18980,orig:0},"K52":{std:20440,orig:0},
+        "K61":{std:18250,orig:0},"K62":{std:16060,orig:0}
+      },
+      bateria:{
+        "K22":{std:12410,orig:0},"K40":{std:11680,orig:14600},"K40S":{std:11680,orig:14600},
+        "K41S":{std:11680,orig:14600},"K42":{std:12410,orig:0},"K50":{std:11680,orig:14600},
+        "K50S":{std:11680,orig:14600},"K51S":{std:11680,orig:14600},"K52":{std:12410,orig:14600},
+        "K62":{std:12410,orig:0}
+      },
+      pin:{
+        "K51S":{std:5000,orig:0}
+      }
+    }
+  },
+  Nokia:{
+    modelos:["1.3","2.3","2.4","3.1 Plus","5.1 Plus","7.1 Plus"],
+    costos:{
+      modulo:{
+        "1.3":{std:14600,orig:0},"2.3":{std:15330,orig:0},"2.4":{std:15330,orig:0},
+        "3.1 Plus":{std:17520,orig:0},"5.1 Plus":{std:15330,orig:0},"7.1 Plus":{std:14600,orig:0}
+      },
+      bateria:{
+        "2.3":{std:0,orig:0}
+      },
+      pin:{}
+    }
+  },
+  TCL:{
+    modelos:["10SE","20B","20E","20SE","20Y","30SE","305","305i","40SE","40 NXTPaper","403","405","50 5G","50 SE","50XE 5G"],
+    costos:{
+      modulo:{
+        "10SE":{std:13140,orig:0},"20B":{std:16790,orig:0},"20E":{std:16060,orig:0},
+        "20SE":{std:16790,orig:0},"20Y":{std:16060,orig:29200},"30SE":{std:17520,orig:0},
+        "305":{std:17520,orig:32120},"40SE":{std:17812,orig:0},"40 NXTPaper":{std:26280,orig:40880},
+        "403":{std:18980,orig:29200},"405":{std:16790,orig:0},"50 5G":{std:21900,orig:0},
+        "50 SE":{std:29200,orig:48180},"50XE 5G":{std:23360,orig:0}
+      },
+      bateria:{
+        "20SE":{std:21900,orig:0},"30SE":{std:21900,orig:0},"305":{std:21900,orig:0},
+        "40SE":{std:17520,orig:0}
+      },
+      pin:{}
+    }
+  },
+  ZTE:{
+    modelos:["A31 Plus","A34","A35","A52","A53","A55","V30 Vita","V40 Design","V40 Vita","V50 Design","V50 Vita","V60 Design"],
+    costos:{
+      modulo:{
+        "A31 Plus":{std:17812,orig:29200},"A34":{std:18980,orig:0},"A35":{std:18980,orig:0},
+        "A52":{std:17812,orig:29200},"A53":{std:18250,orig:0},"A55":{std:18980,orig:0},
+        "V30 Vita":{std:18250,orig:0},"V40 Design":{std:19710,orig:32120},
+        "V40 Vita":{std:18250,orig:0},"V50 Design":{std:18980,orig:33580},
+        "V50 Vita":{std:18980,orig:0},"V60 Design":{std:18980,orig:0}
+      },
+      bateria:{
+        "A34":{std:17520,orig:0},"A52":{std:17520,orig:0},"A53":{std:17520,orig:0}
+      },
+      pin:{}
+    }
+  },
+  Huawei:{
+    modelos:["P8 Lite 2017","P9 Lite","P20 Lite","P30 Lite","P Smart 2018","P Smart 2019","Mate 10","Mate 10 Lite","Mate 20 Lite","Y6 2019","Y7 2017","Y7 2018","Y7 2019","Y9 2019","Y9 Prime","Honor X6","Honor X7A","Honor X7B","Honor X7D","Honor X8A"],
+    costos:{
+      modulo:{
+        "P8 Lite 2017":{std:11680,orig:0},"P9 Lite":{std:11680,orig:0},"P20 Lite":{std:16060,orig:0},
+        "P30 Lite":{std:21900,orig:0},"P Smart 2018":{std:13140,orig:0},"P Smart 2019":{std:15330,orig:0},
+        "Mate 10":{std:20440,orig:0},"Mate 10 Lite":{std:16060,orig:0},"Mate 20 Lite":{std:16060,orig:0},
+        "Y6 2019":{std:16060,orig:0},"Y7 2017":{std:16060,orig:0},"Y7 2018":{std:13140,orig:0},
+        "Y7 2019":{std:14717,orig:0},"Y9 2019":{std:14600,orig:20440},"Y9 Prime":{std:15330,orig:0},
+        "Honor X6":{std:20440,orig:0},"Honor X7A":{std:20440,orig:0},"Honor X7B":{std:23360,orig:26280},
+        "Honor X7D":{std:26280,orig:0},"Honor X8A":{std:20440,orig:0}
+      },
+      bateria:{
+        "P20 Lite":{std:11680,orig:0},"Mate 10 Lite":{std:12410,orig:0},"Mate 20 Lite":{std:0,orig:0},
+        "Honor X7A":{std:17520,orig:0},"Honor X7B":{std:17520,orig:0}
+      },
+      pin:{}
+    }
+  }
+};
+
+let tablaActual='local', cuotaNuevaActual=1, filtroActual='todas', resumenMode='hoy';
+let calidadActual='glass';
+let fotosNuevas=[]; // base64 de fotos de la orden nueva
+
+function fmt(n){return '$'+Math.round(n).toLocaleString('es-AR');}
+function tipoLabel(t){return{modulo:'Módulo/Pantalla',vidrio_plano:'Vidrio plano',vidrio_curvo:'Vidrio curvo',bateria:'Batería',pin:'Pin de carga',tapa:'Tapa trasera',otro:'Otro'}[t]||t;}
+function getPrecios(){return window._state.precios||DB_DEFAULT;}
+const s=()=>window._state;
+
+async function fbSave(path,data){try{if(window._fbSet)await window._fbSet(path,data);}catch(e){console.log('fb err',e);}}
+async function fbDel(path){try{if(window._fbRemove)await window._fbRemove(path);}catch(e){}}
+
+// LOGIN
+function doLogin(){
+  const v=document.getElementById('pinInput').value;
+  if(v===s().pin){
+    document.getElementById('loginScreen').style.display='none';
+    document.getElementById('app').style.display='block';
+    sessionStorage.setItem('li','1');
+    window._appReady=true;
+    initApp();
+  } else {
+    document.getElementById('loginError').style.display='block';
+    document.getElementById('pinInput').value='';
+  }
+}
+function logout(){
+  sessionStorage.removeItem('li');
+  window._appReady=false;
+  document.getElementById('app').style.display='none';
+  document.getElementById('loginScreen').style.display='flex';
+  document.getElementById('pinInput').value='';
+  document.getElementById('loginError').style.display='none';
+}
+function initApp(){
+  document.getElementById('topbarDate').textContent=new Date().toLocaleDateString('es-AR',{weekday:'long',day:'numeric',month:'long'});
+  document.getElementById('aj-gastos').value=s().gastosLocal;
+  document.getElementById('aj-personal').value=s().gastosPersonal;
+  document.getElementById('aj-nombre').value=s().tallerNombre;
+  renderOrdenes();renderResumen();
+}
+function showPage(id){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+  document.getElementById('page-'+id).classList.add('active');
+  const tabs=['nueva','ordenes','resumen'];
+  const idx=tabs.indexOf(id);
+  if(idx>=0)document.querySelectorAll('.tab')[idx].classList.add('active');
+  if(id==='ordenes')renderOrdenes();
+  if(id==='resumen')renderResumen();
+}
+
+// CALIDAD
+function setCalidad(cal,btn){
+  calidadActual=cal;
+  document.getElementById('cal-glass').classList.remove('sel','sel-orig','sel-glass');
+  document.getElementById('cal-std').classList.remove('sel','sel-orig','sel-glass');
+  document.getElementById('cal-orig').classList.remove('sel','sel-orig','sel-glass');
+  if(cal==='glass') btn.classList.add('sel-glass');
+  else if(cal==='orig') btn.classList.add('sel-orig');
+  else btn.classList.add('sel');
+  cargarCosto();
+}
+
+// MODELOS
+function cargarModelos(){
+  const marca=document.getElementById('n-marca').value;
+  const sel=document.getElementById('n-modelo');
+  sel.innerHTML='<option value="">— Modelo —</option>';
+  if(!marca||!getPrecios()[marca])return;
+  getPrecios()[marca].modelos.forEach(m=>{
+    const o=document.createElement('option');o.value=m;o.textContent=m;sel.appendChild(o);
+  });
+  document.getElementById('costoDbCard').style.display='none';
+  document.getElementById('precioSugerido').style.display='none';
+  document.getElementById('calidadSection').style.display='none';
+}
+
+function cargarCosto(){
+  const marca=document.getElementById('n-marca').value;
+  const modelo=document.getElementById('n-modelo').value;
+  const tipo=document.getElementById('n-tipo').value;
+  const card=document.getElementById('costoDbCard');
+  const calSec=document.getElementById('calidadSection');
+  // Notas
+  document.getElementById('notaVidrio').style.display=(tipo==='vidrio_plano'||tipo==='vidrio_curvo')?'block':'none';
+  document.getElementById('notaModulo').style.display=(tipo==='modulo')?'block':'none';
+  if(!tipo||tipo==='otro'){card.style.display='none';calSec.style.display='none';calcPrecio();return;}
+  // Vidrio: costo fijo sin necesitar modelo
+  if(tipo==='vidrio_plano'||tipo==='vidrio_curvo'){
+    const costoVidrio=tipo==='vidrio_plano'?5600:13000;
+    calSec.style.display='none';
+    document.getElementById('cc-precio').textContent=fmt(costoVidrio);
+    document.getElementById('cc-detalle').textContent=(tipo==='vidrio_plano'?'Glass plano':'Glass curvo')+' · Precio base';
+    card.style.display='block';
+    return;
+  }
+  if(!marca||!modelo){card.style.display='none';calSec.style.display='none';calcPrecio();return;}
+  const db=getPrecios();
+  if(!db[marca]?.costos?.[tipo]){card.style.display='none';calSec.style.display='none';calcPrecio();return;}
+  const costoObj=db[marca].costos[tipo][modelo];
+  if(!costoObj){card.style.display='none';calSec.style.display='none';calcPrecio();return;}
+  // Mostrar selector calidad si hay precio original o glass
+  const tieneOrig=costoObj.orig&&costoObj.orig>0;
+  calSec.style.display='block';
+  let costoFinal=costoObj.std;
+  if(calidadActual==='orig'&&tieneOrig) costoFinal=costoObj.orig;
+  else if(calidadActual==='glass') costoFinal=costoObj.std; // glass usa mismo precio base
+  if(!costoFinal){card.style.display='none';calcPrecio();return;}
+  document.getElementById('cc-precio').textContent=fmt(costoFinal);
+  const calLabel=calidadActual==='orig'&&tieneOrig?' · Original':calidadActual==='glass'?' · Glass':' · OLED';
+  document.getElementById('cc-detalle').textContent=marca+' '+modelo+' · '+tipoLabel(tipo)+calLabel;
+  card.style.display='block';
+}
+
+function confirmarCosto(){
+  const txt=document.getElementById('cc-precio').textContent.replace(/[$\s.]/g,'').replace(',','');
+  document.getElementById('n-costo').value=parseInt(txt)||0;
+  calcPrecio();toast('✓ Costo cargado');
+}
+
+function setTabla(t,btn){
+  tablaActual=t;
+  document.getElementById('tb-local').classList.remove('sel');
+  document.getElementById('tb-sueldo').classList.remove('sel');
+  btn.classList.add('sel');calcPrecio();
+}
+function setCuotaNueva(btn){
+  document.querySelectorAll('#cuotasMini .cm-btn').forEach(b=>b.classList.remove('sel'));
+  btn.classList.add('sel');cuotaNuevaActual=parseInt(btn.dataset.c);calcPrecio();
+}
+function calcPrecio(){
+  const tipo=document.getElementById('n-tipo').value;
+  const costo=parseFloat(document.getElementById('n-costo').value)||0;
+  if(!tipo||!costo){document.getElementById('precioSugerido').style.display='none';return;}
+  const cfg=CONFIGS[tipo]||CONFIGS.otro;
+  const f=tablaActual==='local'?cfg.fL:cfg.fS;
+  const mo=tablaActual==='local'?cfg.moL:cfg.moS;
+  const base=Math.max(costo*f,costo+mo);
+  const ef=Math.ceil(base/500)*500;
+  document.getElementById('ps-price').textContent=fmt(ef);
+  document.getElementById('ps-sub').textContent='Ganancia: '+fmt(ef-costo)+' · '+Math.round(((ef-costo)/costo)*100)+'%';
+  const psTarjeta=document.getElementById('ps-tarjeta');
+  if(cuotaNuevaActual>1){
+    const coef=COEF_MC[cuotaNuevaActual]||1.6524;
+    const total=Math.ceil(ef*coef/500)*500;
+    const cuota=Math.ceil(total/cuotaNuevaActual/100)*100;
+    psTarjeta.style.display='block';
+    psTarjeta.textContent=cuotaNuevaActual+' cuotas: '+fmt(total)+' total · '+fmt(cuota)+'/cuota';
+  } else psTarjeta.style.display='none';
+  document.getElementById('n-precio').value=ef;
+  document.getElementById('precioSugerido').style.display='block';
+  actualizarGanancia();
+}
+function actualizarGanancia(){
+  const c=parseFloat(document.getElementById('n-costo').value)||0;
+  const p=parseFloat(document.getElementById('n-precio').value)||0;
+  const el=document.getElementById('ganancia-preview');
+  if(c>0&&p>0){
+    const g=p-c;
+    el.style.display='block';
+    el.textContent='Ganancia: '+fmt(g)+' ('+Math.round((g/c)*100)+'%)';
+    el.style.color=g>=0?'var(--green)':'var(--red)';
+  } else el.style.display='none';
+}
+
+// FOTOS
+function agregarFotos(input){
+  const files=Array.from(input.files);
+  files.forEach(file=>{
+    const reader=new FileReader();
+    reader.onload=e=>{
+      fotosNuevas.push(e.target.result);
+      renderFotoWrap();
+    };
+    reader.readAsDataURL(file);
+  });
+  input.value='';
+}
+function renderFotoWrap(){
+  const wrap=document.getElementById('fotoWrap');
+  wrap.innerHTML='';
+  fotosNuevas.forEach((b64)=>{
+    const img=document.createElement('img');
+    img.className='foto-thumb';img.src=b64;
+    img.onclick=()=>abrirLightbox(b64);
+    wrap.appendChild(img);
+  });
+}
+function abrirLightbox(src){
+  document.getElementById('lightbox-img').src=src;
+  document.getElementById('lightbox').classList.add('show');
+}
+
+// GUARDAR ORDEN
+async function guardarOrden(){
+  const nombre=document.getElementById('n-nombre').value.trim();
+  const marca=document.getElementById('n-marca').value;
+  const modelo=document.getElementById('n-modelo').value||'—';
+  const tipo=document.getElementById('n-tipo').value;
+  const costo=parseFloat(document.getElementById('n-costo').value)||0;
+  const precio=parseFloat(document.getElementById('n-precio').value)||0;
+  if(!nombre){toast('⚠️ Ingresá el nombre del cliente');return;}
+  if(!marca){toast('⚠️ Seleccioná la marca');return;}
+  if(!tipo){toast('⚠️ Seleccioná el tipo de reparación');return;}
+  if(!precio){toast('⚠️ Ingresá el precio cobrado');return;}
+  const id='ORD-'+Date.now();
+  const o={
+    id,fecha:new Date().toISOString(),
+    nombre,telefono:document.getElementById('n-telefono').value.trim(),
+    marca,modelo,color:document.getElementById('n-color').value.trim(),
+    tipo,calidad:calidadActual,costo,precio,
+    pago:document.getElementById('n-pago').value,
+    obs:document.getElementById('n-obs').value.trim(),
+    estado:'recibido',ganancia:precio-costo,
+    fotos:fotosNuevas.length?fotosNuevas:[]
+  };
+  await fbSave('ordenes/'+id,o);
+  toast('✅ Orden guardada y sincronizada ☁️');
+  limpiarNueva();showPage('ordenes');
+}
+function limpiarNueva(){
+  ['n-nombre','n-telefono','n-modelo','n-color','n-obs','n-costo','n-precio'].forEach(id=>{
+    const el=document.getElementById(id);if(el)el.value='';
+  });
+  document.getElementById('n-marca').value='';
+  document.getElementById('n-tipo').value='';
+  document.getElementById('n-pago').value='efectivo';
+  document.getElementById('costoDbCard').style.display='none';
+  document.getElementById('precioSugerido').style.display='none';
+  document.getElementById('ganancia-preview').style.display='none';
+  document.getElementById('calidadSection').style.display='none';
+  document.getElementById('notaVidrio').style.display='none';
+  document.getElementById('notaModulo').style.display='none';
+  document.getElementById('n-modelo').innerHTML='<option value="">— Modelo —</option>';
+  fotosNuevas=[];
+  document.getElementById('fotoWrap').innerHTML='';
+  calidadActual='glass';
+  document.getElementById('cal-glass').classList.add('sel-glass');
+  document.getElementById('cal-std').classList.remove('sel','sel-orig','sel-glass');
+  document.getElementById('cal-orig').classList.remove('sel','sel-orig','sel-glass');
+}
+
+// LISTA ORDENES
+function setFiltro(btn){
+  document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');filtroActual=btn.dataset.f;renderOrdenes();
+}
+window.renderOrdenes=function(){
+  const q=(document.getElementById('searchInput')?.value||'').toLowerCase();
+  let list=s().ordenes.filter(o=>{
+    const mF=filtroActual==='todas'||o.estado===filtroActual;
+    const mQ=!q||(o.nombre+o.marca+o.modelo).toLowerCase().includes(q);
+    return mF&&mQ;
+  });
+  const cont=document.getElementById('listaOrdenes');
+  if(!list.length){
+    cont.innerHTML='<div class="empty-state"><div class="es-icon">📋</div><p>No hay órdenes todavía</p></div>';return;
+  }
+  const stM={recibido:'st-recibido',listo:'st-listo',entregado:'st-entregado'};
+  const stL={recibido:'Recibido',listo:'Listo ✓',entregado:'Entregado'};
+  cont.innerHTML=list.map(o=>`
+    <div class="orden-card" onclick="abrirDetalle('${o.id}')">
+      <div class="orden-header">
+        <div><div class="orden-num">${o.id} · ${new Date(o.fecha).toLocaleDateString('es-AR')}</div></div>
+        <span class="status-badge ${stM[o.estado]||'st-recibido'}">${stL[o.estado]||'Recibido'}</span>
+      </div>
+      <div class="orden-cliente">${o.nombre}</div>
+      <div class="orden-equipo">${o.marca} ${o.modelo} · ${tipoLabel(o.tipo)}${o.fotos&&o.fotos.length?' 📷':''}</div>
+      <div class="orden-footer">
+        <div class="orden-precio">${fmt(o.precio)}</div>
+        <div style="font-size:.62rem;color:var(--muted)">${o.telefono||''}</div>
+      </div>
+    </div>`).join('');
+};
+
+// DETALLE
+function abrirDetalle(id){
+  const o=s().ordenes.find(x=>x.id===id);if(!o)return;
+  const pagoL={efectivo:'Efectivo/Transf.',debito:'Débito',credito1:'Crédito 1 pago',cuotas:'Cuotas'};
+  const stOpts=['recibido','listo','entregado'].map(st=>
+    `<option value="${st}" ${o.estado===st?'selected':''}>${{recibido:'Recibido',listo:'Listo ✓',entregado:'Entregado'}[st]}</option>`).join('');
+  const fotosHtml=o.fotos&&o.fotos.length?`
+    <div style="font-size:.7rem;color:var(--muted);margin-top:8px;margin-bottom:4px;">📷 Fotos del equipo</div>
+    <div class="fotos-modal">${o.fotos.map(f=>`<img src="${f}" onclick="abrirLightbox('${f}')">`).join('')}</div>`:'';
+  const calLabel=o.calidad==='orig'?' · Original':o.calidad==='glass'?' · Glass':' · OLED';
+  document.getElementById('modalInner').innerHTML=`
+    <button class="modal-close" onclick="cerrarModal()">✕</button>
+    <div class="modal-title">Orden ${o.id}</div>
+    <div class="detail-row"><span class="dr-label">Fecha</span><span class="dr-val">${new Date(o.fecha).toLocaleString('es-AR')}</span></div>
+    <div class="detail-row"><span class="dr-label">Cliente</span><span class="dr-val">${o.nombre}</span></div>
+    ${o.telefono?`<div class="detail-row"><span class="dr-label">WhatsApp</span><span class="dr-val">${o.telefono}</span></div>`:''}
+    <div class="detail-row"><span class="dr-label">Equipo</span><span class="dr-val">${o.marca} ${o.modelo} ${o.color?'('+o.color+')':''}</span></div>
+    <div class="detail-row"><span class="dr-label">Reparación</span><span class="dr-val">${tipoLabel(o.tipo)}${calLabel}</span></div>
+    ${o.obs?`<div class="detail-row"><span class="dr-label">Obs.</span><span class="dr-val">${o.obs}</span></div>`:''}
+    <div class="detail-row"><span class="dr-label">Costo repuesto</span><span class="dr-val" style="color:var(--accent2)">${fmt(o.costo||0)}</span></div>
+    <div class="detail-row"><span class="dr-label">Precio cobrado</span><span class="dr-val" style="color:var(--yellow)">${fmt(o.precio)}</span></div>
+    <div class="detail-row"><span class="dr-label">Pago</span><span class="dr-val">${pagoL[o.pago]||o.pago}</span></div>
+    ${fotosHtml}
+    <div class="ganancia-highlight"><div class="gh-label">💰 Ganancia neta</div><div class="gh-val">${fmt(o.ganancia)}</div></div>
+    <label style="font-size:.68rem;color:var(--muted);text-transform:uppercase;letter-spacing:.7px;">Estado</label>
+    <select class="status-select" onchange="cambiarEstado('${o.id}',this.value)">${stOpts}</select>
+    ${o.telefono?`<button class="btn-wa-full" onclick="enviarWA('${o.id}')">📲 Enviar por WhatsApp</button>`:''}
+    <div class="print-options">
+      <button class="btn-print-therm" onclick="imprimirTermica('${o.id}')">🧾 Ticket térmico</button>
+      <button class="btn-print-a4" onclick="imprimirA4('${o.id}')">📄 A4 doble</button>
+    </div>
+    <button class="btn-delete" onclick="eliminarOrden('${o.id}')">🗑️ Eliminar orden</button>`;
+  document.getElementById('modal').classList.add('show');
+}
+function cerrarModal(){document.getElementById('modal').classList.remove('show');}
+async function cambiarEstado(id,val){
+  await fbSave('ordenes/'+id+'/estado',val);
+  toast('Estado actualizado ☁️');
+}
+async function eliminarOrden(id){
+  if(!confirm('¿Eliminar esta orden?'))return;
+  await fbDel('ordenes/'+id);
+  cerrarModal();toast('Orden eliminada');
+}
+
+// WHATSAPP
+function enviarWA(id){
+  const o=s().ordenes.find(x=>x.id===id);if(!o)return;
+  const stL={recibido:'Recibido ✓',listo:'Listo para retirar ✅',entregado:'Entregado'};
+  const msg=`📱 *${s().tallerNombre}*\n\n📋 Orden: ${o.id}\n👤 Cliente: ${o.nombre}\n📱 Equipo: ${o.marca} ${o.modelo}\n🔧 Reparación: ${tipoLabel(o.tipo)}\n💰 Precio: ${fmt(o.precio)}\n📌 Estado: ${stL[o.estado]}\n📅 Fecha: ${new Date(o.fecha).toLocaleDateString('es-AR')}\n\n¡Gracias por elegirnos! 😊`;
+  window.open(`https://wa.me/54${o.telefono.replace(/\D/g,'')}?text=${encodeURIComponent(msg)}`,'_blank');
+}
+
+// IMPRIMIR TICKET
+function imprimirTermica(id){
+  const o=s().ordenes.find(x=>x.id===id);if(!o)return;
+  const pagoL={efectivo:'Efectivo/Transf.',debito:'Débito',credito1:'Crédito 1p',cuotas:'Cuotas'};
+  document.getElementById('printArea').innerHTML=`
+    <style>@media print{@page{size:80mm auto;margin:4mm;}body{font-family:monospace;font-size:11px;background:#fff;color:#000;}
+    .tk{width:72mm;}.tkc{text-align:center;}.tkt{font-size:14px;font-weight:900;text-align:center;border-bottom:1px dashed #000;padding-bottom:4px;margin-bottom:4px;}
+    .tkr{display:flex;justify-content:space-between;padding:2px 0;border-bottom:1px dotted #ccc;font-size:10px;}
+    .tktot{font-size:14px;font-weight:900;text-align:right;border-top:2px solid #000;margin-top:5px;padding-top:4px;}
+    .tkf{text-align:center;font-size:9px;margin-top:6px;border-top:1px dashed #000;padding-top:4px;}}</style>
+    <div class="tk">
+      <div class="tkt">${s().tallerNombre}</div>
+      <div class="tkc" style="font-size:9px;margin-bottom:4px;">${new Date(o.fecha).toLocaleString('es-AR')}</div>
+      <div class="tkr"><span>Orden:</span><span>${o.id}</span></div>
+      <div class="tkr"><span>Cliente:</span><span>${o.nombre}</span></div>
+      ${o.telefono?`<div class="tkr"><span>Tel:</span><span>${o.telefono}</span></div>`:''}
+      <div class="tkr"><span>Equipo:</span><span>${o.marca} ${o.modelo}</span></div>
+      <div class="tkr"><span>Reparación:</span><span>${tipoLabel(o.tipo)}</span></div>
+      ${o.obs?`<div class="tkr"><span>Obs:</span><span style="font-size:9px">${o.obs}</span></div>`:''}
+      <div class="tkr"><span>Pago:</span><span>${pagoL[o.pago]||o.pago}</span></div>
+      <div class="tktot">TOTAL: ${fmt(o.precio)}</div>
+      ${(o.tipo==='vidrio_plano'||o.tipo==='vidrio_curvo')?`<div style="margin-top:4px;font-size:8px;border:1px dashed #000;padding:3px;">AVISO: Cambio de vidrio tiene ~10% riesgo de daño. En ese caso se ofrece módulo a precio de costo.</div>`:''}
+      ${o.tipo==='modulo'?`<div style="margin-top:4px;font-size:8px;border:1px dashed #000;padding:3px;">GARANTIA: 30 dias solo por fallas de fabrica. No cubre golpes ni daños externos.</div>`:''}
+      <div class="tkf">¡Gracias por elegirnos!</div>
+    </div>`;
+  window.print();
+}
+
+// IMPRIMIR A4 DOBLE
+function imprimirA4(id){
+  const o=s().ordenes.find(x=>x.id===id);if(!o)return;
+  const pagoL={efectivo:'Efectivo / Transferencia',debito:'Tarjeta débito',credito1:'Crédito 1 pago',cuotas:'Tarjeta en cuotas'};
+  const bloque=`<div style="width:100%;padding:10px 16px;font-family:Arial,sans-serif;font-size:11px;">
+    <div style="display:flex;justify-content:space-between;border-bottom:2px solid #000;padding-bottom:6px;margin-bottom:8px;">
+      <div><div style="font-size:14px;font-weight:900;">${s().tallerNombre}</div><div style="font-size:9px;color:#555;">ORDEN DE TRABAJO</div></div>
+      <div style="text-align:right;font-size:9px;color:#555;">${new Date(o.fecha).toLocaleString('es-AR')}</div>
+    </div>
+    <div style="display:flex;justify-content:space-between;padding:3px 0;border-bottom:1px solid #eee;"><span style="color:#666;">N° Orden:</span><strong>${o.id}</strong></div>
+    <div style="display:flex;justify-content:space-between;padding:3px 0;border-bottom:1px solid #eee;"><span style="color:#666;">Cliente:</span><span>${o.nombre}</span></div>
+    ${o.telefono?`<div style="display:flex;justify-content:space-between;padding:3px 0;border-bottom:1px solid #eee;"><span style="color:#666;">Teléfono:</span><span>${o.telefono}</span></div>`:''}
+    <div style="display:flex;justify-content:space-between;padding:3px 0;border-bottom:1px solid #eee;"><span style="color:#666;">Equipo:</span><span>${o.marca} ${o.modelo} ${o.color?'— '+o.color:''}</span></div>
+    <div style="display:flex;justify-content:space-between;padding:3px 0;border-bottom:1px solid #eee;"><span style="color:#666;">Reparación:</span><span>${tipoLabel(o.tipo)}</span></div>
+    ${o.obs?`<div style="display:flex;justify-content:space-between;padding:3px 0;border-bottom:1px solid #eee;"><span style="color:#666;">Observaciones:</span><span>${o.obs}</span></div>`:''}
+    <div style="display:flex;justify-content:space-between;padding:3px 0;border-bottom:1px solid #eee;"><span style="color:#666;">Forma de pago:</span><span>${pagoL[o.pago]||o.pago}</span></div>
+    <div style="font-size:15px;font-weight:900;text-align:right;margin-top:6px;border-top:2px solid #000;padding-top:5px;">TOTAL: ${fmt(o.precio)}</div>
+    ${(o.tipo==='vidrio_plano'||o.tipo==='vidrio_curvo')?`<div style="margin-top:8px;padding:7px;border:1px solid #cc6600;border-radius:6px;font-size:9px;color:#663300;background:#fff8f0;"><strong>⚠️ AVISO:</strong> El cambio de vidrio conlleva un riesgo aprox. del 10% de daño al módulo. En ese caso se ofrece módulo a precio de costo.</div>`:''}
+    ${o.tipo==='modulo'?`<div style="margin-top:8px;padding:7px;border:1px solid #006699;border-radius:6px;font-size:9px;color:#003355;background:#f0f8ff;"><strong>ℹ️ GARANTÍA:</strong> 30 días solo por fallas de fábrica. No cubre golpes, caídas, humedad ni daños externos.</div>`:''}
+    <div style="display:flex;justify-content:space-between;margin-top:10px;font-size:9px;color:#666;border-top:1px dashed #ccc;padding-top:5px;">
+      <span>Firma cliente: ___________________</span>
+      <span>Aclaración: ___________________</span>
+    </div>
+  </div>`;
+  document.getElementById('printArea').innerHTML=`
+    <style>@media print{@page{size:A4;margin:8mm;}body{background:#fff;color:#000;}
+    .a4c{width:100%;}.a4cut{border-top:2px dashed #999;text-align:center;font-size:9px;color:#999;padding:2px 0;margin:0;}}</style>
+    <div class="a4c"><div>${bloque}</div><div class="a4cut">✂ ─────────────────── CORTAR ─────────────────── ✂</div><div>${bloque}</div></div>`;
+  window.print();
+}
+
+// RESUMEN
+function setResumen(mode,btn){
+  resumenMode=mode;
+  document.querySelectorAll('.rt-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');renderResumen();
+}
+window.renderResumen=function(){
+  const now=new Date();
+  let list=s().ordenes;
+  if(resumenMode==='hoy'){
+    const hoy=now.toDateString();
+    list=list.filter(o=>new Date(o.fecha).toDateString()===hoy);
+  } else {
+    list=list.filter(o=>{const d=new Date(o.fecha);return d.getMonth()===now.getMonth()&&d.getFullYear()===now.getFullYear();});
+  }
+  const fac=list.reduce((a,o)=>a+o.precio,0);
+  const cos=list.reduce((a,o)=>a+(o.costo||0),0);
+  const gan=list.reduce((a,o)=>a+o.ganancia,0);
+  const diasMes=new Date(now.getFullYear(),now.getMonth()+1,0).getDate();
+  const gastoP=resumenMode==='hoy'
+    ?Math.round((s().gastosLocal+s().gastosPersonal)/diasMes)
+    :Math.round((s().gastosLocal+s().gastosPersonal)*(now.getDate()/diasMes));
+  const neta=gan-gastoP;
+  document.getElementById('resumenContent').innerHTML=`
+    <div class="stat-grid">
+      <div class="stat-box"><div class="stat-label">Facturado</div><div class="stat-val sv-yellow">${fmt(fac)}</div></div>
+      <div class="stat-box"><div class="stat-label">Órdenes</div><div class="stat-val sv-blue">${list.length}</div></div>
+      <div class="stat-box"><div class="stat-label">Ganancia bruta</div><div class="stat-val sv-green">${fmt(gan)}</div></div>
+      <div class="stat-box"><div class="stat-label">En repuestos</div><div class="stat-val sv-orange">${fmt(cos)}</div></div>
+    </div>
+    <div class="card" style="background:linear-gradient(135deg,#0a1a0a,#0d2a0d);border-color:${neta>=0?'var(--green)':'var(--red)'}">
+      <div class="card-title" style="color:${neta>=0?'var(--green)':'var(--red)'}">${resumenMode==='hoy'?'Resultado del día':'Resultado del mes'}</div>
+      <div class="detail-row"><span class="dr-label">Ganancia bruta</span><span class="dr-val" style="color:var(--green)">${fmt(gan)}</span></div>
+      <div class="detail-row"><span class="dr-label">Gastos proporcionales</span><span class="dr-val" style="color:var(--red)">− ${fmt(gastoP)}</span></div>
+      <div style="text-align:center;margin-top:10px;">
+        <div style="font-size:.64rem;text-transform:uppercase;color:${neta>=0?'var(--green)':'var(--red)'}">Ganancia neta real</div>
+        <div style="font-size:1.7rem;font-weight:900;color:${neta>=0?'var(--green)':'var(--red)'}">${fmt(neta)}</div>
+      </div>
+    </div>
+    ${list.length?`<div class="card"><div class="card-title">Detalle</div>${list.map(o=>`
+      <div class="rep-item" onclick="abrirDetalle('${o.id}')">
+        <div><div style="font-weight:600">${o.nombre}</div><div style="font-size:.68rem;color:var(--muted)">${o.marca} ${o.modelo} · ${tipoLabel(o.tipo)}</div></div>
+        <div style="text-align:right"><div class="ri-precio">${fmt(o.precio)}</div><div class="ri-gan">+${fmt(o.ganancia)}</div></div>
+      </div>`).join('')}</div>`:'<div class="empty-state"><div class="es-icon">📊</div><p>Sin órdenes en este período</p></div>'}`;
+};
+
+// IMPORTAR LISTAS
+function importarArchivo(input){
+  const file=input.files[0];if(!file)return;
+  const reader=new FileReader();
+  reader.onload=e=>{document.getElementById('listaTexto').value=e.target.result;};
+  reader.readAsText(file);
+}
+async function importarTexto(){
+  const txt=document.getElementById('listaTexto').value.trim();
+  if(!txt){toast('⚠️ Pegá o subí una lista');return;}
+  const lineas=txt.split('\n').filter(l=>l.trim());
+  let ok=0,err=0;
+  const precios=JSON.parse(JSON.stringify(getPrecios()));
+  lineas.forEach(linea=>{
+    const p=linea.split('|').map(x=>x.trim());
+    if(p.length<4){err++;return;}
+    const [marca,modelo,tipo,costoStdStr,costoOrigStr]=p;
+    const std=parseFloat(costoStdStr)||0;
+    const orig=parseFloat(costoOrigStr)||0;
+    if(!marca||!modelo||!tipo){err++;return;}
+    if(!precios[marca]){precios[marca]={modelos:[],costos:{}};}
+    if(!precios[marca].modelos.includes(modelo))precios[marca].modelos.push(modelo);
+    if(!precios[marca].costos[tipo])precios[marca].costos[tipo]={};
+    precios[marca].costos[tipo][modelo]={std,orig};
+    ok++;
+  });
+  window._state.precios=precios;
+  await fbSave('config/precios',precios);
+  document.getElementById('listaTexto').value='';
+  toast(`✅ Importados ${ok} precios${err?' · '+err+' errores':''} ☁️`);
+}
+
+// EDITAR PRECIO
+function renderDbEdit(){
+  const marca=document.getElementById('aj-dbMarca').value;
+  const cont=document.getElementById('dbEditList');
+  if(!marca){cont.innerHTML='';return;}
+  const db=getPrecios();if(!db[marca]){cont.innerHTML='';return;}
+  const tipos=['modulo','bateria','pin','tapa','vidrio_plano','vidrio_curvo'];
+  const tNom={modulo:'Módulo',bateria:'Batería',pin:'Pin de carga',tapa:'Tapa',vidrio_plano:'Vidrio plano',vidrio_curvo:'Vidrio curvo'};
+  let html='';
+  tipos.forEach(t=>{
+    const costos=db[marca].costos?.[t];if(!costos)return;
+    html+=`<div style="font-size:.68rem;font-weight:700;color:var(--accent);margin:9px 0 3px;text-transform:uppercase">${tNom[t]}</div>`;
+    Object.entries(costos).forEach(([modelo,val])=>{
+      const std=val.std||0;const orig=val.orig||0;
+      html+=`<div class="db-item">
+        <div>${modelo}</div>
+        <div style="display:flex;align-items:center;gap:5px">
+          <span style="font-size:.72rem;color:var(--muted)">Std: <span style="color:var(--yellow)">${fmt(std)}</span>${orig?` / Orig: <span style="color:var(--accent)">${fmt(orig)}</span>`:''}</span>
+          <button class="db-edit" onclick="editarPrecio('${marca}','${t}','${modelo.replace(/'/g,"\\'")}')">✏️</button>
+        </div>
+      </div>`;
+    });
+  });
+  cont.innerHTML=html||'<p style="font-size:.76rem;color:var(--muted)">Sin datos.</p>';
+}
+async function editarPrecio(marca,tipo,modelo){
+  const actual=getPrecios()[marca]?.costos[tipo]?.[modelo]||{std:0,orig:0};
+  const nuevoStd=prompt(`Costo ESTÁNDAR — ${marca} ${modelo}\nActual: ${fmt(actual.std)}`,actual.std);
+  if(nuevoStd===null)return;
+  const nuevoOrig=prompt(`Costo OLED/ORIGINAL — ${marca} ${modelo}\n(0 si no aplica)\nActual: ${fmt(actual.orig)}`,actual.orig);
+  if(nuevoOrig===null)return;
+  const precios=JSON.parse(JSON.stringify(getPrecios()));
+  if(!precios[marca])precios[marca]={modelos:[],costos:{}};
+  if(!precios[marca].costos[tipo])precios[marca].costos[tipo]={};
+  precios[marca].costos[tipo][modelo]={std:parseFloat(nuevoStd)||0,orig:parseFloat(nuevoOrig)||0};
+  window._state.precios=precios;
+  await fbSave('config/precios',precios);
+  renderDbEdit();toast('✅ Precio actualizado ☁️');
+}
+
+// AJUSTES
+function cambiarClave(){
+  const c1=document.getElementById('aj-clave1').value,c2=document.getElementById('aj-clave2').value;
+  if(!c1){toast('⚠️ Ingresá una clave');return;}
+  if(c1!==c2){toast('⚠️ Las claves no coinciden');return;}
+  window._state.pin=c1;fbSave('config/pin',c1);
+  document.getElementById('aj-clave1').value='';document.getElementById('aj-clave2').value='';
+  toast('✅ Clave actualizada ☁️');
+}
+function guardarNombreTaller(){
+  window._state.tallerNombre=document.getElementById('aj-nombre').value||'Leonel Cell (DisplayFix)';
+  fbSave('config/tallerNombre',window._state.tallerNombre);toast('✅ Nombre guardado ☁️');
+}
+function guardarGastos(){
+  window._state.gastosLocal=parseFloat(document.getElementById('aj-gastos').value)||900000;
+  window._state.gastosPersonal=parseFloat(document.getElementById('aj-personal').value)||1500000;
+  fbSave('config/gastosLocal',window._state.gastosLocal);
+  fbSave('config/gastosPersonal',window._state.gastosPersonal);
+  toast('✅ Gastos guardados ☁️');
+}
+async function borrarTodo(){
+  if(!confirm('¿Borrar TODAS las órdenes?'))return;
+  await fbDel('ordenes');toast('Registros eliminados');
+}
+
+function toast(msg){
+  const el=document.getElementById('toast');
+  el.textContent=msg;el.classList.add('show');
+  setTimeout(()=>el.classList.remove('show'),2600);
+}
+
+document.getElementById('modal').addEventListener('click',function(e){if(e.target===this)cerrarModal();});
+document.getElementById('pinInput').addEventListener('keydown',e=>{if(e.key==='Enter')doLogin();});
+
+if(sessionStorage.getItem('li')==='1'){
+  document.getElementById('loginScreen').style.display='none';
+  document.getElementById('app').style.display='block';
+  window._appReady=true;
+  setTimeout(initApp,600);
+}
+</script>
+</body>
+</html>
