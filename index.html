@@ -268,6 +268,16 @@ body{background:var(--bg);color:var(--text);font-family:'Segoe UI',system-ui,san
       <div class="card-title">Datos del cliente</div>
       <div class="field"><label>Nombre y apellido</label><input type="text" id="n-nombre" placeholder="Ej: Juan Pérez"></div>
       <div class="field"><label>WhatsApp</label><input type="tel" id="n-telefono" placeholder="Ej: 11 2345-6789" inputmode="tel"></div>
+      <div class="field">
+        <label>IMEI del equipo</label>
+        <div style="display:flex;gap:8px;align-items:center;">
+          <input type="text" id="n-imei" placeholder="Ej: 356938035643809" inputmode="numeric" maxlength="15" style="flex:1;" oninput="if(document.getElementById('n-sinpantalla').checked){document.getElementById('n-sinpantalla').checked=false;}">
+          <label style="display:flex;align-items:center;gap:5px;font-size:.72rem;color:var(--muted);white-space:nowrap;cursor:pointer;min-width:fit-content;">
+            <input type="checkbox" id="n-sinpantalla" style="width:18px;height:18px;accent-color:var(--red);cursor:pointer;" onchange="if(this.checked){document.getElementById('n-imei').value='';document.getElementById('n-imei').placeholder='No disponible';}else{document.getElementById('n-imei').placeholder='Ej: 356938035643809';}">
+            Pantalla sin imagen
+          </label>
+        </div>
+      </div>
     </div>
 
     <div class="card">
@@ -920,8 +930,11 @@ async function guardarOrden(){
   if(!tipo){toast('⚠️ Seleccioná el tipo de reparación');return;}
   if(!precio){toast('⚠️ Ingresá el precio cobrado');return;}
   const id='ORD-'+Date.now();
+  const imei=document.getElementById('n-imei').value.trim();
+  const sinPantalla=document.getElementById('n-sinpantalla').checked;
   const o={id,fecha:new Date().toISOString(),nombre,
     telefono:document.getElementById('n-telefono').value.trim(),
+    imei:sinPantalla?'PANTALLA SIN IMAGEN':imei,
     marca,modelo,color:document.getElementById('n-color').value.trim(),
     tipo,calidad,costo,precio,
     pago:document.getElementById('n-pago').value,
@@ -945,7 +958,9 @@ async function guardarOrden(){
   limpiarNueva();showPage('ordenes');
 }
 function limpiarNueva(){
-  ['n-nombre','n-telefono','n-modelo','n-color','n-obs','n-costo','n-precio'].forEach(id=>{const el=document.getElementById(id);if(el)el.value='';});
+  ['n-nombre','n-telefono','n-imei','n-modelo','n-color','n-obs','n-costo','n-precio'].forEach(id=>{const el=document.getElementById(id);if(el)el.value='';});
+  document.getElementById('n-sinpantalla').checked=false;
+  document.getElementById('n-imei').placeholder='Ej: 356938035643809';
   document.getElementById('n-marca').value='';
   document.getElementById('n-tipo').value='';
   document.getElementById('n-calidad').value='';
@@ -1006,6 +1021,7 @@ function abrirDetalle(id){
     <div class="detail-row"><span class="dr-label">Fecha</span><span class="dr-val">${new Date(o.fecha).toLocaleString('es-AR')}</span></div>
     <div class="detail-row"><span class="dr-label">Cliente</span><span class="dr-val">${o.nombre}</span></div>
     ${o.telefono?`<div class="detail-row"><span class="dr-label">WhatsApp</span><span class="dr-val">${o.telefono}</span></div>`:''}
+    ${o.imei?`<div class="detail-row"><span class="dr-label">IMEI</span><span class="dr-val" style="color:${o.imei==='PANTALLA SIN IMAGEN'?'var(--red)':'var(--text)'}">${o.imei}</span></div>`:''}
     <div class="detail-row"><span class="dr-label">Equipo</span><span class="dr-val">${o.marca} ${o.modelo} ${o.color?'('+o.color+')':''}</span></div>
     <div class="detail-row"><span class="dr-label">Reparación</span><span class="dr-val">${tipoLabel(o.tipo)}${o.calidad?' · '+calLabel(o.calidad):''}</span></div>
     ${o.obs?`<div class="detail-row"><span class="dr-label">Obs.</span><span class="dr-val">${o.obs}</span></div>`:''}
@@ -1035,7 +1051,7 @@ async function eliminarOrden(id){
 function enviarWA(id){
   const o=s().ordenes.find(x=>x.id===id);if(!o)return;
   const stL={recibido:'Recibido ✓',listo:'Listo para retirar ✅',entregado:'Entregado'};
-  const msg=`📱 *${s().tallerNombre}*\n\n📋 Orden: ${o.id}\n👤 Cliente: ${o.nombre}\n📱 Equipo: ${o.marca} ${o.modelo}\n🔧 Reparación: ${tipoLabel(o.tipo)}${o.calidad?' ('+calLabel(o.calidad)+')':''}\n💰 Precio: ${fmt(o.precio)}\n📌 Estado: ${stL[o.estado]}\n📅 Fecha: ${new Date(o.fecha).toLocaleDateString('es-AR')}\n\n¡Gracias por elegirnos! 😊`;
+  const msg=`📱 *${s().tallerNombre}*\n\n📋 Orden: ${o.id}\n👤 Cliente: ${o.nombre}\n📱 Equipo: ${o.marca} ${o.modelo}\n${o.imei?'🔢 IMEI: '+o.imei+'\n':''}🔧 Reparación: ${tipoLabel(o.tipo)}${o.calidad?' ('+calLabel(o.calidad)+')':''}\n💰 Precio: ${fmt(o.precio)}\n📌 Estado: ${stL[o.estado]}\n📅 Fecha: ${new Date(o.fecha).toLocaleDateString('es-AR')}\n\n¡Gracias por elegirnos! 😊`;
   window.open(`https://wa.me/54${o.telefono.replace(/\D/g,'')}?text=${encodeURIComponent(msg)}`,'_blank');
 }
 
@@ -1059,6 +1075,7 @@ function imprimirTicket(id){
       <div class="tkr"><span>Orden:</span><span>${o.id}</span></div>
       <div class="tkr"><span>Cliente:</span><span>${o.nombre}</span></div>
       ${o.telefono?`<div class="tkr"><span>Tel:</span><span>${o.telefono}</span></div>`:''}
+      ${o.imei?`<div class="tkr"><span>IMEI:</span><span style="${o.imei==='PANTALLA SIN IMAGEN'?'font-weight:900':''}">${o.imei}</span></div>`:''}
       <div class="tkr"><span>Equipo:</span><span>${o.marca} ${o.modelo}</span></div>
       <div class="tkr"><span>Reparación:</span><span>${tipoLabel(o.tipo)}${o.calidad?' ('+calLabel(o.calidad)+')':''}</span></div>
       ${o.obs?`<div class="tkr"><span>Obs:</span><span>${o.obs}</span></div>`:''}
@@ -1083,6 +1100,7 @@ function imprimirA4(id){
     <div style="display:flex;justify-content:space-between;padding:3px 0;border-bottom:1px solid #eee;"><span style="color:#666;">N° Orden:</span><strong>${o.id}</strong></div>
     <div style="display:flex;justify-content:space-between;padding:3px 0;border-bottom:1px solid #eee;"><span style="color:#666;">Cliente:</span><span>${o.nombre}</span></div>
     ${o.telefono?`<div style="display:flex;justify-content:space-between;padding:3px 0;border-bottom:1px solid #eee;"><span style="color:#666;">Teléfono:</span><span>${o.telefono}</span></div>`:''}
+    ${o.imei?`<div style="display:flex;justify-content:space-between;padding:3px 0;border-bottom:1px solid #eee;"><span style="color:#666;">IMEI:</span><span style="${o.imei==='PANTALLA SIN IMAGEN'?'font-weight:900;color:#cc0000':''}">${o.imei}</span></div>`:''}
     <div style="display:flex;justify-content:space-between;padding:3px 0;border-bottom:1px solid #eee;"><span style="color:#666;">Equipo:</span><span>${o.marca} ${o.modelo} ${o.color?'— '+o.color:''}</span></div>
     <div style="display:flex;justify-content:space-between;padding:3px 0;border-bottom:1px solid #eee;"><span style="color:#666;">Reparación:</span><span>${tipoLabel(o.tipo)}${o.calidad?' ('+calLabel(o.calidad)+')':''}</span></div>
     ${o.obs?`<div style="display:flex;justify-content:space-between;padding:3px 0;border-bottom:1px solid #eee;"><span style="color:#666;">Obs.:</span><span>${o.obs}</span></div>`:''}
