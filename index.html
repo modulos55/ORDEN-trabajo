@@ -20,6 +20,8 @@
   --red:#ff4d6d;--text:#e8eaf0;--muted:#6b729a;--radius:14px;
 }
 body{background:var(--bg);color:var(--text);font-family:'Segoe UI',system-ui,sans-serif;min-height:100vh;overflow-x:hidden;}
+
+/* LOGIN */
 #loginScreen{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:100vh;padding:24px;}
 .login-logo{font-size:2.8rem;margin-bottom:8px;}
 .login-title{font-size:1.6rem;font-weight:900;color:var(--accent);letter-spacing:-1px;margin-bottom:2px;text-align:center;}
@@ -35,6 +37,8 @@ body{background:var(--bg);color:var(--text);font-family:'Segoe UI',system-ui,san
 .sync-ok{background:#0a2a1a;color:var(--green);}
 .sync-err{background:#2a0a0a;color:var(--red);}
 .sync-wait{background:#1a1a0a;color:var(--yellow);}
+
+/* APP */
 #app{display:none;}
 .topbar{background:var(--surface);border-bottom:1px solid var(--border);padding:10px 14px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100;}
 .topbar-title{font-size:.92rem;font-weight:900;color:var(--accent);}
@@ -49,6 +53,8 @@ body{background:var(--bg);color:var(--text);font-family:'Segoe UI',system-ui,san
 .tab.active{color:var(--accent);border-bottom-color:var(--accent);}
 .page{display:none;padding:12px;}
 .page.active{display:block;}
+
+/* CARDS & FORMS */
 .card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:14px;margin-bottom:10px;}
 .card-title{font-size:.64rem;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--muted);margin-bottom:10px;}
 .field{margin-bottom:10px;}
@@ -57,7 +63,7 @@ body{background:var(--bg);color:var(--text);font-family:'Segoe UI',system-ui,san
 .field input:focus,.field select:focus,.field textarea:focus{border-color:var(--accent);}
 .field textarea{resize:vertical;min-height:58px;font-family:inherit;}
 .prefix-wrap{position:relative;}
-.prefix-wrap span{position:absolute;left:11px;top:50%;transform:translateY(-50%);color:var(--muted);pointer-events:none;font-size:.88rem;}
+.prefix-wrap span{position:absolute;left:11px;top:50%;transform:translateY(-50%);color:var(--muted);pointer-events:none;}
 .prefix-wrap input{padding-left:22px;}
 .field input::-webkit-inner-spin-button{-webkit-appearance:none;}
 .row2{display:grid;grid-template-columns:1fr 1fr;gap:8px;}
@@ -65,14 +71,19 @@ body{background:var(--bg);color:var(--text);font-family:'Segoe UI',system-ui,san
 .btn-accent{background:linear-gradient(135deg,var(--accent),#0099cc);color:#000;}
 .btn-green{background:linear-gradient(135deg,var(--green),#009973);color:#000;}
 .btn-outline{background:transparent;border:1px solid var(--border);color:var(--muted);}
-/* CALIDAD TOGGLE */
-.calidad-toggle{display:flex;gap:6px;margin:4px 0 8px;}
-.cal-btn{flex:1;background:var(--bg);border:1px solid var(--border);border-radius:9px;color:var(--muted);font-size:.72rem;font-weight:700;padding:8px 4px;cursor:pointer;text-align:center;transition:all .15s;}
-.cal-btn.sel{background:var(--accent);border-color:var(--accent);color:#000;}
-.cal-btn.sel-orig{background:var(--yellow);border-color:var(--yellow);color:#000;}
-.cal-btn.sel-glass{background:var(--green);border-color:var(--green);color:#000;}
-.foto-btns{display:flex;gap:8px;margin-bottom:8px;}
-.foto-btn{flex:1;background:var(--surface2);border:1px solid var(--border);border-radius:10px;color:var(--text);font-size:.8rem;font-weight:600;padding:10px;cursor:pointer;text-align:center;}
+
+/* BOTONES DE REPARACIÓN */
+.rep-section-label{font-size:.66rem;font-weight:700;text-transform:uppercase;letter-spacing:.8px;color:var(--muted);margin:10px 0 5px;}
+.rep-grid-2{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:4px;}
+.rep-grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:4px;}
+.rep-btn{background:var(--bg);border:2px solid var(--border);border-radius:12px;color:var(--muted);font-size:.72rem;font-weight:700;padding:12px 4px;cursor:pointer;text-align:center;line-height:1.7;transition:all .15s;}
+.rep-btn .rb-icon{font-size:1.3rem;display:block;}
+.rep-btn.sel-glass-plano{background:#0a2a0a;border-color:#4dff88;color:#4dff88;}
+.rep-btn.sel-glass-curvo{background:#0a2a1a;border-color:var(--green);color:var(--green);}
+.rep-btn.sel-oled{background:#0a1a2a;border-color:var(--accent);color:var(--accent);}
+.rep-btn.sel-original{background:#2a2a0a;border-color:var(--yellow);color:var(--yellow);}
+.rep-btn.sel-otros{background:#2a1500;border-color:var(--accent2);color:var(--accent2);}
+
 /* COSTO DB */
 .costo-card{background:linear-gradient(135deg,#0d1a2a,#0a1520);border:1px solid var(--accent);border-radius:12px;padding:12px;margin:7px 0;}
 .cc-label{font-size:.64rem;text-transform:uppercase;letter-spacing:1px;color:var(--accent);margin-bottom:4px;}
@@ -80,11 +91,13 @@ body{background:var(--bg);color:var(--text);font-family:'Segoe UI',system-ui,san
 .cc-price{font-size:1.4rem;font-weight:900;color:#fff;}
 .cc-detail{font-size:.7rem;color:var(--muted);margin-top:2px;}
 .cc-confirm{background:var(--accent);border:none;border-radius:8px;color:#000;font-size:.72rem;font-weight:800;padding:7px 11px;cursor:pointer;}
+
 /* TABLA TOGGLE */
 .tabla-toggle{display:flex;gap:6px;margin:4px 0 7px;}
 .tt-btn{flex:1;background:var(--bg);border:1px solid var(--border);border-radius:9px;color:var(--muted);font-size:.72rem;font-weight:700;padding:8px 4px;cursor:pointer;text-align:center;}
 .tt-btn.sel{background:var(--accent2);border-color:var(--accent2);color:#fff;}
-/* PRECIO */
+
+/* PRECIO SUGERIDO */
 .precio-badge{background:linear-gradient(135deg,#0d2137,#0a1a2e);border:1px solid var(--accent);border-radius:12px;padding:12px;text-align:center;margin:7px 0;}
 .pb-label{font-size:.64rem;text-transform:uppercase;letter-spacing:1px;color:var(--accent);margin-bottom:3px;}
 .pb-price{font-size:1.9rem;font-weight:900;color:#fff;letter-spacing:-1px;}
@@ -92,11 +105,13 @@ body{background:var(--bg);color:var(--text);font-family:'Segoe UI',system-ui,san
 .cuotas-mini{display:flex;gap:5px;flex-wrap:wrap;margin-top:4px;}
 .cm-btn{background:var(--bg);border:1px solid var(--border);border-radius:7px;color:var(--muted);font-size:.7rem;padding:5px 8px;cursor:pointer;font-weight:600;}
 .cm-btn.sel{background:var(--accent2);border-color:var(--accent2);color:#fff;}
-/* FOTO */
-.foto-wrap{display:flex;gap:8px;flex-wrap:wrap;margin-top:6px;}
+
+/* FOTOS */
+.foto-btns{display:flex;gap:8px;margin-bottom:8px;}
+.foto-btn{flex:1;background:var(--surface2);border:1px solid var(--border);border-radius:10px;color:var(--text);font-size:.8rem;font-weight:600;padding:10px;cursor:pointer;text-align:center;}
+.foto-wrap{display:flex;flex-wrap:wrap;gap:6px;margin-top:4px;}
 .foto-thumb{width:70px;height:70px;border-radius:10px;object-fit:cover;border:1px solid var(--border);cursor:pointer;}
-.foto-add{width:70px;height:70px;border-radius:10px;border:2px dashed var(--border);display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:1.4rem;color:var(--muted);background:var(--bg);}
-.foto-add:active{border-color:var(--accent);}
+
 /* ORDEN CARD */
 .orden-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:12px;margin-bottom:8px;cursor:pointer;}
 .orden-header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:4px;}
@@ -109,6 +124,7 @@ body{background:var(--bg);color:var(--text);font-family:'Segoe UI',system-ui,san
 .orden-equipo{font-size:.76rem;color:var(--muted);}
 .orden-footer{display:flex;justify-content:space-between;align-items:center;margin-top:6px;padding-top:6px;border-top:1px solid var(--border);}
 .orden-precio{font-size:.92rem;font-weight:800;color:var(--yellow);}
+
 /* MODAL */
 #modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,.9);z-index:200;overflow-y:auto;padding:13px;}
 #modal.show{display:flex;align-items:flex-start;justify-content:center;}
@@ -118,17 +134,18 @@ body{background:var(--bg);color:var(--text);font-family:'Segoe UI',system-ui,san
 .detail-row{display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid var(--border);font-size:.8rem;}
 .detail-row .dr-label{color:var(--muted);}
 .detail-row .dr-val{font-weight:600;text-align:right;max-width:58%;}
-.ganancia-highlight{background:linear-gradient(135deg,#0a2a1a,#051510);border:1px solid var(--green);border-radius:10px;padding:11px;text-align:center;margin:10px 0;}
+.ganancia-hl{background:linear-gradient(135deg,#0a2a1a,#051510);border:1px solid var(--green);border-radius:10px;padding:11px;text-align:center;margin:10px 0;}
 .gh-label{font-size:.64rem;text-transform:uppercase;letter-spacing:1px;color:var(--green);margin-bottom:3px;}
 .gh-val{font-size:1.4rem;font-weight:900;color:var(--green);}
 .status-select{width:100%;background:var(--bg);border:1px solid var(--border);border-radius:10px;color:var(--text);font-size:.86rem;padding:9px;outline:none;margin:8px 0;}
-.print-options{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-top:9px;}
-.btn-print-therm{background:linear-gradient(135deg,#2a1a00,#3a2500);border:1px solid var(--yellow);border-radius:10px;color:var(--yellow);font-size:.75rem;font-weight:700;padding:10px 7px;cursor:pointer;text-align:center;}
-.btn-print-a4{background:linear-gradient(135deg,#0a1a2a,#0d2137);border:1px solid var(--accent);border-radius:10px;color:var(--accent);font-size:.75rem;font-weight:700;padding:10px 7px;cursor:pointer;text-align:center;}
-.btn-wa-full{background:#25d366;border:none;border-radius:10px;color:#000;font-size:.78rem;font-weight:700;padding:10px;cursor:pointer;width:100%;margin-top:7px;}
+.btn-wa{background:#25d366;border:none;border-radius:10px;color:#000;font-size:.78rem;font-weight:700;padding:10px;cursor:pointer;width:100%;margin-top:7px;}
+.print-opts{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-top:9px;}
+.btn-therm{background:linear-gradient(135deg,#2a1a00,#3a2500);border:1px solid var(--yellow);border-radius:10px;color:var(--yellow);font-size:.75rem;font-weight:700;padding:10px 7px;cursor:pointer;text-align:center;}
+.btn-a4{background:linear-gradient(135deg,#0a1a2a,#0d2137);border:1px solid var(--accent);border-radius:10px;color:var(--accent);font-size:.75rem;font-weight:700;padding:10px 7px;cursor:pointer;text-align:center;}
 .btn-delete{background:#2a0a0a;border:1px solid var(--red);color:var(--red);width:100%;margin-top:6px;border-radius:10px;font-size:.76rem;font-weight:700;padding:10px;cursor:pointer;}
 .fotos-modal{display:flex;gap:6px;flex-wrap:wrap;margin-top:6px;}
 .fotos-modal img{width:80px;height:80px;border-radius:8px;object-fit:cover;cursor:pointer;}
+
 /* RESUMEN */
 .resumen-tabs{display:flex;gap:7px;margin-bottom:12px;}
 .rt-btn{flex:1;background:var(--surface2);border:1px solid var(--border);border-radius:10px;color:var(--muted);font-size:.76rem;font-weight:700;padding:9px;cursor:pointer;text-align:center;}
@@ -140,30 +157,69 @@ body{background:var(--bg);color:var(--text);font-family:'Segoe UI',system-ui,san
 .sv-green{color:var(--green);}.sv-yellow{color:var(--yellow);}.sv-blue{color:var(--accent);}.sv-orange{color:var(--accent2);}
 .rep-item{display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid var(--border);font-size:.78rem;cursor:pointer;}
 .rep-item:last-child{border-bottom:none;}
-.ri-precio{font-weight:700;color:var(--yellow);}
-.ri-gan{font-size:.68rem;color:var(--green);}
+
+/* INVENTARIO */
 .db-item{display:flex;justify-content:space-between;align-items:center;padding:7px 0;border-bottom:1px solid var(--border);font-size:.78rem;}
 .db-item:last-child{border-bottom:none;}
 .db-edit{background:var(--surface2);border:1px solid var(--border);border-radius:6px;color:var(--text);font-size:.72rem;padding:3px 7px;cursor:pointer;}
 .upload-zone{border:2px dashed var(--border);border-radius:12px;padding:20px;text-align:center;color:var(--muted);font-size:.8rem;margin-bottom:10px;cursor:pointer;}
+
+/* SEARCH & FILTER */
 .search-wrap{position:relative;margin-bottom:10px;}
 .search-wrap input{width:100%;background:var(--surface);border:1px solid var(--border);border-radius:10px;color:var(--text);font-size:.86rem;padding:9px 11px 9px 32px;outline:none;}
-.search-wrap .si{position:absolute;left:10px;top:50%;transform:translateY(-50%);color:var(--muted);font-size:.8rem;}
+.search-wrap .si{position:absolute;left:10px;top:50%;transform:translateY(-50%);color:var(--muted);}
 .filter-row{display:flex;gap:5px;margin-bottom:10px;overflow-x:auto;padding-bottom:2px;}
 .filter-btn{background:var(--surface);border:1px solid var(--border);border-radius:20px;color:var(--muted);font-size:.68rem;font-weight:700;padding:5px 10px;cursor:pointer;white-space:nowrap;}
 .filter-btn.active{background:var(--accent);border-color:var(--accent);color:#000;}
 .empty-state{text-align:center;padding:40px 16px;color:var(--muted);}
 .empty-state .es-icon{font-size:2rem;margin-bottom:9px;}
-#toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%) translateY(80px);background:var(--green);color:#000;font-size:.8rem;font-weight:700;padding:10px 18px;border-radius:30px;z-index:999;opacity:0;transition:all .3s;pointer-events:none;white-space:nowrap;}
-#toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
+
+/* STOCK ALERT */
+.stock-alert{position:fixed;top:0;left:0;right:0;background:var(--red);color:#fff;font-size:.85rem;font-weight:800;padding:14px 16px;text-align:center;z-index:500;display:none;animation:slideDown .3s ease;}
+@keyframes slideDown{from{transform:translateY(-100%);}to{transform:translateY(0);}}
+
 /* LIGHTBOX */
 #lightbox{display:none;position:fixed;inset:0;background:rgba(0,0,0,.95);z-index:300;align-items:center;justify-content:center;}
 #lightbox.show{display:flex;}
 #lightbox img{max-width:95vw;max-height:90vh;border-radius:10px;}
-#lightbox-close{position:absolute;top:16px;right:16px;background:rgba(255,255,255,.15);border:none;color:#fff;font-size:1.2rem;padding:8px 12px;border-radius:8px;cursor:pointer;}
+#lb-close{position:absolute;top:16px;right:16px;background:rgba(255,255,255,.15);border:none;color:#fff;font-size:1.2rem;padding:8px 12px;border-radius:8px;cursor:pointer;}
+
+/* TOAST */
+#toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%) translateY(80px);background:var(--green);color:#000;font-size:.8rem;font-weight:700;padding:10px 18px;border-radius:30px;z-index:999;opacity:0;transition:all .3s;pointer-events:none;white-space:nowrap;}
+#toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
+
+/* QR SCANNER */
+#qrScanner{display:none;position:fixed;inset:0;background:rgba(0,0,0,.95);z-index:400;flex-direction:column;align-items:center;justify-content:center;}
+#qrScanner.show{display:flex;}
+#qrScanner video{width:90vw;max-width:400px;border-radius:16px;border:2px solid var(--accent);}
+#qrScanner .scanner-label{color:var(--accent);font-size:.85rem;font-weight:700;margin-top:12px;}
+#qrScanner .scanner-close{position:absolute;top:16px;right:16px;background:rgba(255,255,255,.15);border:none;color:#fff;font-size:1.2rem;padding:8px 12px;border-radius:8px;cursor:pointer;}
+
+/* QR MODAL */
+.qr-display{text-align:center;padding:20px;}
+.qr-display canvas,.qr-display img{margin:10px auto;display:block;}
+.qr-display .qr-label{font-size:.75rem;color:var(--muted);margin-top:8px;}
+
+/* ACC ITEM */
+.acc-item{background:var(--bg);border:1px solid var(--border);border-radius:12px;padding:12px;margin-bottom:8px;}
+.acc-item-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;}
+.acc-item-name{font-size:.82rem;font-weight:700;}
+.acc-stock-row{display:flex;align-items:center;gap:8px;margin-bottom:6px;}
+.acc-stock-btn{background:var(--surface2);border:1px solid var(--border);border-radius:7px;font-size:.9rem;font-weight:900;width:32px;height:32px;cursor:pointer;display:flex;align-items:center;justify-content:center;}
+.acc-stock-btn.minus{color:var(--red);}
+.acc-stock-btn.plus{color:var(--green);}
+.acc-stock-val{font-size:1rem;font-weight:800;min-width:30px;text-align:center;}
+.acc-price-row{display:flex;gap:8px;}
+.acc-price-field{flex:1;}
+.acc-price-field label{font-size:.6rem;color:var(--muted);text-transform:uppercase;display:block;margin-bottom:3px;}
+.acc-price-field input{width:100%;background:var(--surface);border:1px solid var(--border);border-radius:8px;color:var(--text);font-size:.8rem;padding:7px 8px;outline:none;}
+.acc-price-field input:focus{border-color:var(--accent);}
+.acc-qr-btn{background:var(--surface2);border:1px solid var(--border);border-radius:7px;color:var(--accent);font-size:.7rem;font-weight:700;padding:5px 8px;cursor:pointer;}
+
+/* PRINT */
 @media print{
   body{background:#fff!important;color:#000!important;}
-  #loginScreen,#app,#modal,#toast,#lightbox{display:none!important;}
+  #loginScreen,#app,#modal,#toast,#lightbox,#qrScanner,.stock-alert{display:none!important;}
   #printArea{display:block!important;}
 }
 #printArea{display:none;}
@@ -179,7 +235,7 @@ body{background:var(--bg);color:var(--text);font-family:'Segoe UI',system-ui,san
   <div class="login-card">
     <div class="login-error" id="loginError">Clave incorrecta.</div>
     <label>Clave de acceso</label>
-    <input type="password" id="pinInput" placeholder="••••" maxlength="8" onkeydown="if(event.key==='Enter')doLogin()">
+    <input type="password" id="pinInput" placeholder="••••" maxlength="8">
     <button class="btn-primary" onclick="doLogin()">ENTRAR</button>
     <div class="login-hint">Clave por defecto: <strong>1234</strong></div>
     <div id="syncStatus" class="sync-status sync-wait">⏳ Conectando...</div>
@@ -197,7 +253,7 @@ body{background:var(--bg);color:var(--text);font-family:'Segoe UI',system-ui,san
       <span class="sync-dot" id="syncDot"></span>
       <button class="icon-btn" onclick="showPage('listas')">📋</button>
       <button class="icon-btn" onclick="showPage('ajustes')">⚙️</button>
-      <button class="icon-btn" onclick="logout()">🔒</button>
+      <button class="icon-btn" onclick="doLogout()">🔒</button>
     </div>
   </div>
   <div class="tabs">
@@ -213,11 +269,12 @@ body{background:var(--bg);color:var(--text);font-family:'Segoe UI',system-ui,san
       <div class="field"><label>Nombre y apellido</label><input type="text" id="n-nombre" placeholder="Ej: Juan Pérez"></div>
       <div class="field"><label>WhatsApp</label><input type="tel" id="n-telefono" placeholder="Ej: 11 2345-6789" inputmode="tel"></div>
     </div>
+
     <div class="card">
       <div class="card-title">Equipo</div>
       <div class="row2">
         <div class="field"><label>Marca</label>
-          <select id="n-marca" onchange="cargarModelos()">
+          <select id="n-marca" onchange="onMarcaChange()">
             <option value="">— Marca —</option>
             <option>Samsung</option><option>iPhone</option><option>Motorola</option>
             <option>Xiaomi</option><option>LG</option><option>Nokia</option>
@@ -226,16 +283,15 @@ body{background:var(--bg);color:var(--text);font-family:'Segoe UI',system-ui,san
           </select>
         </div>
         <div class="field"><label>Modelo</label>
-          <select id="n-modelo" onchange="cargarCosto()"><option value="">— Modelo —</option></select>
+          <select id="n-modelo" onchange="onModeloChange()"><option value="">— Modelo —</option></select>
         </div>
       </div>
       <div class="field"><label>Color</label><input type="text" id="n-color" placeholder="Ej: Negro"></div>
       <div class="field"><label>Observaciones del equipo</label>
-        <textarea id="n-obs" placeholder="Daños visibles, detalles importantes..."></textarea>
+        <textarea id="n-obs" placeholder="Daños visibles, detalles..."></textarea>
       </div>
-      <!-- FOTOS -->
       <div class="field">
-        <label>📷 Fotos del estado del equipo</label>
+        <label>📷 Fotos del equipo</label>
         <div class="foto-btns">
           <button class="foto-btn" onclick="document.getElementById('fotoGaleria').click()">🖼️ Galería</button>
           <button class="foto-btn" onclick="document.getElementById('fotoCamara').click()">📷 Cámara</button>
@@ -245,44 +301,62 @@ body{background:var(--bg);color:var(--text);font-family:'Segoe UI',system-ui,san
         <input type="file" id="fotoCamara" accept="image/*" capture="environment" style="display:none" onchange="agregarFotos(this)">
       </div>
     </div>
+
     <div class="card">
-      <div class="card-title">Reparación y precio</div>
-      <div class="field"><label>Tipo de reparación</label>
-        <select id="n-tipo" onchange="cargarCosto()">
-          <option value="">— Seleccioná —</option>
-          <option value="modulo">Módulo / Pantalla completa</option>
-          <option value="vidrio_plano">Cambio de vidrio plano</option>
-          <option value="vidrio_curvo">Cambio de vidrio curvo</option>
-          <option value="bateria">Batería</option>
-          <option value="pin">Pin de carga</option>
-          <option value="tapa">Tapa trasera</option>
-          <option value="otro">Otro</option>
-        </select>
+      <div class="card-title">Tipo de reparación</div>
+
+      <!-- FILA 1: GLASS + MÓDULO -->
+      <div class="rep-grid-4" style="display:grid;grid-template-columns:repeat(4,1fr);gap:7px;margin-bottom:8px;">
+        <button class="rep-btn" id="btn-gplano" onclick="selRep(this,'vidrio_plano','glass_plano')">
+          <span class="rb-icon">🪟</span><span style="font-size:.65rem">Glass Plano</span>
+        </button>
+        <button class="rep-btn" id="btn-gcurvo" onclick="selRep(this,'vidrio_curvo','glass_curvo')">
+          <span class="rb-icon">🌀</span><span style="font-size:.65rem">Glass Curvo</span>
+        </button>
+        <button class="rep-btn" id="btn-oled" onclick="selRep(this,'modulo','oled')">
+          <span class="rb-icon">🔵</span><span style="font-size:.65rem">Módulo OLED</span>
+        </button>
+        <button class="rep-btn" id="btn-orig" onclick="selRep(this,'modulo','original')">
+          <span class="rb-icon">🟡</span><span style="font-size:.65rem">Módulo Orig.</span>
+        </button>
       </div>
-      <!-- NOTA RIESGO VIDRIO -->
-      <div id="notaVidrio" style="display:none;background:linear-gradient(135deg,#2a1500,#1a0d00);border:1px solid var(--accent2);border-radius:12px;padding:12px;margin:8px 0;">
-        <div style="font-size:.72rem;font-weight:800;color:var(--accent2);margin-bottom:5px;">⚠️ AVISO IMPORTANTE — Cambio de vidrio</div>
-        <div style="font-size:.75rem;color:#ffcc99;line-height:1.5;">El cambio de vidrio es un trabajo delicado que conlleva un riesgo aproximado del <strong>10%</strong> de daño al módulo durante el proceso. En caso de que esto ocurra, se le ofrecerá al cliente el reemplazo del módulo a <strong>precio de costo</strong>, sin cargo de mano de obra.</div>
+
+      <!-- FILA 2: OTROS -->
+      <div class="rep-grid-4" style="display:grid;grid-template-columns:repeat(4,1fr);gap:7px;margin-bottom:4px;">
+        <button class="rep-btn" id="btn-bat" onclick="selRep(this,'bateria','std')">
+          <span class="rb-icon">🔋</span><span style="font-size:.65rem">Batería</span>
+        </button>
+        <button class="rep-btn" id="btn-pin" onclick="selRep(this,'pin','std')">
+          <span class="rb-icon">⚡</span><span style="font-size:.65rem">Pin de Carga</span>
+        </button>
+        <button class="rep-btn" id="btn-tapa" onclick="selRep(this,'tapa','std')">
+          <span class="rb-icon">🔲</span><span style="font-size:.65rem">Tapa Trasera</span>
+        </button>
+        <button class="rep-btn" id="btn-otro" onclick="selRep(this,'otro','std')">
+          <span class="rb-icon">🔧</span><span style="font-size:.65rem">Otro</span>
+        </button>
       </div>
-      <!-- NOTA GARANTIA MÓDULO -->
+      <div id="autoGlassMsg" style="display:none;font-size:.7rem;color:var(--green);text-align:center;padding:4px;margin-bottom:4px;">✓ Detectado automáticamente</div>
+
+      <input type="hidden" id="n-tipo">
+      <input type="hidden" id="n-calidad">
+
+      <!-- NOTA VIDRIO -->
+      <div id="notaVidrio" style="display:none;background:linear-gradient(135deg,#3a1a00,#2a0d00);border:2px solid var(--accent2);border-radius:12px;padding:14px;margin:10px 0;">
+        <div style="font-size:1rem;font-weight:900;color:var(--accent2);margin-bottom:8px;">⚠️ AVISO IMPORTANTE</div>
+        <div style="font-size:.95rem;font-weight:700;color:#ffcc99;line-height:1.7;">El cambio de vidrio conlleva un riesgo aproximado del <span style="font-size:1.1rem;color:#ff9944;font-weight:900;">10%</span> de daño al módulo durante el proceso.<br><br>En caso de que esto ocurra, se le ofrecerá al cliente el reemplazo del módulo a <strong style="color:#fff;">precio de costo</strong>, sin cargo de mano de obra.</div>
+      </div>
+
+      <!-- NOTA MÓDULO -->
       <div id="notaModulo" style="display:none;background:linear-gradient(135deg,#0a1a2a,#051015);border:1px solid var(--accent);border-radius:12px;padding:12px;margin:8px 0;">
-        <div style="font-size:.72rem;font-weight:800;color:var(--accent);margin-bottom:5px;">ℹ️ GARANTÍA — Cambio de módulo</div>
-        <div style="font-size:.75rem;color:#99ddff;line-height:1.5;">La garantía es de <strong>30 días</strong>, únicamente por fallas de fábrica del repuesto. No cubre golpes, caídas, humedad, ni ningún otro tipo de daño externo.</div>
+        <div style="font-size:.8rem;font-weight:800;color:var(--accent);margin-bottom:5px;">ℹ️ GARANTÍA — Módulo</div>
+        <div style="font-size:.8rem;color:#99ddff;line-height:1.6;font-weight:600;"><strong>30 días</strong> únicamente por fallas de fábrica. No cubre golpes, caídas, humedad ni daños externos.</div>
       </div>
-        <div class="field">
-          <label>Calidad del repuesto</label>
-          <div class="calidad-toggle">
-            <button class="cal-btn sel-glass" id="cal-glass" onclick="setCalidad('glass',this)">Glass</button>
-            <button class="cal-btn" id="cal-std" onclick="setCalidad('std',this)">OLED</button>
-            <button class="cal-btn" id="cal-orig" onclick="setCalidad('orig',this)">Original</button>
-          </div>
-        </div>
-      </div>
-      <!-- COSTO DB -->
-      <!-- CALIDAD -->
-      <div id="calidadSection" style="display:none">
+
+      <!-- COSTO DEL REPUESTO -->
+      <div id="costoSection" style="display:none;margin-top:10px;">
         <div class="costo-card">
-          <div class="cc-label">💾 Costo del repuesto (base de datos)</div>
+          <div class="cc-label">💾 Costo del repuesto</div>
           <div class="cc-main">
             <div><div class="cc-price" id="cc-precio">—</div><div class="cc-detail" id="cc-detalle"></div></div>
             <button class="cc-confirm" onclick="confirmarCosto()">Usar ✓</button>
@@ -290,54 +364,64 @@ body{background:var(--bg);color:var(--text);font-family:'Segoe UI',system-ui,san
         </div>
         <div style="font-size:.7rem;color:var(--muted);margin-bottom:7px;text-align:center;">o modificá el costo abajo</div>
       </div>
-      <div class="field"><label>Costo del repuesto (reposición hoy)</label>
+
+      <div class="field" id="costoManualSection" style="display:none;">
+        <label>Costo del repuesto ($)</label>
         <div class="prefix-wrap"><span>$</span>
           <input type="number" id="n-costo" placeholder="Ej: 12000" inputmode="numeric" oninput="calcPrecio()">
         </div>
       </div>
-      <div class="field"><label>Tabla de precios</label>
-        <div class="tabla-toggle">
-          <button class="tt-btn sel" id="tb-local" onclick="setTabla('local',this)">Tabla 1<br><small style="font-weight:400;font-size:.62rem">Solo local</small></button>
-          <button class="tt-btn" id="tb-sueldo" onclick="setTabla('sueldo',this)">Tabla 2<br><small style="font-weight:400;font-size:.62rem">Con sueldo</small></button>
+
+      <!-- TABLA + PRECIO SUGERIDO -->
+      <div id="precioSection" style="display:none;">
+        <div class="field"><label>Tabla de precios</label>
+          <div class="tabla-toggle">
+            <button class="tt-btn sel" id="tb-local" onclick="setTabla('local',this)">Tabla 1<br><small style="font-weight:400;font-size:.62rem">Solo local</small></button>
+            <button class="tt-btn" id="tb-sueldo" onclick="setTabla('sueldo',this)">Tabla 2<br><small style="font-weight:400;font-size:.62rem">Con sueldo</small></button>
+          </div>
         </div>
-      </div>
-      <div id="precioSugerido" style="display:none">
         <div class="precio-badge">
           <div class="pb-label">💡 Precio sugerido efectivo</div>
           <div class="pb-price" id="ps-price">—</div>
           <div class="pb-sub" id="ps-sub"></div>
         </div>
-        <div class="field" style="margin-top:3px;"><label>Tarjeta / cuotas</label>
+        <!-- +1% / -1% -->
+        <div style="display:flex;gap:8px;margin:8px 0;">
+          <button onclick="ajustarPrecio(-1)" style="flex:1;background:var(--surface2);border:1px solid var(--border);border-radius:10px;color:var(--red);font-size:.9rem;font-weight:800;padding:10px;cursor:pointer;">− 1%</button>
+          <button onclick="ajustarPrecio(1)" style="flex:1;background:var(--surface2);border:1px solid var(--border);border-radius:10px;color:var(--green);font-size:.9rem;font-weight:800;padding:10px;cursor:pointer;">+ 1%</button>
+        </div>
+        <div class="field"><label>Tarjeta / cuotas</label>
           <div class="cuotas-mini" id="cuotasMini">
-            <button class="cm-btn sel" data-c="1" onclick="setCuotaNueva(this)">Efect.</button>
-            <button class="cm-btn" data-c="2" onclick="setCuotaNueva(this)">2c</button>
-            <button class="cm-btn" data-c="3" onclick="setCuotaNueva(this)">3c</button>
-            <button class="cm-btn" data-c="6" onclick="setCuotaNueva(this)">6c</button>
-            <button class="cm-btn" data-c="12" onclick="setCuotaNueva(this)">12c</button>
+            <button class="cm-btn sel" data-c="1" onclick="setCuota(this)">Efect.</button>
+            <button class="cm-btn" data-c="2" onclick="setCuota(this)">2c</button>
+            <button class="cm-btn" data-c="3" onclick="setCuota(this)">3c</button>
+            <button class="cm-btn" data-c="6" onclick="setCuota(this)">6c</button>
+            <button class="cm-btn" data-c="12" onclick="setCuota(this)">12c</button>
           </div>
           <div id="ps-tarjeta" style="font-size:.76rem;color:var(--yellow);margin-top:5px;padding:7px;background:var(--surface2);border-radius:8px;display:none;"></div>
         </div>
-      </div>
-      <div class="field"><label>Precio cobrado al cliente</label>
-        <div class="prefix-wrap"><span>$</span>
-          <input type="number" id="n-precio" placeholder="Podés modificarlo" inputmode="numeric" oninput="actualizarGanancia()">
+        <div class="field"><label>Precio cobrado al cliente ($)</label>
+          <div class="prefix-wrap"><span>$</span>
+            <input type="number" id="n-precio" placeholder="Podés modificarlo" inputmode="numeric" oninput="actualizarGanancia()">
+          </div>
+        </div>
+        <div id="ganancia-preview" style="display:none;font-size:.76rem;padding:7px;background:#0a2a1a;border-radius:8px;margin-top:3px;"></div>
+        <div class="field"><label>Forma de pago</label>
+          <select id="n-pago">
+            <option value="efectivo">Efectivo / Transferencia</option>
+            <option value="debito">Tarjeta débito</option>
+            <option value="credito1">Crédito 1 pago</option>
+            <option value="cuotas">Cuotas</option>
+          </select>
         </div>
       </div>
-      <div id="ganancia-preview" style="display:none;font-size:.76rem;padding:7px;background:#0a2a1a;border-radius:8px;margin-top:3px;"></div>
-      <div class="field"><label>Forma de pago</label>
-        <select id="n-pago">
-          <option value="efectivo">Efectivo / Transferencia</option>
-          <option value="debito">Tarjeta débito</option>
-          <option value="credito1">Crédito 1 pago</option>
-          <option value="cuotas">Cuotas</option>
-        </select>
-      </div>
     </div>
+
     <button class="btn-block btn-accent" onclick="guardarOrden()">GUARDAR ORDEN</button>
     <button class="btn-block btn-outline" onclick="limpiarNueva()">Limpiar formulario</button>
   </div>
 
-  <!-- ORDENES -->
+  <!-- ÓRDENES -->
   <div class="page" id="page-ordenes">
     <div class="search-wrap"><span class="si">🔍</span>
       <input type="text" id="searchInput" placeholder="Buscar cliente o equipo..." oninput="renderOrdenes()">
@@ -362,29 +446,83 @@ body{background:var(--bg);color:var(--text);font-family:'Segoe UI',system-ui,san
 
   <!-- LISTAS -->
   <div class="page" id="page-listas">
-    <div class="card">
-      <div class="card-title">📂 Importar lista de precios</div>
-      <p style="font-size:.76rem;color:var(--muted);margin-bottom:10px;">Formato TXT:<br>
-      <code style="background:var(--bg);padding:2px 6px;border-radius:4px;font-size:.7rem;">MARCA|MODELO|TIPO|COSTO_STD|COSTO_ORIG</code><br>
-      <span style="font-size:.7rem;">Ejemplo: Samsung|A12|modulo|16060|24820<br>Si no hay original, dejá el último en 0</span></p>
-      <div class="upload-zone" onclick="document.getElementById('fileInput').click()">📄 Subir archivo TXT</div>
-      <input type="file" id="fileInput" accept=".txt,.csv" style="display:none" onchange="importarArchivo(this)">
-      <div class="field"><label>O pegá el texto acá</label>
-        <textarea id="listaTexto" placeholder="Samsung|A12|modulo|16060|24820" style="min-height:90px;font-size:.78rem;font-family:monospace;"></textarea>
+    <!-- VISTA PRINCIPAL -->
+    <div id="listas-main">
+      <div class="card">
+        <div class="card-title">📦 Inventario de repuestos</div>
+        <p style="font-size:.76rem;color:var(--muted);margin-bottom:10px;">Seleccioná una marca para ver y ajustar el stock con + y −.</p>
+        <div class="field"><label>Marca</label>
+          <select id="inv-marca" onchange="abrirSeccionInv()">
+            <option value="">— Seleccioná —</option>
+            <option>Samsung</option><option>iPhone</option><option>Motorola</option>
+            <option>Xiaomi</option><option>LG</option><option>Nokia</option><option>TCL</option><option>ZTE</option><option>Huawei</option>
+          </select>
+        </div>
       </div>
-      <button class="btn-block btn-green" onclick="importarTexto()">IMPORTAR LISTA</button>
+      <div class="card">
+        <div class="card-title">💰 Editar costos de repuestos</div>
+        <p style="font-size:.76rem;color:var(--muted);margin-bottom:10px;">Actualizá el costo cuando cambia el proveedor. El precio sugerido al cliente se recalcula automáticamente.</p>
+        <div class="field"><label>Marca</label>
+          <select id="costo-marca" onchange="abrirSeccionCostos()">
+            <option value="">— Seleccioná —</option>
+            <option>Samsung</option><option>iPhone</option><option>Motorola</option>
+            <option>Xiaomi</option><option>LG</option><option>Nokia</option><option>TCL</option><option>ZTE</option><option>Huawei</option>
+          </select>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-title">📂 Importar lista de precios (TXT)</div>
+        <p style="font-size:.76rem;color:var(--muted);margin-bottom:8px;">Formato: <code style="background:var(--bg);padding:2px 5px;border-radius:4px;">Samsung|A12|modulo|16060|24820</code><br>Campos: Marca|Modelo|Tipo|Costo OLED|Costo Original</p>
+        <div class="upload-zone" onclick="document.getElementById('fileInput').click()">📄 Subir archivo TXT</div>
+        <input type="file" id="fileInput" accept=".txt" style="display:none" onchange="importarArchivo(this)">
+        <div class="field"><textarea id="listaTexto" placeholder="O pegá el texto acá..." style="min-height:80px;font-family:monospace;font-size:.78rem;"></textarea></div>
+        <button class="btn-block btn-green" onclick="importarTexto()">IMPORTAR</button>
+      </div>
+      <div class="card">
+        <div class="card-title">📱 Inventario de Accesorios</div>
+        <p style="font-size:.76rem;color:var(--muted);margin-bottom:10px;">Seleccioná una marca para gestionar stock de accesorios.</p>
+        <div class="field"><label>Marca</label>
+          <select id="acc-marca" onchange="abrirSeccionAcc()">
+            <option value="">— Seleccioná —</option>
+            <option>Samsung</option><option>iPhone</option><option>Motorola</option>
+            <option>Xiaomi</option><option>LG</option><option>Nokia</option><option>TCL</option><option>ZTE</option><option>Huawei</option>
+          </select>
+        </div>
+      </div>
     </div>
-    <div class="card">
-      <div class="card-title">✏️ Editar precio individual</div>
-      <div class="field"><label>Marca</label>
-        <select id="aj-dbMarca" onchange="renderDbEdit()">
-          <option value="">— Seleccioná —</option>
-          <option>Samsung</option><option>iPhone</option><option>Motorola</option>
-          <option>Xiaomi</option><option>LG</option><option>Nokia</option>
-          <option>TCL</option><option>ZTE</option><option>Huawei</option>
-        </select>
+
+    <!-- VISTA INVENTARIO DE MARCA -->
+    <div id="listas-inv" style="display:none">
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px;">
+        <button onclick="volverListasMain()" style="background:var(--surface2);border:1px solid var(--border);border-radius:10px;color:var(--text);font-size:.85rem;font-weight:700;padding:9px 14px;cursor:pointer;">← Volver</button>
+        <div style="font-size:.9rem;font-weight:800;color:var(--accent)" id="inv-titulo">Stock</div>
       </div>
-      <div id="dbEditList"></div>
+      <div class="card">
+        <div id="invModelosList"></div>
+      </div>
+    </div>
+
+    <!-- VISTA EDICIÓN DE COSTOS -->
+    <div id="listas-costos" style="display:none">
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px;">
+        <button onclick="volverListasMain()" style="background:var(--surface2);border:1px solid var(--border);border-radius:10px;color:var(--text);font-size:.85rem;font-weight:700;padding:9px 14px;cursor:pointer;">← Volver</button>
+        <div style="font-size:.9rem;font-weight:800;color:var(--yellow)" id="costos-titulo">Costos</div>
+      </div>
+      <div class="card">
+        <div id="costoEditorList"></div>
+      </div>
+    </div>
+
+    <!-- VISTA INVENTARIO ACCESORIOS -->
+    <div id="listas-acc" style="display:none">
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px;">
+        <button onclick="volverListasMain()" style="background:var(--surface2);border:1px solid var(--border);border-radius:10px;color:var(--text);font-size:.85rem;font-weight:700;padding:9px 14px;cursor:pointer;">← Volver</button>
+        <div style="font-size:.9rem;font-weight:800;color:var(--accent)" id="acc-titulo">Accesorios</div>
+      </div>
+      <button onclick="abrirQRScanner()" style="width:100%;background:linear-gradient(135deg,#1a2a0a,#0d2a0d);border:1px solid var(--green);border-radius:12px;color:var(--green);font-size:.85rem;font-weight:700;padding:12px;cursor:pointer;margin-bottom:12px;">📷 Escanear Venta</button>
+      <div class="card">
+        <div id="accItemsList"></div>
+      </div>
     </div>
   </div>
 
@@ -410,87 +548,97 @@ body{background:var(--bg);color:var(--text);font-family:'Segoe UI',system-ui,san
       <button class="btn-block btn-accent" onclick="guardarGastos()">Guardar gastos</button>
     </div>
     <div class="card">
+      <div class="card-title">🪟 Precios base de vidrio (glass)</div>
+      <div class="field"><label>Costo glass plano ($)</label>
+        <div class="prefix-wrap"><span>$</span><input type="number" id="aj-vplano" inputmode="numeric" placeholder="6000"></div></div>
+      <div class="field"><label>Costo glass curvo ($)</label>
+        <div class="prefix-wrap"><span>$</span><input type="number" id="aj-vcurvo" inputmode="numeric" placeholder="13000"></div></div>
+      <button class="btn-block btn-accent" onclick="guardarPreciosVidrio()">Guardar precios vidrio</button>
+    </div>
+    <div class="card">
       <div class="card-title" style="color:var(--red)">Zona peligrosa</div>
       <button style="width:100%;background:#2a0a0a;border:1px solid var(--red);color:var(--red);border-radius:var(--radius);padding:11px;cursor:pointer;font-weight:700;" onclick="borrarTodo()">🗑️ Borrar TODOS los registros</button>
     </div>
   </div>
 </div>
 
-<!-- MODAL -->
+<!-- MODAL, LIGHTBOX, UTILS -->
 <div id="modal"><div class="modal-inner" id="modalInner"></div></div>
-<!-- LIGHTBOX -->
 <div id="lightbox" onclick="this.classList.remove('show')">
-  <button id="lightbox-close" onclick="document.getElementById('lightbox').classList.remove('show')">✕</button>
-  <img id="lightbox-img" src="">
+  <button id="lb-close" onclick="document.getElementById('lightbox').classList.remove('show')">✕</button>
+  <img id="lb-img" src="">
 </div>
+<div class="stock-alert" id="stockAlert"></div>
 <div id="printArea"></div>
 <div id="toast"></div>
 
-<!-- FIREBASE -->
+<!-- QR SCANNER -->
+<div id="qrScanner">
+  <button class="scanner-close" onclick="cerrarQRScanner()">✕ Cerrar</button>
+  <video id="qrVideo" autoplay playsinline></video>
+  <div class="scanner-label">Apuntá al código QR del accesorio</div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/qrcode-generator@1.4.4/qrcode.min.js"></script>
+
+<!-- FIREBASE MODULE -->
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
-import { getDatabase, ref, set, onValue, remove, update, off } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
-
-const firebaseConfig = {
-  apiKey:"AIzaSyDWqNyzD2SAZVqdq1SHntoMVmOfaJAGTuI",
-  authDomain:"taller-app-75c32.firebaseapp.com",
-  projectId:"taller-app-75c32",
-  storageBucket:"taller-app-75c32.firebasestorage.app",
-  messagingSenderId:"839390196228",
-  appId:"1:839390196228:web:947d28d1362077a86c7b51",
-  databaseURL:"https://taller-app-75c32-default-rtdb.firebaseio.com"
-};
-
-const fbApp = initializeApp(firebaseConfig);
-const db = getDatabase(fbApp);
-
-window._fbSet    = (path,data)=>set(ref(db,path),data);
-window._fbRemove = (path)=>remove(ref(db,path));
-window._fbUpdate = (path,data)=>update(ref(db,path),data);
-
-// Escuchar órdenes
-const ordenesRef = ref(db,'ordenes');
-onValue(ordenesRef, snap=>{
-  const data=snap.val();
-  window._state.ordenes = data ? Object.values(data).sort((a,b)=>new Date(b.fecha)-new Date(a.fecha)) : [];
-  if(window._appReady){ window.renderOrdenes(); window.renderResumen(); }
+import { getDatabase, ref, set, onValue, remove } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
+const FC={apiKey:"AIzaSyDWqNyzD2SAZVqdq1SHntoMVmOfaJAGTuI",authDomain:"taller-app-75c32.firebaseapp.com",projectId:"taller-app-75c32",storageBucket:"taller-app-75c32.firebasestorage.app",messagingSenderId:"839390196228",appId:"1:839390196228:web:947d28d1362077a86c7b51",databaseURL:"https://taller-app-75c32-default-rtdb.firebaseio.com"};
+const fbApp=initializeApp(FC);
+const db=getDatabase(fbApp);
+window._fbSet=(p,d)=>set(ref(db,p),d);
+window._fbDel=(p)=>remove(ref(db,p));
+onValue(ref(db,'ordenes'),snap=>{
+  const d=snap.val();
+  window._ST.ordenes=d?Object.values(d).sort((a,b)=>new Date(b.fecha)-new Date(a.fecha)):[];
+  if(window._ready){window.renderOrdenes();window.renderResumen();}
 });
-
-// Escuchar config
-const configRef = ref(db,'config');
-onValue(configRef, snap=>{
-  const data=snap.val();
-  if(data){
-    if(data.pin) window._state.pin=data.pin;
-    if(data.tallerNombre) window._state.tallerNombre=data.tallerNombre;
-    if(data.gastosLocal) window._state.gastosLocal=data.gastosLocal;
-    if(data.gastosPersonal) window._state.gastosPersonal=data.gastosPersonal;
-    if(data.precios) window._state.precios=data.precios;
-  }
+onValue(ref(db,'config'),snap=>{
+  const d=snap.val();
+  if(!d)return;
+  if(d.pin)window._ST.pin=d.pin;
+  if(d.tallerNombre)window._ST.tallerNombre=d.tallerNombre;
+  if(d.gastosLocal)window._ST.gastosLocal=d.gastosLocal;
+  if(d.gastosPersonal)window._ST.gastosPersonal=d.gastosPersonal;
+  if(d.precios)window._ST.precios=d.precios;
+  if(d.vplano)window._ST.vplano=d.vplano;
+  if(d.vcurvo)window._ST.vcurvo=d.vcurvo;
+  if(d.inventario)window._ST.inventario=d.inventario||{};
+  const vp=document.getElementById('aj-vplano');const vc=document.getElementById('aj-vcurvo');
+  if(vp&&d.vplano)vp.value=d.vplano;if(vc&&d.vcurvo)vc.value=d.vcurvo;
 });
-
-// Conexión — fix: usar ref separado para no interferir
-const connRef = ref(db,'.info/connected');
-onValue(connRef, snap=>{
+onValue(ref(db,'config/accesorios'),snap=>{
+  const d=snap.val();
+  window._ST.accesorios=d||{};
+});
+onValue(ref(db,'ventas_accesorios'),snap=>{
+  const d=snap.val();
+  window._ST.ventasAcc=d?Object.values(d):[];
+  if(window._ready){window.renderResumen();}
+});
+onValue(ref(db,'.info/connected'),snap=>{
   const ok=snap.val()===true;
-  const dot=document.getElementById('syncDot');
-  const st=document.getElementById('syncStatus');
-  if(dot){ dot.className='sync-dot'+(ok?' on':' err'); }
-  if(st){
-    st.className='sync-status '+(ok?'sync-ok':'sync-err');
-    st.textContent=ok?'☁️ Conectado y sincronizado':'⚠️ Sin conexión — modo local';
-  }
-  window._fbConnected=ok;
+  const dot=document.getElementById('syncDot');const st=document.getElementById('syncStatus');
+  if(dot)dot.className='sync-dot'+(ok?' on':' err');
+  if(st){st.className='sync-status '+(ok?'sync-ok':'sync-err');st.textContent=ok?'☁️ Conectado':'⚠️ Sin conexión';}
+  window._fbOK=ok;
 });
 </script>
 
+<!-- MAIN SCRIPT -->
 <script>
-window._state={pin:'1234',tallerNombre:'Leonel Cell (DisplayFix)',gastosLocal:900000,gastosPersonal:1500000,ordenes:[],precios:null};
-window._appReady=false;
-window._fbConnected=false;
+// ── ESTADO ──────────────────────────────────────────────────────
+window._ST={pin:'1234',tallerNombre:'Leonel Cell (DisplayFix)',gastosLocal:900000,gastosPersonal:1500000,ordenes:[],precios:null,vplano:6000,vcurvo:13000,inventario:{},accesorios:{},ventasAcc:[]};
+window._ready=false;
+window._fbOK=false;
 
-const COEF_MC={1:1,2:1.1138,3:1.156,4:1.1996,5:1.2447,6:1.2913,9:1.4733,12:1.6524,18:2.0716,24:2.5888};
-const CONFIGS={
+// ── CONSTANTES ───────────────────────────────────────────────────
+const COEF={1:1,2:1.1138,3:1.156,4:1.1996,5:1.2447,6:1.2913,9:1.4733,12:1.6524};
+// Tabla 1 = solo gastos local. Tabla 2 = local + sueldo personal
+// factor multiplicador sobre costo, mano de obra mínima
+const CFG={
   modulo:      {fL:1.70,moL:22000,fS:1.85,moS:32000},
   vidrio_plano:{fL:2.50,moL:19000,fS:2.80,moS:26000},
   vidrio_curvo:{fL:2.20,moL:25000,fS:2.50,moS:33000},
@@ -500,9 +648,893 @@ const CONFIGS={
   otro:        {fL:1.70,moL:18000,fS:1.90,moS:26000},
 };
 
-// ── BASE DE DATOS ACTUALIZADA CON NUEVAS LISTAS ──
-// Los costos tienen formato {std: precio_estandar, orig: precio_original}
-// Si no hay original, orig = 0
+// ── HELPERS ──────────────────────────────────────────────────────
+const s=()=>window._ST;
+const fmt=n=>'$'+Math.round(n).toLocaleString('es-AR');
+const tipoLabel=t=>({modulo:'Módulo',vidrio_plano:'Glass Plano',vidrio_curvo:'Glass Curvo',bateria:'Batería',pin:'Pin de carga',tapa:'Tapa trasera',otro:'Otro'}[t]||t);
+const calLabel=c=>({oled:'OLED',original:'Original',std:'Estándar',glass_plano:'Glass Plano',glass_curvo:'Glass Curvo'}[c]||c);
+const getDB=()=>s().precios||DB_DEFAULT;
+async function fbSave(p,d){try{if(window._fbSet)await window._fbSet(p,d);}catch(e){}}
+async function fbDel(p){try{if(window._fbDel)await window._fbDel(p);}catch(e){}}
+
+// ── LOGIN ─────────────────────────────────────────────────────────
+window.doLogin=function(){
+  const v=document.getElementById('pinInput').value;
+  if(v===s().pin){
+    document.getElementById('loginScreen').style.display='none';
+    document.getElementById('app').style.display='block';
+    sessionStorage.setItem('lc','1');
+    window._ready=true;
+    initApp();
+  } else {
+    document.getElementById('loginError').style.display='block';
+    document.getElementById('pinInput').value='';
+  }
+};
+window.doLogout=function(){
+  sessionStorage.removeItem('lc');
+  window._ready=false;
+  document.getElementById('app').style.display='none';
+  document.getElementById('loginScreen').style.display='flex';
+  document.getElementById('pinInput').value='';
+  document.getElementById('loginError').style.display='none';
+};
+document.getElementById('pinInput').addEventListener('keydown',e=>{if(e.key==='Enter')doLogin();});
+
+function initApp(){
+  document.getElementById('topbarDate').textContent=new Date().toLocaleDateString('es-AR',{weekday:'long',day:'numeric',month:'long'});
+  document.getElementById('aj-gastos').value=s().gastosLocal;
+  document.getElementById('aj-personal').value=s().gastosPersonal;
+  document.getElementById('aj-nombre').value=s().tallerNombre;
+  document.getElementById('aj-vplano').value=s().vplano;
+  document.getElementById('aj-vcurvo').value=s().vcurvo;
+  renderOrdenes();renderResumen();
+}
+function showPage(id){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+  document.getElementById('page-'+id).classList.add('active');
+  const tabs=['nueva','ordenes','resumen'];
+  const i=tabs.indexOf(id);if(i>=0)document.querySelectorAll('.tab')[i].classList.add('active');
+  if(id==='ordenes')renderOrdenes();
+  if(id==='resumen')renderResumen();
+}
+
+// ── MODELOS CON PANTALLA CURVA (auto-detección) ──────────────────
+const MODELOS_CURVOS=new Set([
+  // Samsung S series
+  'S6 Edge','S7 Edge','S8','S8 Plus','S9','S9 Plus','S10','S10 Plus',
+  'S20','S20 Plus','S20 Ultra','S20 FE','S21','S21 Plus','S21 Ultra','S21 FE',
+  'S22','S22 Plus','S22 Ultra','S23','S23 Plus','S23 Ultra','S23 FE',
+  'S24','S24 Plus','S24 Ultra','S24 FE','S25','S25 Plus','S25 Ultra',
+  // Samsung A series curvas
+  'A20','A20S','A21','A21S','A22 4G','A23 4G','A23 5G','A24','A25','A26',
+  'A30','A30S','A31','A32 4G','A33','A34','A35','A36',
+  'A51','A52','A53','A54','A55','A56','A70','A71','A72',
+  // Samsung Note
+  'Note 10','Note 10 Plus','Note 20','Note 20 Ultra',
+  // Motorola Edge/curvos
+  'Edge','Edge 20','Edge 20 Pro','Edge 20 Lite',
+  'Edge 30','Edge 30 Pro','Edge 30 Fusion','Edge 30 Neo','Edge 30 Ultra',
+  'Edge 40','Edge 40 Pro','Edge 40 Neo',
+  'Edge 50','Edge 50 Pro','Edge 50 Fusion','Edge 50 Ultra',
+  'Edge 60','Edge 60 Pro','Edge 60 Fusion',
+  'G31','G41','G42','G52','G71','G72','G82',
+  // iPhone (todos tienen curvas en los bordes pero vidrio plano, dejamos plano)
+  // Xiaomi curvas
+  'Mi 9','Mi 9 Lite','Mi 9T','Mi 9T Pro','Mi 11','Mi 11 Pro','Mi 11 Ultra','Mi 11 Lite',
+  'Note 10 Lite','Note 11 Pro','Note 12 Pro','Note 13 Pro',
+]);
+
+function detectarTipoVidrio(modelo){
+  if(!modelo)return null;
+  // Buscar coincidencia exacta o parcial
+  for(const m of MODELOS_CURVOS){
+    if(modelo===m||modelo.includes(m)||m.includes(modelo))return 'vidrio_curvo';
+  }
+  return 'vidrio_plano';
+}
+
+
+
+// ── SELECCIÓN DE REPARACIÓN ───────────────────────────────────────
+function selRep(btn, tipo, calidad, auto=false){
+  document.querySelectorAll('.rep-btn').forEach(b=>b.className='rep-btn');
+  const clsMap={glass_plano:'sel-glass-plano',glass_curvo:'sel-glass-curvo',oled:'sel-oled',original:'sel-original',std:'sel-otros'};
+  btn.classList.add(clsMap[calidad]||'sel-otros');
+  document.getElementById('n-tipo').value=tipo;
+  document.getElementById('n-calidad').value=calidad;
+  const autoMsg=document.getElementById('autoGlassMsg');
+  autoMsg.style.display=auto?'block':'none';
+  document.getElementById('notaVidrio').style.display=(tipo==='vidrio_plano'||tipo==='vidrio_curvo')?'block':'none';
+  document.getElementById('notaModulo').style.display=(tipo==='modulo')?'block':'none';
+  if(tipo==='vidrio_plano'||tipo==='vidrio_curvo'){
+    const costo=tipo==='vidrio_plano'?s().vplano:s().vcurvo;
+    document.getElementById('cc-precio').textContent=fmt(costo);
+    document.getElementById('cc-detalle').textContent=(tipo==='vidrio_plano'?'Glass plano':'Glass curvo')+' · Editable en Ajustes';
+    document.getElementById('costoSection').style.display='block';
+    document.getElementById('costoManualSection').style.display='block';
+    document.getElementById('n-costo').value=costo;
+    calcPrecio();
+    return;
+  }
+  document.getElementById('costoSection').style.display='none';
+  document.getElementById('costoManualSection').style.display='block';
+  document.getElementById('precioSection').style.display='none';
+  const marca=document.getElementById('n-marca').value;
+  const modelo=document.getElementById('n-modelo').value;
+  if(marca&&modelo) buscarCostoDB(marca,modelo,tipo,calidad);
+  else calcPrecio();
+}
+
+// ── MARCA / MODELO ────────────────────────────────────────────────
+function onMarcaChange(){
+  const marca=document.getElementById('n-marca').value;
+  const sel=document.getElementById('n-modelo');
+  sel.innerHTML='<option value="">— Modelo —</option>';
+  if(marca&&getDB()[marca]){
+    getDB()[marca].modelos.forEach(m=>{
+      const o=document.createElement('option');o.value=m;o.textContent=m;sel.appendChild(o);
+    });
+  }
+  document.getElementById('costoSection').style.display='none';
+  document.getElementById('precioSection').style.display='none';
+}
+function onModeloChange(){
+  const marca=document.getElementById('n-marca').value;
+  const modelo=document.getElementById('n-modelo').value;
+  const tipo=document.getElementById('n-tipo').value;
+  const calidad=document.getElementById('n-calidad').value;
+  // Auto-detectar plano/curvo si el tipo actual es vidrio
+  if(modelo&&(tipo==='vidrio_plano'||tipo==='vidrio_curvo')){
+    const tipoDetectado=detectarTipoVidrio(modelo);
+    if(tipoDetectado!==tipo){
+      // Cambiar al tipo correcto automáticamente
+      const btnId=tipoDetectado==='vidrio_curvo'?'btn-gcurvo':'btn-gplano';
+      const cal=tipoDetectado==='vidrio_curvo'?'glass_curvo':'glass_plano';
+      selRep(document.getElementById(btnId),tipoDetectado,cal,true);
+      return;
+    }
+  }
+  if(marca&&modelo&&tipo&&tipo!=='vidrio_plano'&&tipo!=='vidrio_curvo'&&tipo!=='otro'){
+    buscarCostoDB(marca,modelo,tipo,calidad);
+  }
+}
+function buscarCostoDB(marca,modelo,tipo,calidad){
+  const db=getDB();
+  if(!db[marca]?.costos?.[tipo]?.[modelo]){
+    document.getElementById('costoSection').style.display='none';
+    return;
+  }
+  const costoObj=db[marca].costos[tipo][modelo];
+  // Elegir precio según calidad
+  let costo=costoObj.std||0;
+  if(calidad==='original'&&costoObj.orig>0) costo=costoObj.orig;
+  else if(calidad==='oled'&&costoObj.std>0) costo=costoObj.std;
+  if(!costo){document.getElementById('costoSection').style.display='none';return;}
+  document.getElementById('cc-precio').textContent=fmt(costo);
+  document.getElementById('cc-detalle').textContent=`${marca} ${modelo} · ${tipoLabel(tipo)} · ${calLabel(calidad)}`;
+  document.getElementById('costoSection').style.display='block';
+}
+function confirmarCosto(){
+  const txt=document.getElementById('cc-precio').textContent.replace(/[$\s.]/g,'').replace(',','');
+  document.getElementById('n-costo').value=parseInt(txt.replace(/\D/g,''))||0;
+  document.getElementById('costoManualSection').style.display='block';
+  calcPrecio();
+  toast('✓ Costo cargado');
+}
+
+// ── CALCULADORA ───────────────────────────────────────────────────
+function setTabla(t,btn){
+  tablaActual=t;
+  document.getElementById('tb-local').classList.remove('sel');
+  document.getElementById('tb-sueldo').classList.remove('sel');
+  btn.classList.add('sel');
+  calcPrecio();
+}
+function setCuota(btn){
+  document.querySelectorAll('#cuotasMini .cm-btn').forEach(b=>b.classList.remove('sel'));
+  btn.classList.add('sel');
+  cuotaActual=parseInt(btn.dataset.c);
+  calcPrecio();
+}
+function calcPrecio(){
+  const tipo=document.getElementById('n-tipo').value;
+  const costo=parseFloat(document.getElementById('n-costo').value)||0;
+  if(!tipo||!costo){document.getElementById('precioSection').style.display='none';return;}
+  const cfg=CFG[tipo]||CFG.otro;
+  const f=tablaActual==='local'?cfg.fL:cfg.fS;
+  const mo=tablaActual==='local'?cfg.moL:cfg.moS;
+  const base=Math.max(costo*f,costo+mo);
+  const ef=Math.ceil(base/500)*500;
+  document.getElementById('ps-price').textContent=fmt(ef);
+  document.getElementById('ps-sub').textContent='Ganancia: '+fmt(ef-costo)+' · '+Math.round(((ef-costo)/costo)*100)+'%';
+  // Cuotas
+  const psTarj=document.getElementById('ps-tarjeta');
+  if(cuotaActual>1){
+    const coef=COEF[cuotaActual]||1.6524;
+    const tot=Math.ceil(ef*coef/500)*500;
+    const cuota=Math.ceil(tot/cuotaActual/100)*100;
+    psTarj.style.display='block';
+    psTarj.textContent=`${cuotaActual} cuotas: ${fmt(tot)} total · ${fmt(cuota)}/cuota`;
+  } else psTarj.style.display='none';
+  document.getElementById('n-precio').value=ef;
+  document.getElementById('precioSection').style.display='block';
+  actualizarGanancia();
+}
+function ajustarPrecio(dir){
+  const el=document.getElementById('n-precio');
+  const actual=parseFloat(el.value)||0;
+  if(!actual)return;
+  const nuevo=Math.ceil(actual*(1+dir*0.01)/500)*500;
+  el.value=nuevo;
+  document.getElementById('ps-price').textContent=fmt(nuevo);
+  const costo=parseFloat(document.getElementById('n-costo').value)||0;
+  if(costo>0) document.getElementById('ps-sub').textContent='Ganancia: '+fmt(nuevo-costo)+' · '+Math.round(((nuevo-costo)/costo)*100)+'%';
+  actualizarGanancia();
+}
+function actualizarGanancia(){
+  const c=parseFloat(document.getElementById('n-costo').value)||0;
+  const p=parseFloat(document.getElementById('n-precio').value)||0;
+  const el=document.getElementById('ganancia-preview');
+  if(c>0&&p>0){
+    el.style.display='block';
+    el.textContent='Ganancia: '+fmt(p-c)+' ('+Math.round(((p-c)/c)*100)+'%)';
+    el.style.color=(p-c)>=0?'var(--green)':'var(--red)';
+  } else el.style.display='none';
+}
+
+// ── FOTOS ─────────────────────────────────────────────────────────
+function agregarFotos(input){
+  Array.from(input.files).forEach(f=>{
+    const r=new FileReader();
+    r.onload=e=>{fotosNuevas.push(e.target.result);renderFotos();};
+    r.readAsDataURL(f);
+  });
+  input.value='';
+}
+function renderFotos(){
+  const w=document.getElementById('fotoWrap');
+  w.innerHTML='';
+  fotosNuevas.forEach(b64=>{
+    const img=document.createElement('img');
+    img.className='foto-thumb';img.src=b64;
+    img.onclick=()=>{document.getElementById('lb-img').src=b64;document.getElementById('lightbox').classList.add('show');};
+    w.appendChild(img);
+  });
+}
+
+// ── GUARDAR ORDEN ─────────────────────────────────────────────────
+async function guardarOrden(){
+  const nombre=document.getElementById('n-nombre').value.trim();
+  const marca=document.getElementById('n-marca').value;
+  const modelo=document.getElementById('n-modelo').value||'—';
+  const tipo=document.getElementById('n-tipo').value;
+  const calidad=document.getElementById('n-calidad').value;
+  const costo=parseFloat(document.getElementById('n-costo').value)||0;
+  const precio=parseFloat(document.getElementById('n-precio').value)||0;
+  if(!nombre){toast('⚠️ Ingresá el nombre del cliente');return;}
+  if(!tipo){toast('⚠️ Seleccioná el tipo de reparación');return;}
+  if(!precio){toast('⚠️ Ingresá el precio cobrado');return;}
+  const id='ORD-'+Date.now();
+  const o={id,fecha:new Date().toISOString(),nombre,
+    telefono:document.getElementById('n-telefono').value.trim(),
+    marca,modelo,color:document.getElementById('n-color').value.trim(),
+    tipo,calidad,costo,precio,
+    pago:document.getElementById('n-pago').value,
+    obs:document.getElementById('n-obs').value.trim(),
+    estado:'recibido',ganancia:precio-costo,
+    fotos:fotosNuevas.length?fotosNuevas:[]
+  };
+  await fbSave('ordenes/'+id,o);
+  // Descontar inventario
+  if(marca&&modelo&&tipo!=='otro'){
+    const key=`${marca}__${modelo}__${tipo}__${calidad}`;
+    const inv=JSON.parse(JSON.stringify(s().inventario||{}));
+    if(inv[key]!==undefined){
+      inv[key]=Math.max(0,inv[key]-1);
+      s().inventario=inv;
+      await fbSave('config/inventario',inv);
+      if(inv[key]<=2) mostrarStockAlert(`${marca} ${modelo} — ${tipoLabel(tipo)}: quedan ${inv[key]} unidades`);
+    }
+  }
+  toast('✅ Orden guardada ☁️');
+  limpiarNueva();showPage('ordenes');
+}
+function limpiarNueva(){
+  ['n-nombre','n-telefono','n-modelo','n-color','n-obs','n-costo','n-precio'].forEach(id=>{const el=document.getElementById(id);if(el)el.value='';});
+  document.getElementById('n-marca').value='';
+  document.getElementById('n-tipo').value='';
+  document.getElementById('n-calidad').value='';
+  document.getElementById('n-pago').value='efectivo';
+  document.getElementById('n-modelo').innerHTML='<option value="">— Modelo —</option>';
+  document.querySelectorAll('.rep-btn').forEach(b=>b.className='rep-btn');
+  document.getElementById('notaVidrio').style.display='none';
+  document.getElementById('notaModulo').style.display='none';
+  document.getElementById('autoGlassMsg').style.display='none';
+  document.getElementById('costoSection').style.display='none';
+  document.getElementById('costoManualSection').style.display='none';
+  document.getElementById('precioSection').style.display='none';
+  document.getElementById('ganancia-preview').style.display='none';
+  fotosNuevas=[];document.getElementById('fotoWrap').innerHTML='';
+  cuotaActual=1;
+  document.querySelectorAll('#cuotasMini .cm-btn').forEach(b=>b.classList.remove('sel'));
+  document.querySelector('#cuotasMini .cm-btn[data-c="1"]').classList.add('sel');
+}
+
+// ── LISTA ÓRDENES ─────────────────────────────────────────────────
+let filtroActual='todas';
+function setFiltro(btn){
+  document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');filtroActual=btn.dataset.f;renderOrdenes();
+}
+window.renderOrdenes=function(){
+  const q=(document.getElementById('searchInput')?.value||'').toLowerCase();
+  const list=s().ordenes.filter(o=>{
+    const mF=filtroActual==='todas'||o.estado===filtroActual;
+    const mQ=!q||(o.nombre+o.marca+o.modelo).toLowerCase().includes(q);
+    return mF&&mQ;
+  });
+  const cont=document.getElementById('listaOrdenes');
+  if(!list.length){cont.innerHTML='<div class="empty-state"><div class="es-icon">📋</div><p>No hay órdenes</p></div>';return;}
+  const stM={recibido:'st-recibido',listo:'st-listo',entregado:'st-entregado'};
+  const stL={recibido:'Recibido',listo:'Listo ✓',entregado:'Entregado'};
+  cont.innerHTML=list.map(o=>`
+    <div class="orden-card" onclick="abrirDetalle('${o.id}')">
+      <div class="orden-header">
+        <div><div class="orden-num">${o.id} · ${new Date(o.fecha).toLocaleDateString('es-AR')}</div></div>
+        <span class="status-badge ${stM[o.estado]||'st-recibido'}">${stL[o.estado]||'Recibido'}</span>
+      </div>
+      <div class="orden-cliente">${o.nombre}</div>
+      <div class="orden-equipo">${o.marca} ${o.modelo} · ${tipoLabel(o.tipo)}${o.calidad?' ('+calLabel(o.calidad)+')':''}${o.fotos?.length?' 📷':''}</div>
+      <div class="orden-footer"><div class="orden-precio">${fmt(o.precio)}</div><div style="font-size:.62rem;color:var(--muted)">${o.telefono||''}</div></div>
+    </div>`).join('');
+};
+
+// ── DETALLE ───────────────────────────────────────────────────────
+function abrirDetalle(id){
+  const o=s().ordenes.find(x=>x.id===id);if(!o)return;
+  const pagoL={efectivo:'Efectivo/Transf.',debito:'Débito',credito1:'Crédito 1p',cuotas:'Cuotas'};
+  const stOpts=['recibido','listo','entregado'].map(st=>`<option value="${st}" ${o.estado===st?'selected':''}>${{recibido:'Recibido',listo:'Listo ✓',entregado:'Entregado'}[st]}</option>`).join('');
+  const fotosHtml=o.fotos?.length?`<div style="font-size:.7rem;color:var(--muted);margin-top:8px;margin-bottom:4px;">📷 Fotos</div><div class="fotos-modal">${o.fotos.map(f=>`<img src="${f}" onclick="document.getElementById('lb-img').src='${f}';document.getElementById('lightbox').classList.add('show')">`).join('')}</div>`:'';
+  document.getElementById('modalInner').innerHTML=`
+    <button class="modal-close" onclick="cerrarModal()">✕</button>
+    <div class="modal-title">Orden ${o.id}</div>
+    <div class="detail-row"><span class="dr-label">Fecha</span><span class="dr-val">${new Date(o.fecha).toLocaleString('es-AR')}</span></div>
+    <div class="detail-row"><span class="dr-label">Cliente</span><span class="dr-val">${o.nombre}</span></div>
+    ${o.telefono?`<div class="detail-row"><span class="dr-label">WhatsApp</span><span class="dr-val">${o.telefono}</span></div>`:''}
+    <div class="detail-row"><span class="dr-label">Equipo</span><span class="dr-val">${o.marca} ${o.modelo} ${o.color?'('+o.color+')':''}</span></div>
+    <div class="detail-row"><span class="dr-label">Reparación</span><span class="dr-val">${tipoLabel(o.tipo)}${o.calidad?' · '+calLabel(o.calidad):''}</span></div>
+    ${o.obs?`<div class="detail-row"><span class="dr-label">Obs.</span><span class="dr-val">${o.obs}</span></div>`:''}
+    <div class="detail-row"><span class="dr-label">Costo repuesto</span><span class="dr-val" style="color:var(--accent2)">${fmt(o.costo||0)}</span></div>
+    <div class="detail-row"><span class="dr-label">Precio cobrado</span><span class="dr-val" style="color:var(--yellow)">${fmt(o.precio)}</span></div>
+    <div class="detail-row"><span class="dr-label">Pago</span><span class="dr-val">${pagoL[o.pago]||o.pago}</span></div>
+    ${fotosHtml}
+    <div class="ganancia-hl"><div class="gh-label">💰 Ganancia</div><div class="gh-val">${fmt(o.ganancia)}</div></div>
+    <label style="font-size:.68rem;color:var(--muted);text-transform:uppercase;letter-spacing:.7px;">Estado</label>
+    <select class="status-select" onchange="cambiarEstado('${o.id}',this.value)">${stOpts}</select>
+    ${o.telefono?`<button class="btn-wa" onclick="enviarWA('${o.id}')">📲 Enviar por WhatsApp</button>`:''}
+    <div class="print-opts">
+      <button class="btn-therm" onclick="imprimirTicket('${o.id}')">🧾 Ticket térmico</button>
+      <button class="btn-a4" onclick="imprimirA4('${o.id}')">📄 A4 doble</button>
+    </div>
+    <button class="btn-delete" onclick="eliminarOrden('${o.id}')">🗑️ Eliminar</button>`;
+  document.getElementById('modal').classList.add('show');
+}
+function cerrarModal(){document.getElementById('modal').classList.remove('show');}
+async function cambiarEstado(id,val){await fbSave('ordenes/'+id+'/estado',val);toast('Estado actualizado ☁️');}
+async function eliminarOrden(id){
+  if(!confirm('¿Eliminar esta orden?'))return;
+  await fbDel('ordenes/'+id);cerrarModal();toast('Orden eliminada');
+}
+
+// ── WHATSAPP ──────────────────────────────────────────────────────
+function enviarWA(id){
+  const o=s().ordenes.find(x=>x.id===id);if(!o)return;
+  const stL={recibido:'Recibido ✓',listo:'Listo para retirar ✅',entregado:'Entregado'};
+  const msg=`📱 *${s().tallerNombre}*\n\n📋 Orden: ${o.id}\n👤 Cliente: ${o.nombre}\n📱 Equipo: ${o.marca} ${o.modelo}\n🔧 Reparación: ${tipoLabel(o.tipo)}${o.calidad?' ('+calLabel(o.calidad)+')':''}\n💰 Precio: ${fmt(o.precio)}\n📌 Estado: ${stL[o.estado]}\n📅 Fecha: ${new Date(o.fecha).toLocaleDateString('es-AR')}\n\n¡Gracias por elegirnos! 😊`;
+  window.open(`https://wa.me/54${o.telefono.replace(/\D/g,'')}?text=${encodeURIComponent(msg)}`,'_blank');
+}
+
+// ── IMPRIMIR ──────────────────────────────────────────────────────
+function imprimirTicket(id){
+  const o=s().ordenes.find(x=>x.id===id);if(!o)return;
+  const pagoL={efectivo:'Efectivo',debito:'Débito',credito1:'Crédito 1p',cuotas:'Cuotas'};
+  const esVidrio=o.tipo==='vidrio_plano'||o.tipo==='vidrio_curvo';
+  const esModulo=o.tipo==='modulo';
+  document.getElementById('printArea').innerHTML=`
+    <style>@media print{@page{size:80mm auto;margin:4mm;}body{font-family:monospace;font-size:11px;background:#fff;color:#000;}
+    .tk{width:72mm;}.tkc{text-align:center;}
+    .tkt{font-size:14px;font-weight:900;text-align:center;border-bottom:1px dashed #000;padding-bottom:4px;margin-bottom:4px;}
+    .tkr{display:flex;justify-content:space-between;padding:2px 0;border-bottom:1px dotted #ccc;font-size:10px;}
+    .tktot{font-size:14px;font-weight:900;text-align:right;border-top:2px solid #000;margin-top:5px;padding-top:4px;}
+    .tkaviso{margin-top:5px;font-size:10px;font-weight:900;border:2px solid #000;padding:4px;text-align:left;}
+    .tkf{text-align:center;font-size:9px;margin-top:6px;border-top:1px dashed #000;padding-top:4px;}}</style>
+    <div class="tk">
+      <div class="tkt">${s().tallerNombre}</div>
+      <div class="tkc" style="font-size:9px;margin-bottom:4px;">${new Date(o.fecha).toLocaleString('es-AR')}</div>
+      <div class="tkr"><span>Orden:</span><span>${o.id}</span></div>
+      <div class="tkr"><span>Cliente:</span><span>${o.nombre}</span></div>
+      ${o.telefono?`<div class="tkr"><span>Tel:</span><span>${o.telefono}</span></div>`:''}
+      <div class="tkr"><span>Equipo:</span><span>${o.marca} ${o.modelo}</span></div>
+      <div class="tkr"><span>Reparación:</span><span>${tipoLabel(o.tipo)}${o.calidad?' ('+calLabel(o.calidad)+')':''}</span></div>
+      ${o.obs?`<div class="tkr"><span>Obs:</span><span>${o.obs}</span></div>`:''}
+      <div class="tkr"><span>Pago:</span><span>${pagoL[o.pago]||o.pago}</span></div>
+      <div class="tktot">TOTAL: ${fmt(o.precio)}</div>
+      ${esVidrio?`<div class="tkaviso">⚠️ AVISO: Cambio de vidrio tiene ~10% riesgo de daño al módulo. En ese caso se ofrece módulo a precio de costo.</div>`:''}
+      ${esModulo?`<div class="tkaviso">ℹ️ GARANTIA: 30 dias solo por fallas de fabrica. No cubre golpes ni daños externos.</div>`:''}
+      <div class="tkf">¡Gracias por elegirnos!</div>
+    </div>`;
+  window.print();
+}
+function imprimirA4(id){
+  const o=s().ordenes.find(x=>x.id===id);if(!o)return;
+  const pagoL={efectivo:'Efectivo / Transferencia',debito:'Tarjeta débito',credito1:'Crédito 1 pago',cuotas:'Tarjeta en cuotas'};
+  const esVidrio=o.tipo==='vidrio_plano'||o.tipo==='vidrio_curvo';
+  const esModulo=o.tipo==='modulo';
+  const bloque=`<div style="width:100%;padding:10px 16px;font-family:Arial,sans-serif;font-size:11px;">
+    <div style="display:flex;justify-content:space-between;border-bottom:2px solid #000;padding-bottom:6px;margin-bottom:8px;">
+      <div><div style="font-size:14px;font-weight:900;">${s().tallerNombre}</div><div style="font-size:9px;color:#555;">ORDEN DE TRABAJO</div></div>
+      <div style="text-align:right;font-size:9px;">${new Date(o.fecha).toLocaleString('es-AR')}</div>
+    </div>
+    <div style="display:flex;justify-content:space-between;padding:3px 0;border-bottom:1px solid #eee;"><span style="color:#666;">N° Orden:</span><strong>${o.id}</strong></div>
+    <div style="display:flex;justify-content:space-between;padding:3px 0;border-bottom:1px solid #eee;"><span style="color:#666;">Cliente:</span><span>${o.nombre}</span></div>
+    ${o.telefono?`<div style="display:flex;justify-content:space-between;padding:3px 0;border-bottom:1px solid #eee;"><span style="color:#666;">Teléfono:</span><span>${o.telefono}</span></div>`:''}
+    <div style="display:flex;justify-content:space-between;padding:3px 0;border-bottom:1px solid #eee;"><span style="color:#666;">Equipo:</span><span>${o.marca} ${o.modelo} ${o.color?'— '+o.color:''}</span></div>
+    <div style="display:flex;justify-content:space-between;padding:3px 0;border-bottom:1px solid #eee;"><span style="color:#666;">Reparación:</span><span>${tipoLabel(o.tipo)}${o.calidad?' ('+calLabel(o.calidad)+')':''}</span></div>
+    ${o.obs?`<div style="display:flex;justify-content:space-between;padding:3px 0;border-bottom:1px solid #eee;"><span style="color:#666;">Obs.:</span><span>${o.obs}</span></div>`:''}
+    <div style="display:flex;justify-content:space-between;padding:3px 0;border-bottom:1px solid #eee;"><span style="color:#666;">Forma de pago:</span><span>${pagoL[o.pago]||o.pago}</span></div>
+    <div style="font-size:16px;font-weight:900;text-align:right;margin-top:7px;border-top:2px solid #000;padding-top:5px;">TOTAL: ${fmt(o.precio)}</div>
+    ${esVidrio?`<div style="margin-top:10px;padding:10px;border:2px solid #cc6600;border-radius:5px;font-size:12px;font-weight:900;color:#663300;background:#fff8f0;"><strong>⚠️ AVISO IMPORTANTE:</strong> El cambio de vidrio conlleva un riesgo aproximado del 10% de daño al módulo. En caso de que esto ocurra, se ofrecerá el módulo a precio de costo sin cargo de mano de obra.</div>`:''}
+    ${esModulo?`<div style="margin-top:8px;padding:8px;border:1px solid #006699;border-radius:5px;font-size:11px;font-weight:700;color:#003355;background:#f0f8ff;"><strong>ℹ️ GARANTÍA:</strong> 30 días solo por fallas de fábrica. No cubre golpes, caídas, humedad ni daños externos.</div>`:''}
+    <div style="display:flex;justify-content:space-between;margin-top:12px;font-size:9px;color:#666;border-top:1px dashed #ccc;padding-top:6px;">
+      <span>Firma cliente: ___________________</span>
+      <span>Aclaración: ___________________</span>
+    </div>
+  </div>`;
+  document.getElementById('printArea').innerHTML=`
+    <style>@media print{@page{size:A4;margin:8mm;}body{background:#fff;color:#000;}.a4c{width:100%;}.a4cut{border-top:2px dashed #999;text-align:center;font-size:9px;color:#999;padding:2px 0;margin:0;}}</style>
+    <div class="a4c"><div>${bloque}</div><div class="a4cut">✂ ─────────────────────── CORTAR ─────────────────────── ✂</div><div>${bloque}</div></div>`;
+  window.print();
+}
+
+// ── RESUMEN ───────────────────────────────────────────────────────
+let resumenMode='hoy';
+function setResumen(m,btn){
+  resumenMode=m;
+  document.querySelectorAll('.rt-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');renderResumen();
+}
+window.renderResumen=function(){
+  const now=new Date();
+  let list=s().ordenes;
+  if(resumenMode==='hoy'){const hoy=now.toDateString();list=list.filter(o=>new Date(o.fecha).toDateString()===hoy);}
+  else{list=list.filter(o=>{const d=new Date(o.fecha);return d.getMonth()===now.getMonth()&&d.getFullYear()===now.getFullYear();});}
+  const fac=list.reduce((a,o)=>a+o.precio,0);
+  const cos=list.reduce((a,o)=>a+(o.costo||0),0);
+  const gan=list.reduce((a,o)=>a+o.ganancia,0);
+  // Accesorios
+  let accList=s().ventasAcc||[];
+  if(resumenMode==='hoy'){const hoy=now.toDateString();accList=accList.filter(v=>new Date(v.fecha).toDateString()===hoy);}
+  else{accList=accList.filter(v=>{const d=new Date(v.fecha);return d.getMonth()===now.getMonth()&&d.getFullYear()===now.getFullYear();});}
+  const accFac=accList.reduce((a,v)=>a+(v.precio||0),0);
+  const accCos=accList.reduce((a,v)=>a+(v.costo||0),0);
+  const accGan=accList.reduce((a,v)=>a+(v.ganancia||0),0);
+  // Totales combinados
+  const totalFac=fac+accFac;
+  const totalGan=gan+accGan;
+  const diasMes=new Date(now.getFullYear(),now.getMonth()+1,0).getDate();
+  const gastoP=resumenMode==='hoy'?Math.round((s().gastosLocal+s().gastosPersonal)/diasMes):Math.round((s().gastosLocal+s().gastosPersonal)*(now.getDate()/diasMes));
+  const neta=totalGan-gastoP;
+  document.getElementById('resumenContent').innerHTML=`
+    <div style="font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.8px;color:var(--accent);margin-bottom:8px;">🔧 Reparaciones</div>
+    <div class="stat-grid">
+      <div class="stat-box"><div class="stat-label">Facturado</div><div class="stat-val sv-yellow">${fmt(fac)}</div></div>
+      <div class="stat-box"><div class="stat-label">Órdenes</div><div class="stat-val sv-blue">${list.length}</div></div>
+      <div class="stat-box"><div class="stat-label">Ganancia bruta</div><div class="stat-val sv-green">${fmt(gan)}</div></div>
+      <div class="stat-box"><div class="stat-label">En repuestos</div><div class="stat-val sv-orange">${fmt(cos)}</div></div>
+    </div>
+    <div style="font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.8px;color:var(--green);margin:14px 0 8px;">📱 Accesorios</div>
+    <div class="stat-grid">
+      <div class="stat-box"><div class="stat-label">Facturado</div><div class="stat-val sv-yellow">${fmt(accFac)}</div></div>
+      <div class="stat-box"><div class="stat-label">Vendidos</div><div class="stat-val sv-blue">${accList.length}</div></div>
+      <div class="stat-box"><div class="stat-label">Ganancia bruta</div><div class="stat-val sv-green">${fmt(accGan)}</div></div>
+      <div class="stat-box"><div class="stat-label">En costo</div><div class="stat-val sv-orange">${fmt(accCos)}</div></div>
+    </div>
+    <div style="font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.8px;color:var(--yellow);margin:14px 0 8px;">📊 Total Combinado</div>
+    <div class="stat-grid">
+      <div class="stat-box"><div class="stat-label">Total facturado</div><div class="stat-val sv-yellow">${fmt(totalFac)}</div></div>
+      <div class="stat-box"><div class="stat-label">Ganancia bruta</div><div class="stat-val sv-green">${fmt(totalGan)}</div></div>
+    </div>
+    <div class="card" style="background:linear-gradient(135deg,#0a1a0a,#0d2a0d);border-color:${neta>=0?'var(--green)':'var(--red)'}">
+      <div class="card-title" style="color:${neta>=0?'var(--green)':'var(--red)'}">${resumenMode==='hoy'?'Resultado del día':'Resultado del mes'}</div>
+      <div class="detail-row"><span class="dr-label">Ganancia bruta total</span><span class="dr-val" style="color:var(--green)">${fmt(totalGan)}</span></div>
+      <div class="detail-row"><span class="dr-label">Gastos proporcionales</span><span class="dr-val" style="color:var(--red)">− ${fmt(gastoP)}</span></div>
+      <div style="text-align:center;margin-top:10px;">
+        <div style="font-size:.64rem;text-transform:uppercase;color:${neta>=0?'var(--green)':'var(--red)'}">Ganancia neta real</div>
+        <div style="font-size:1.7rem;font-weight:900;color:${neta>=0?'var(--green)':'var(--red)'}">${fmt(neta)}</div>
+      </div>
+    </div>
+    ${list.length?`<div class="card"><div class="card-title">Detalle Reparaciones</div>${list.map(o=>`
+      <div class="rep-item" onclick="abrirDetalle('${o.id}')">
+        <div><div style="font-weight:600">${o.nombre}</div><div style="font-size:.68rem;color:var(--muted)">${o.marca} ${o.modelo} · ${tipoLabel(o.tipo)}</div></div>
+        <div style="text-align:right"><div style="font-weight:700;color:var(--yellow)">${fmt(o.precio)}</div><div style="font-size:.68rem;color:var(--green)">+${fmt(o.ganancia)}</div></div>
+      </div>`).join('')}</div>`:''}
+    ${accList.length?`<div class="card"><div class="card-title">Detalle Accesorios</div>${accList.map(v=>`
+      <div class="rep-item">
+        <div><div style="font-weight:600">${v.marca} · ${v.tipo.replace(/_/g,' ')}</div><div style="font-size:.68rem;color:var(--muted)">${new Date(v.fecha).toLocaleString('es-AR')}</div></div>
+        <div style="text-align:right"><div style="font-weight:700;color:var(--yellow)">${fmt(v.precio)}</div><div style="font-size:.68rem;color:var(--green)">+${fmt(v.ganancia)}</div></div>
+      </div>`).join('')}</div>`:''}
+    ${!list.length&&!accList.length?'<div class="empty-state"><div class="es-icon">📊</div><p>Sin actividad en este período</p></div>':''}`;
+};
+
+// ── LISTAS NAVEGACIÓN ─────────────────────────────────────────────
+function abrirSeccionInv(){
+  const marca=document.getElementById('inv-marca').value;
+  if(!marca)return;
+  document.getElementById('listas-main').style.display='none';
+  document.getElementById('listas-costos').style.display='none';
+  document.getElementById('listas-inv').style.display='block';
+  document.getElementById('inv-titulo').textContent='Stock — '+marca;
+  renderInvModelos();
+}
+function abrirSeccionCostos(){
+  const marca=document.getElementById('costo-marca').value;
+  if(!marca)return;
+  document.getElementById('listas-main').style.display='none';
+  document.getElementById('listas-inv').style.display='none';
+  document.getElementById('listas-costos').style.display='block';
+  document.getElementById('costos-titulo').textContent='Costos — '+marca;
+  renderCostoEditor(marca);
+}
+function volverListasMain(){
+  document.getElementById('listas-inv').style.display='none';
+  document.getElementById('listas-costos').style.display='none';
+  document.getElementById('listas-acc').style.display='none';
+  document.getElementById('listas-main').style.display='block';
+  document.getElementById('inv-marca').value='';
+  document.getElementById('costo-marca').value='';
+  document.getElementById('acc-marca').value='';
+}
+
+// ── ACCESORIOS ──────────────────────────────────────────────────
+const ACC_TYPES=[
+  {key:'funda_transparente',label:'Funda Transparente'},
+  {key:'funda_reforzada',label:'Funda Reforzada'},
+  {key:'funda_silicon',label:'Funda Silicon Case'},
+  {key:'funda_doble_capa',label:'Funda Doble Capa'},
+  {key:'vidrio_9d',label:'Vidrio Templado 9D'},
+  {key:'cargador',label:'Cargador'},
+  {key:'cable_usb',label:'Cable USB'}
+];
+
+function abrirSeccionAcc(){
+  const marca=document.getElementById('acc-marca').value;
+  if(!marca)return;
+  document.getElementById('listas-main').style.display='none';
+  document.getElementById('listas-inv').style.display='none';
+  document.getElementById('listas-costos').style.display='none';
+  document.getElementById('listas-acc').style.display='block';
+  document.getElementById('acc-titulo').textContent='Accesorios — '+marca;
+  renderAccItems(marca);
+}
+
+function renderAccItems(marca){
+  const cont=document.getElementById('accItemsList');
+  const acc=s().accesorios||{};
+  let html='';
+  ACC_TYPES.forEach(t=>{
+    const k=marca+'__'+t.key;
+    const data=acc[k]||{stock:0,costo:0,precio:0};
+    const safeK=k.replace(/[^a-z0-9_]/gi,'_');
+    html+=`<div class="acc-item">
+      <div class="acc-item-header">
+        <span class="acc-item-name">${t.label}</span>
+        <button class="acc-qr-btn" onclick="mostrarQRAcc('${marca}','${t.key}','${t.label}')">QR</button>
+      </div>
+      <div class="acc-stock-row">
+        <button class="acc-stock-btn minus" onclick="ajustarStockAcc('${k}',-1,'${marca}')">−</button>
+        <span class="acc-stock-val" id="acc-stk-${safeK}">${data.stock}</span>
+        <button class="acc-stock-btn plus" onclick="ajustarStockAcc('${k}',1,'${marca}')">+</button>
+      </div>
+      <div class="acc-price-row">
+        <div class="acc-price-field">
+          <label>Costo</label>
+          <input type="number" inputmode="numeric" value="${data.costo||''}" placeholder="0" onchange="guardarPrecioAcc('${k}','costo',this.value)">
+        </div>
+        <div class="acc-price-field">
+          <label>Precio venta</label>
+          <input type="number" inputmode="numeric" value="${data.precio||''}" placeholder="0" onchange="guardarPrecioAcc('${k}','precio',this.value)">
+        </div>
+      </div>
+    </div>`;
+  });
+  cont.innerHTML=html;
+}
+
+async function ajustarStockAcc(key,delta,marca){
+  const acc=JSON.parse(JSON.stringify(s().accesorios||{}));
+  if(!acc[key])acc[key]={stock:0,costo:0,precio:0};
+  acc[key].stock=Math.max(0,(acc[key].stock||0)+delta);
+  s().accesorios=acc;
+  await fbSave('config/accesorios',acc);
+  const el=document.getElementById('acc-stk-'+key.replace(/[^a-z0-9_]/gi,'_'));
+  if(el)el.textContent=acc[key].stock;
+}
+
+async function guardarPrecioAcc(key,field,val){
+  const acc=JSON.parse(JSON.stringify(s().accesorios||{}));
+  if(!acc[key])acc[key]={stock:0,costo:0,precio:0};
+  acc[key][field]=parseFloat(val)||0;
+  s().accesorios=acc;
+  await fbSave('config/accesorios',acc);
+  toast('✓ Actualizado ☁️');
+}
+
+// ── QR GENERATOR ─────────────────────────────────────────────────
+function mostrarQRAcc(marca,tipo,label){
+  const data=JSON.stringify({t:'acc',m:marca,a:tipo});
+  const qr=qrcode(0,'M');
+  qr.addData(data);
+  qr.make();
+  document.getElementById('modalInner').innerHTML=`
+    <button class="modal-close" onclick="cerrarModal()">✕</button>
+    <div class="modal-title">QR — ${marca} ${label}</div>
+    <div class="qr-display">
+      ${qr.createImgTag(6)}
+      <div class="qr-label">${marca} · ${label}</div>
+      <button class="btn-block btn-accent" style="margin-top:16px;" onclick="window.print()">🖨️ Imprimir QR</button>
+    </div>`;
+  document.getElementById('modal').classList.add('show');
+}
+
+// ── QR SCANNER ───────────────────────────────────────────────────
+let _qrStream=null;
+let _qrInterval=null;
+
+function abrirQRScanner(){
+  if(!('BarcodeDetector' in window)){
+    toast('⚠️ Tu navegador no soporta BarcodeDetector. Usá Chrome en Android.');
+    return;
+  }
+  const scanner=document.getElementById('qrScanner');
+  const video=document.getElementById('qrVideo');
+  scanner.classList.add('show');
+  navigator.mediaDevices.getUserMedia({video:{facingMode:'environment'}}).then(stream=>{
+    _qrStream=stream;
+    video.srcObject=stream;
+    const detector=new BarcodeDetector({formats:['qr_code']});
+    _qrInterval=setInterval(async()=>{
+      try{
+        const codes=await detector.detect(video);
+        if(codes.length>0){
+          const raw=codes[0].rawValue;
+          cerrarQRScanner();
+          procesarQRVenta(raw);
+        }
+      }catch(e){}
+    },300);
+  }).catch(e=>{
+    toast('⚠️ No se pudo acceder a la cámara');
+    cerrarQRScanner();
+  });
+}
+
+function cerrarQRScanner(){
+  if(_qrInterval){clearInterval(_qrInterval);_qrInterval=null;}
+  if(_qrStream){_qrStream.getTracks().forEach(t=>t.stop());_qrStream=null;}
+  document.getElementById('qrScanner').classList.remove('show');
+  document.getElementById('qrVideo').srcObject=null;
+}
+
+async function procesarQRVenta(raw){
+  let data;
+  try{data=JSON.parse(raw);}catch(e){toast('⚠️ QR inválido');return;}
+  if(data.t!=='acc'){toast('⚠️ QR no es de accesorio');return;}
+  const key=data.m+'__'+data.a;
+  const acc=JSON.parse(JSON.stringify(s().accesorios||{}));
+  const item=acc[key];
+  if(!item||item.stock<=0){toast('⚠️ Sin stock de '+data.m+' '+data.a.replace(/_/g,' '));return;}
+  item.stock=Math.max(0,item.stock-1);
+  acc[key]=item;
+  s().accesorios=acc;
+  await fbSave('config/accesorios',acc);
+  const ventaId='VACC-'+Date.now();
+  const venta={id:ventaId,fecha:new Date().toISOString(),marca:data.m,tipo:data.a,costo:item.costo||0,precio:item.precio||0,ganancia:(item.precio||0)-(item.costo||0)};
+  await fbSave('ventas_accesorios/'+ventaId,venta);
+  if(navigator.vibrate)navigator.vibrate([200,100,200]);
+  toast('✅ Venta: '+data.m+' '+data.a.replace(/_/g,' ')+' · Stock: '+item.stock);
+  const accView=document.getElementById('listas-acc');
+  if(accView&&accView.style.display!=='none'){renderAccItems(data.m);}
+}
+
+// ── INVENTARIO REPUESTOS ─────────────────────────────────────────
+function renderInvModelos(){
+  const marca=document.getElementById('inv-marca').value;
+  const cont=document.getElementById('invModelosList');
+  const db=getDB();
+  if(!db[marca]){cont.innerHTML='<p style="color:var(--muted);font-size:.76rem">Sin datos.</p>';return;}
+  const inv=s().inventario||{};
+  const tipos=['modulo','bateria','pin','tapa'];
+  const tNom={modulo:'Módulo',bateria:'Batería',pin:'Pin de carga',tapa:'Tapa trasera'};
+  let html='';
+  db[marca].modelos.forEach(modelo=>{
+    let items=[];
+    tipos.forEach(tipo=>{
+      if(!db[marca]?.costos?.[tipo]?.[modelo])return;
+      const cals=tipo==='modulo'?['oled','original']:['std'];
+      cals.forEach(cal=>{
+        const key=`${marca}__${modelo}__${tipo}__${cal}`;
+        const stock=inv[key]!==undefined?inv[key]:0;
+        items.push({tipo,cal,key,stock,label:`${tNom[tipo]||tipo} (${calLabel(cal)})`});
+      });
+    });
+    if(!items.length)return;
+    html+=`<div style="padding:8px 0;border-bottom:1px solid var(--border);">
+      <div style="font-size:.82rem;font-weight:700;margin-bottom:6px;">${modelo}</div>`;
+    items.forEach(it=>{
+      const ke=it.key.replace(/'/g,"\\'");
+      const safeId=it.key.replace(/[^a-z0-9_]/gi,'_');
+      html+=`<div style="display:flex;align-items:center;justify-content:space-between;padding:4px 0;">
+        <span style="font-size:.72rem;color:var(--muted)">${it.label}</span>
+        <div style="display:flex;align-items:center;gap:6px;">
+          <button onclick="ajustarStockInv('${ke}',-1)" style="background:var(--surface2);border:1px solid var(--border);border-radius:7px;color:var(--red);font-size:.85rem;font-weight:900;width:28px;height:28px;cursor:pointer;">−</button>
+          <span id="inv-stk-${safeId}" style="font-size:.85rem;font-weight:700;min-width:24px;text-align:center;">${it.stock}</span>
+          <button onclick="ajustarStockInv('${ke}',1)" style="background:var(--surface2);border:1px solid var(--border);border-radius:7px;color:var(--green);font-size:.85rem;font-weight:900;width:28px;height:28px;cursor:pointer;">+</button>
+        </div>
+      </div>`;
+    });
+    html+=`</div>`;
+  });
+  cont.innerHTML=html||'<p style="color:var(--muted);font-size:.76rem">Sin modelos.</p>';
+}
+
+async function ajustarStockInv(key,delta){
+  const inv=JSON.parse(JSON.stringify(s().inventario||{}));
+  inv[key]=Math.max(0,(inv[key]||0)+delta);
+  s().inventario=inv;
+  await fbSave('config/inventario',inv);
+  const el=document.getElementById('inv-stk-'+key.replace(/[^a-z0-9_]/gi,'_'));
+  if(el)el.textContent=inv[key];
+}
+
+function renderCostoEditor(marca){
+  const cont=document.getElementById('costoEditorList');
+  const db=getDB();
+  if(!db[marca]){cont.innerHTML='<p style="color:var(--muted);font-size:.76rem">Sin datos.</p>';return;}
+  const tipos=['modulo','bateria','pin','tapa'];
+  const tNom={modulo:'Módulo',bateria:'Batería',pin:'Pin de carga',tapa:'Tapa trasera'};
+  let html='';
+  tipos.forEach(tipo=>{
+    const costos=db[marca].costos?.[tipo];if(!costos)return;
+    html+=`<div style="font-size:.68rem;font-weight:700;color:var(--accent);margin:10px 0 4px;text-transform:uppercase;letter-spacing:.8px;">${tNom[tipo]}</div>`;
+    Object.entries(costos).forEach(([modelo,val])=>{
+      const std=val.std||0;const orig=val.orig||0;
+      const mid=modelo.replace(/[^a-z0-9]/gi,'_');
+      const mesc=modelo.replace(/'/g,"\\'");
+      html+=`<div style="padding:8px 0;border-bottom:1px solid var(--border);">
+        <div style="font-size:.8rem;font-weight:700;margin-bottom:6px;">${modelo}</div>
+        <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;">
+          <div style="flex:1;min-width:130px;">
+            <div style="font-size:.65rem;color:var(--accent);margin-bottom:3px;">OLED</div>
+            <div style="display:flex;align-items:center;gap:5px;">
+              <button onclick="ajustarCosto('${marca}','${tipo}','${mesc}','std',-1000)" style="background:var(--surface2);border:1px solid var(--border);border-radius:7px;color:var(--red);font-size:.85rem;font-weight:900;width:30px;height:30px;cursor:pointer;">−</button>
+              <span id="costo-${marca}-${tipo}-${mid}-std" style="font-size:.85rem;font-weight:700;min-width:70px;text-align:center;color:var(--yellow);">${fmt(std)}</span>
+              <button onclick="ajustarCosto('${marca}','${tipo}','${mesc}','std',1000)" style="background:var(--surface2);border:1px solid var(--border);border-radius:7px;color:var(--green);font-size:.85rem;font-weight:900;width:30px;height:30px;cursor:pointer;">+</button>
+            </div>
+          </div>
+          ${orig>0?`<div style="flex:1;min-width:130px;">
+            <div style="font-size:.65rem;color:var(--yellow);margin-bottom:3px;">Original</div>
+            <div style="display:flex;align-items:center;gap:5px;">
+              <button onclick="ajustarCosto('${marca}','${tipo}','${mesc}','orig',-1000)" style="background:var(--surface2);border:1px solid var(--border);border-radius:7px;color:var(--red);font-size:.85rem;font-weight:900;width:30px;height:30px;cursor:pointer;">−</button>
+              <span id="costo-${marca}-${tipo}-${mid}-orig" style="font-size:.85rem;font-weight:700;min-width:70px;text-align:center;color:var(--accent);">${fmt(orig)}</span>
+              <button onclick="ajustarCosto('${marca}','${tipo}','${mesc}','orig',1000)" style="background:var(--surface2);border:1px solid var(--border);border-radius:7px;color:var(--green);font-size:.85rem;font-weight:900;width:30px;height:30px;cursor:pointer;">+</button>
+            </div>
+          </div>`:''}
+        </div>
+      </div>`;
+    });
+  });
+  cont.innerHTML=html||'<p style="font-size:.76rem;color:var(--muted)">Sin datos.</p>';
+}
+async function ajustarCosto(marca,tipo,modelo,cal,delta){
+  const pr=JSON.parse(JSON.stringify(getDB()));
+  if(!pr[marca]?.costos?.[tipo]?.[modelo])return;
+  const actual=pr[marca].costos[tipo][modelo][cal]||0;
+  const nuevo=Math.max(0,actual+delta);
+  pr[marca].costos[tipo][modelo][cal]=nuevo;
+  s().precios=pr;
+  await fbSave('config/precios',pr);
+  const el=document.getElementById(`costo-${marca}-${tipo}-${modelo.replace(/[^a-z0-9]/gi,'_')}-${cal}`);
+  if(el)el.textContent=fmt(nuevo);
+  toast('✓ Costo actualizado ☁️');
+}
+
+function mostrarStockAlert(msg){
+  const el=document.getElementById('stockAlert');
+  el.textContent='⚠️ STOCK BAJO — '+msg;el.style.display='block';
+  if(navigator.vibrate)navigator.vibrate([300,100,300]);
+  setTimeout(()=>{el.style.display='none';},5000);
+}
+
+// ── IMPORTAR LISTAS ───────────────────────────────────────────────
+function importarArchivo(input){
+  const f=input.files[0];if(!f)return;
+  const r=new FileReader();r.onload=e=>{document.getElementById('listaTexto').value=e.target.result;};
+  r.readAsText(f);
+}
+async function importarTexto(){
+  const txt=document.getElementById('listaTexto').value.trim();
+  if(!txt){toast('⚠️ Pegá o subí una lista');return;}
+  const pr=JSON.parse(JSON.stringify(getDB()));
+  let ok=0,err=0;
+  txt.split('\n').filter(l=>l.trim()).forEach(linea=>{
+    const p=linea.split('|').map(x=>x.trim());
+    if(p.length<4){err++;return;}
+    const [marca,modelo,tipo,costoOled,costoOrig]=p;
+    const std=parseFloat(costoOled)||0;
+    const orig=parseFloat(costoOrig)||0;
+    if(!marca||!modelo||!tipo){err++;return;}
+    if(!pr[marca])pr[marca]={modelos:[],costos:{}};
+    if(!pr[marca].modelos.includes(modelo))pr[marca].modelos.push(modelo);
+    if(!pr[marca].costos[tipo])pr[marca].costos[tipo]={};
+    pr[marca].costos[tipo][modelo]={std,orig};
+    ok++;
+  });
+  s().precios=pr;await fbSave('config/precios',pr);
+  document.getElementById('listaTexto').value='';
+  toast(`✅ ${ok} precios importados${err?' · '+err+' errores':''} ☁️`);
+}
+
+// ── AJUSTES ───────────────────────────────────────────────────────
+function cambiarClave(){
+  const c1=document.getElementById('aj-clave1').value,c2=document.getElementById('aj-clave2').value;
+  if(!c1){toast('⚠️ Ingresá una clave');return;}
+  if(c1!==c2){toast('⚠️ Las claves no coinciden');return;}
+  s().pin=c1;fbSave('config/pin',c1);
+  document.getElementById('aj-clave1').value='';document.getElementById('aj-clave2').value='';
+  toast('✅ Clave actualizada ☁️');
+}
+function guardarNombreTaller(){
+  s().tallerNombre=document.getElementById('aj-nombre').value||'Leonel Cell (DisplayFix)';
+  fbSave('config/tallerNombre',s().tallerNombre);toast('✅ Nombre guardado ☁️');
+}
+function guardarGastos(){
+  s().gastosLocal=parseFloat(document.getElementById('aj-gastos').value)||900000;
+  s().gastosPersonal=parseFloat(document.getElementById('aj-personal').value)||1500000;
+  fbSave('config/gastosLocal',s().gastosLocal);fbSave('config/gastosPersonal',s().gastosPersonal);
+  toast('✅ Gastos guardados ☁️');
+}
+async function guardarPreciosVidrio(){
+  s().vplano=parseFloat(document.getElementById('aj-vplano').value)||6000;
+  s().vcurvo=parseFloat(document.getElementById('aj-vcurvo').value)||13000;
+  await fbSave('config/vplano',s().vplano);await fbSave('config/vcurvo',s().vcurvo);
+  toast('✅ Precios de vidrio guardados ☁️');
+}
+async function borrarTodo(){
+  if(!confirm('¿Borrar TODAS las órdenes?'))return;
+  await fbDel('ordenes');toast('Registros eliminados');
+}
+
+// ── TOAST ─────────────────────────────────────────────────────────
+function toast(msg){
+  const el=document.getElementById('toast');
+  el.textContent=msg;el.classList.add('show');
+  setTimeout(()=>el.classList.remove('show'),2600);
+}
+
+document.getElementById('modal').addEventListener('click',function(e){if(e.target===this)cerrarModal();});
+
+if(sessionStorage.getItem('lc')==='1'){
+  document.getElementById('loginScreen').style.display='none';
+  document.getElementById('app').style.display='block';
+  window._ready=true;
+  setTimeout(initApp,600);
+}
+</script>
+
+<!-- BASE DE DATOS DE REPUESTOS -->
+<script>
 const DB_DEFAULT={
   Samsung:{
     modelos:["A01 Core","A02","A02S","A03","A03 Core","A03S","A04","A04E","A04S","A05","A05S","A06","A07","A10","A10S","A11","A12","A13 4G","A14 5G","A15","A16 4G","A16 5G","A20","A20S","A21","A21S","A22 4G","A22 5G","A23 4G","A23 5G","A24","A25","A26","A30","A30S","A31","A32 4G","A33","A34","A35","A36","A51","A52","A53","A54","A55","A56","A70","A71","A72","S20","S20 FE","S21 FE","S22","S22 Ultra","S23","S23 Ultra","S24","S24 Ultra","S25 Ultra"],
@@ -540,8 +1572,7 @@ const DB_DEFAULT={
         "A32 4G":{std:12410,orig:0},"A33":{std:0,orig:17520},"A34":{std:14600,orig:18980},
         "A36":{std:17520,orig:0},"A51":{std:14600,orig:18980},"A52":{std:14600,orig:17520},
         "A54":{std:14600,orig:0},"A70":{std:14600,orig:18980},"A71":{std:14600,orig:0},
-        "A72":{std:0,orig:17520},"S21":{std:17520,orig:0},"S21 FE":{std:17520,orig:0},
-        "S22":{std:17520,orig:0},"S22 Ultra":{std:17520,orig:20440},"S23 Ultra":{std:26280,orig:0}
+        "S21 FE":{std:17520,orig:0},"S22":{std:17520,orig:0},"S22 Ultra":{std:17520,orig:20440}
       },
       pin:{
         "A02":{std:5000,orig:0},"A03":{std:5000,orig:0},"A04S":{std:8500,orig:0},
@@ -552,18 +1583,6 @@ const DB_DEFAULT={
         "A34":{std:9000,orig:0},"A51":{std:5000,orig:0},"A52":{std:16500,orig:0},
         "A53":{std:10000,orig:0},"A55":{std:5000,orig:0},"S20":{std:8000,orig:0}
       },
-      vidrio_plano:{
-        "A01 Core":{std:5600,orig:0},"A02":{std:5600,orig:0},"A03":{std:5600,orig:0},
-        "A05":{std:5600,orig:0},"A10":{std:5600,orig:0},"A11":{std:5600,orig:0},
-        "A12":{std:5600,orig:0},"A13 4G":{std:5600,orig:0},"A14 5G":{std:5600,orig:0}
-      },
-      vidrio_curvo:{
-        "A20":{std:13000,orig:0},"A21S":{std:13000,orig:0},"A22 4G":{std:13000,orig:0},
-        "A23 4G":{std:13000,orig:0},"A24":{std:13000,orig:0},"A25":{std:13000,orig:0},
-        "A32 4G":{std:13000,orig:0},"A33":{std:13000,orig:0},"A34":{std:13000,orig:0},
-        "A51":{std:13000,orig:0},"A52":{std:13000,orig:0},"A53":{std:13000,orig:0},
-        "A54":{std:13000,orig:0},"A55":{std:13000,orig:0},"S20":{std:13000,orig:0}
-      },
       tapa:{
         "A01 Core":{std:7300,orig:0},"A02":{std:7300,orig:0},"A02S":{std:7300,orig:0},
         "A03":{std:7300,orig:0},"A04":{std:7300,orig:0},"A05":{std:7300,orig:0},
@@ -573,14 +1592,12 @@ const DB_DEFAULT={
         "A31":{std:7300,orig:0},"A32 4G":{std:7300,orig:0},"A33":{std:8760,orig:0},
         "A34":{std:8760,orig:0},"A35":{std:10220,orig:0},"A51":{std:7300,orig:0},
         "A52":{std:7300,orig:0},"A53":{std:8760,orig:0},"A54":{std:11680,orig:0},
-        "A55":{std:8760,orig:0},"A56":{std:11680,orig:0},"A70":{std:7300,orig:0},
-        "S20":{std:10220,orig:0},"S20 FE":{std:10220,orig:0},"S22":{std:11680,orig:0},
-        "S23":{std:11680,orig:0},"S24":{std:14600,orig:0},"S24 Ultra":{std:14600,orig:0}
+        "A55":{std:8760,orig:0},"S20":{std:10220,orig:0},"S24":{std:14600,orig:0}
       }
     }
   },
   iPhone:{
-    modelos:["6","6S","6 Plus","6S Plus","7","7 Plus","8","8 Plus","X","XS","XS Max","XR","11","11 Pro","11 Pro Max","12","12 Pro","12 Pro Max","13","13 Pro","13 Pro Max","14","14 Pro","14 Pro Max","14 Plus","15","15 Pro","15 Pro Max","15 Plus","16","16 Pro","16 Pro Max","17 Pro","17 Pro Max"],
+    modelos:["6","6S","6 Plus","6S Plus","7","7 Plus","8","8 Plus","X","XS","XS Max","XR","11","11 Pro","11 Pro Max","12","12 Pro","12 Pro Max","13","13 Pro","13 Pro Max","14","14 Pro","14 Pro Max","14 Plus","15","15 Pro","15 Pro Max","16","16 Pro","16 Pro Max","17 Pro","17 Pro Max"],
     costos:{
       modulo:{
         "6":{std:10220,orig:0},"6S":{std:10220,orig:0},"6 Plus":{std:9665,orig:0},"6S Plus":{std:11680,orig:0},
@@ -610,31 +1627,25 @@ const DB_DEFAULT={
         "6":{std:4500,orig:0},"6S":{std:4500,orig:0},"6 Plus":{std:4500,orig:0},
         "7":{std:9000,orig:0},"7 Plus":{std:5000,orig:0},"8":{std:9000,orig:0},
         "X":{std:6000,orig:0},"XS":{std:9000,orig:0},"XR":{std:9000,orig:0},
-        "XS Max":{std:12000,orig:0},"11":{std:12000,orig:0},"12":{std:12000,orig:0},
-        "13 Pro Max":{std:12000,orig:0},"14 Pro Max":{std:12000,orig:0}
+        "XS Max":{std:12000,orig:0},"11":{std:12000,orig:0},"12":{std:12000,orig:0}
       },
       tapa:{
-        "8":{std:8760,orig:0},"8 Plus":{std:10220,orig:0},"X":{std:10220,orig:0},
-        "XS":{std:10220,orig:0},"XS Max":{std:10220,orig:0},"XR":{std:10220,orig:0},
-        "11":{std:10220,orig:0},"11 Pro":{std:10220,orig:0},"11 Pro Max":{std:10220,orig:0},
-        "12":{std:10220,orig:0},"12 Pro":{std:10220,orig:0},"12 Pro Max":{std:10220,orig:0},
-        "13":{std:10220,orig:0},"13 Pro":{std:10220,orig:0},"13 Pro Max":{std:10220,orig:0},
-        "14":{std:10220,orig:0},"14 Pro":{std:10220,orig:0},"14 Pro Max":{std:10220,orig:0},
-        "15":{std:11680,orig:0},"15 Pro":{std:11680,orig:0},"15 Pro Max":{std:14600,orig:0},
-        "16":{std:24820,orig:0},"16 Pro":{std:24820,orig:0},"16 Pro Max":{std:24820,orig:0}
+        "8":{std:8760,orig:0},"X":{std:10220,orig:0},"XS":{std:10220,orig:0},
+        "XR":{std:10220,orig:0},"XS Max":{std:10220,orig:0},"11":{std:10220,orig:0},
+        "12":{std:10220,orig:0},"13":{std:10220,orig:0},"14":{std:10220,orig:0},
+        "15":{std:11680,orig:0},"16":{std:24820,orig:0}
       }
     }
   },
   Motorola:{
-    modelos:["E5","E5 Plus","E6 Play","E6S","E6i","E7","E7i Power","E7 Plus","E13","E20","E22","E32","E40","G7","G7 Plus","G7 Play","G7 Power","G8","G8 Play","G8 Plus","G8 Power","G9 Play","G9 Plus","G9 Power","G13","G14","G15","G20","G22","G23","G24","G30","G31","G32","G35","G41","G42","G51","G52","G54","G56","G60S","G71","G72","G75","G82","G85","G100","Edge 20 Lite","Edge 20 Pro","Edge 30","Edge 30 Fusion","Edge 30 Neo","Edge 40","Edge 40 Neo","Edge 50 Fusion","Edge 50 Pro","Edge 60 Fusion"],
+    modelos:["E5","E5 Plus","E6 Play","E6S","E7","E7i Power","E7 Plus","E13","E20","E22","E32","E40","G7","G7 Plus","G7 Play","G7 Power","G8","G8 Play","G8 Plus","G8 Power","G9 Play","G9 Plus","G9 Power","G13","G14","G15","G20","G22","G23","G24","G30","G31","G32","G35","G41","G42","G51","G52","G54","G60S","G71","G72","G75","G82","G85","Edge 30","Edge 30 Fusion","Edge 30 Neo","Edge 40","Edge 40 Neo","Edge 50 Fusion","Edge 50 Pro"],
     costos:{
       modulo:{
-        "E5":{std:11972,orig:0},"E5 Plus":{std:11680,orig:0},"E6 Play":{std:10220,orig:10220},
-        "E6S":{std:12410,orig:14600},"E6i":{std:14600,orig:14600},"E7":{std:14600,orig:17520},
-        "E7i Power":{std:16060,orig:0},"E7 Plus":{std:16060,orig:33580},"E13":{std:16060,orig:27740},
-        "E20":{std:16060,orig:18250},"E22":{std:16060,orig:18250},"E32":{std:18250,orig:18250},
-        "E40":{std:16060,orig:21900},"G7":{std:14600,orig:0},"G7 Plus":{std:14600,orig:0},
-        "G7 Play":{std:17520,orig:0},"G7 Power":{std:19418,orig:27331},
+        "E5":{std:11972,orig:0},"E6 Play":{std:10220,orig:10220},"E6S":{std:12410,orig:14600},
+        "E7":{std:14600,orig:17520},"E7i Power":{std:16060,orig:0},"E7 Plus":{std:16060,orig:33580},
+        "E13":{std:16060,orig:27740},"E20":{std:16060,orig:18250},"E22":{std:16060,orig:18250},
+        "E32":{std:18250,orig:18250},"E40":{std:16060,orig:21900},"G7":{std:14600,orig:0},
+        "G7 Plus":{std:14600,orig:0},"G7 Play":{std:17520,orig:0},"G7 Power":{std:19418,orig:27331},
         "G8":{std:20440,orig:0},"G8 Play":{std:20440,orig:17520},"G8 Plus":{std:21900,orig:0},
         "G8 Power":{std:21900,orig:17520},"G9 Play":{std:16060,orig:35040},
         "G9 Plus":{std:19710,orig:0},"G9 Power":{std:16936,orig:40880},
@@ -643,103 +1654,80 @@ const DB_DEFAULT={
         "G24":{std:17520,orig:39420},"G30":{std:16060,orig:40880},"G31":{std:41172,orig:55480},
         "G32":{std:16060,orig:39420},"G35":{std:19710,orig:39420},"G41":{std:45260,orig:62780},
         "G42":{std:46720,orig:51100},"G51":{std:23360,orig:51100},"G52":{std:0,orig:51100},
-        "G54":{std:21900,orig:36500},"G56":{std:23360,orig:73000},"G60S":{std:19272,orig:21900},
-        "G71":{std:0,orig:51100},"G72":{std:62780,orig:81760},"G75":{std:0,orig:70080},
-        "G82":{std:0,orig:51100},"G85":{std:65700,orig:87600},"G100":{std:23360,orig:0},
-        "Edge 20 Lite":{std:73000,orig:99280},"Edge 20 Pro":{std:68620,orig:73000},
-        "Edge 30":{std:87600,orig:87600},"Edge 30 Fusion":{std:84680,orig:87600},
-        "Edge 30 Neo":{std:105120,orig:0},"Edge 40":{std:91980,orig:0},"Edge 40 Neo":{std:80300,orig:80300},
-        "Edge 50 Fusion":{std:65700,orig:124100},"Edge 50 Pro":{std:0,orig:131400},
-        "Edge 60 Fusion":{std:94900,orig:146000}
+        "G54":{std:21900,orig:36500},"G60S":{std:19272,orig:21900},"G71":{std:0,orig:51100},
+        "G72":{std:62780,orig:81760},"G75":{std:0,orig:70080},"G82":{std:0,orig:51100},
+        "G85":{std:65700,orig:87600},"Edge 30":{std:87600,orig:87600},
+        "Edge 30 Fusion":{std:84680,orig:87600},"Edge 30 Neo":{std:105120,orig:0},
+        "Edge 40":{std:91980,orig:0},"Edge 40 Neo":{std:80300,orig:80300},
+        "Edge 50 Fusion":{std:65700,orig:124100},"Edge 50 Pro":{std:0,orig:131400}
       },
       bateria:{
-        "E5":{std:11680,orig:0},"E5 Plus":{std:12410,orig:0},"E6 Play":{std:12410,orig:0},
-        "E6S":{std:12410,orig:17520},"E7":{std:11680,orig:0},"E7 Plus":{std:11680,orig:0},
+        "E6 Play":{std:12410,orig:0},"E6S":{std:12410,orig:17520},"E7":{std:11680,orig:0},
         "E13":{std:17520,orig:0},"E20":{std:13140,orig:20440},"E22":{std:14600,orig:20440},
         "E32":{std:12410,orig:0},"E40":{std:12410,orig:0},"G7 Play":{std:11680,orig:0},
-        "G7 Power":{std:16060,orig:20440},"G8 Play":{std:12410,orig:17520},"G8 Plus":{std:12410,orig:17520},
-        "G8 Power":{std:12410,orig:17520},"G9 Play":{std:0,orig:0},"G9 Plus":{std:0,orig:20440},
-        "G9 Power":{std:14600,orig:20440},"G13":{std:17520,orig:18250},"G14":{std:17520,orig:21900},
-        "G20":{std:0,orig:42340},"G22":{std:17520,orig:20440},"G23":{std:17520,orig:18250},
-        "G24":{std:17520,orig:21900},"G30":{std:0,orig:40880},"G31":{std:14600,orig:55480},
-        "G32":{std:17520,orig:39420},"G35":{std:14600,orig:39420},"G41":{std:17520,orig:0},
-        "G42":{std:0,orig:0},"G52":{std:14600,orig:20440},"G54":{std:17520,orig:0},
-        "G60S":{std:17520,orig:21900},"G71":{std:17520,orig:51100},"G72":{std:0,orig:81760},
-        "G75":{std:20440,orig:0},"G82":{std:0,orig:51100},"G85":{std:0,orig:87600},
-        "G100":{std:14600,orig:20440},"Edge 30":{std:14600,orig:0},"Edge 30 Fusion":{std:17520,orig:87600},
-        "Edge 30 Neo":{std:20440,orig:0},"Edge 40":{std:0,orig:91980},"Edge 40 Neo":{std:20440,orig:80300},
+        "G7 Power":{std:16060,orig:20440},"G8 Play":{std:12410,orig:17520},"G8 Power":{std:12410,orig:17520},
+        "G9 Play":{std:0,orig:0},"G9 Power":{std:14600,orig:20440},"G13":{std:17520,orig:18250},
+        "G14":{std:17520,orig:21900},"G22":{std:17520,orig:20440},"G31":{std:14600,orig:55480},
+        "G32":{std:17520,orig:39420},"G52":{std:14600,orig:20440},"G60S":{std:17520,orig:21900},
+        "G72":{std:0,orig:81760},"G75":{std:20440,orig:0},"Edge 30":{std:14600,orig:0},
+        "Edge 30 Fusion":{std:17520,orig:87600},"Edge 40 Neo":{std:20440,orig:80300},
         "Edge 50 Fusion":{std:17520,orig:124100}
       },
       pin:{
         "E6 Play":{std:5000,orig:0},"E7":{std:5000,orig:0},"G7 Play":{std:5000,orig:0},
         "G8 Play":{std:5000,orig:0},"G9 Play":{std:5000,orig:0},"G9 Plus":{std:8500,orig:0},
-        "G9 Power":{std:8500,orig:0},"G13":{std:5000,orig:0},"G20":{std:5000,orig:0},
-        "G22":{std:9500,orig:0},"G31":{std:9500,orig:0},"G42":{std:5000,orig:0},
-        "G52":{std:5000,orig:0},"G72":{std:5000,orig:0},"G82":{std:5000,orig:0},
-        "Edge 30 Neo":{std:5000,orig:0},"Edge 50 Fusion":{std:10500,orig:0}
+        "G9 Power":{std:8500,orig:0},"G13":{std:5000,orig:0},"G22":{std:9500,orig:0},
+        "G31":{std:9500,orig:0},"G42":{std:5000,orig:0},"G52":{std:5000,orig:0},
+        "G72":{std:5000,orig:0},"G82":{std:5000,orig:0},"Edge 50 Fusion":{std:10500,orig:0}
       },
       tapa:{
-        "E5":{std:5840,orig:0},"E5 Plus":{std:5840,orig:0},"E6 Play":{std:5840,orig:0},
-        "E6S":{std:7300,orig:0},"E7":{std:7300,orig:0},"E13":{std:7300,orig:0},
-        "E20":{std:8760,orig:0},"E22":{std:7300,orig:0},"E40":{std:7300,orig:0},
-        "G7 Play":{std:5840,orig:0},"G7 Power":{std:5840,orig:0},"G8":{std:7300,orig:0},
-        "G8 Power":{std:7300,orig:0},"G9 Play":{std:7300,orig:0},"G9 Plus":{std:7300,orig:0},
-        "G9 Power":{std:7300,orig:0},"G20":{std:7300,orig:0},"G22":{std:7300,orig:0},
-        "G30":{std:7300,orig:0},"G41":{std:7300,orig:0},"G51":{std:7300,orig:0},
-        "G60S":{std:7300,orig:0},"G71":{std:7300,orig:0},"G100":{std:8760,orig:0},
-        "Edge 30":{std:8760,orig:0},"Edge 40":{std:10220,orig:0},"Edge 40 Neo":{std:10220,orig:0},
-        "Edge 50 Fusion":{std:11680,orig:0}
-      },
-      vidrio_plano:{
-        "E6 Play":{std:5600,orig:0},"E7":{std:5600,orig:0},"E13":{std:5600,orig:0},
-        "G7 Play":{std:5600,orig:0},"G8 Play":{std:5600,orig:0},"G9 Play":{std:5600,orig:0},
-        "G9 Power":{std:5600,orig:0},"G13":{std:5600,orig:0},"G20":{std:5600,orig:0},"G22":{std:5600,orig:0}
-      },
-      vidrio_curvo:{
-        "G31":{std:13000,orig:0},"G42":{std:13000,orig:0},"G52":{std:13000,orig:0},
-        "G71":{std:13000,orig:0},"G72":{std:13000,orig:0},"G82":{std:13000,orig:0},
-        "Edge 30":{std:13000,orig:0},"Edge 40":{std:13000,orig:0},"Edge 40 Neo":{std:13000,orig:0},
-        "Edge 50 Fusion":{std:13000,orig:0}
+        "E5":{std:5840,orig:0},"E6 Play":{std:5840,orig:0},"E6S":{std:7300,orig:0},
+        "E7":{std:7300,orig:0},"E13":{std:7300,orig:0},"E20":{std:8760,orig:0},
+        "E22":{std:7300,orig:0},"G7 Play":{std:5840,orig:0},"G8":{std:7300,orig:0},
+        "G9 Play":{std:7300,orig:0},"G9 Power":{std:7300,orig:0},"G20":{std:7300,orig:0},
+        "G22":{std:7300,orig:0},"G30":{std:7300,orig:0},"G41":{std:7300,orig:0},
+        "G60S":{std:7300,orig:0},"Edge 40":{std:10220,orig:0},"Edge 50 Fusion":{std:11680,orig:0}
       }
     }
   },
   Xiaomi:{
-    modelos:["Mi A1","Mi A2","Mi A2 Lite","Mi A3","Mi 7","Mi 8 Lite","Mi 9","Mi 9 Lite","Mi 9T","Mi 9T Pro","Mi 11 Lite","Redmi 5 Plus","Redmi 6","Redmi 6A","Redmi 7A","Redmi 8","Redmi 8A","Redmi 9","Redmi 9A","Redmi 9C","Redmi 10","Redmi 10C","Redmi 12","Redmi 12C","Redmi 13","Redmi 13C","Redmi 14C","Redmi 15C","Redmi A1","Redmi A2","Redmi A3","Redmi A5","Note 5","Note 7","Note 8","Note 8 Pro","Note 9","Note 9S","Note 9 Pro","Note 10 4G","Note 10 5G","Note 10S","Note 11","Note 11S","Note 12","Note 12 Pro","Note 13 4G","Note 13 Pro","Note 14 4G","Note 14 Pro","Poco M3","Poco X3","Poco F3","Poco X6 Pro","Poco X7 Pro"],
+    modelos:["Mi A1","Mi A2","Mi A2 Lite","Mi A3","Mi 7","Mi 8 Lite","Mi 9","Mi 9 Lite","Mi 9T","Mi 9T Pro","Mi 11 Lite","Redmi 5 Plus","Redmi 6","Redmi 8","Redmi 8A","Redmi 9","Redmi 9A","Redmi 9C","Redmi 10","Redmi 10C","Redmi 12","Redmi 12C","Redmi 13","Redmi 13C","Redmi 14C","Redmi 15C","Redmi A1","Redmi A2","Redmi A3","Redmi A5","Note 7","Note 8","Note 8 Pro","Note 9","Note 9S","Note 9 Pro","Note 10 4G","Note 10S","Note 11","Note 11S","Note 12","Note 12 Pro","Note 13 4G","Note 13 Pro","Note 14 4G","Note 14 Pro","Poco M3","Poco X3","Poco X6 Pro","Poco X7 Pro"],
     costos:{
       modulo:{
         "Mi A1":{std:9490,orig:0},"Mi A2":{std:14600,orig:0},"Mi A2 Lite":{std:14600,orig:0},
         "Mi A3":{std:39420,orig:0},"Mi 7":{std:14600,orig:0},"Mi 8 Lite":{std:23360,orig:0},
         "Mi 9":{std:46720,orig:0},"Mi 9 Lite":{std:29200,orig:46720},"Mi 9T":{std:21900,orig:49640},
         "Mi 9T Pro":{std:21900,orig:49640},"Mi 11 Lite":{std:32120,orig:67160},
-        "Redmi 5 Plus":{std:16060,orig:0},"Redmi 6":{std:14600,orig:0},"Redmi 6A":{std:14600,orig:0},
-        "Redmi 7A":{std:13140,orig:0},"Redmi 8":{std:14600,orig:0},"Redmi 8A":{std:14600,orig:0},
+        "Redmi 5 Plus":{std:16060,orig:0},"Redmi 6":{std:14600,orig:0},
+        "Redmi 8":{std:14600,orig:0},"Redmi 8A":{std:14600,orig:0},
         "Redmi 9":{std:17520,orig:23360},"Redmi 9A":{std:16060,orig:21900},"Redmi 9C":{std:16060,orig:21900},
-        "Redmi 10":{std:16060,orig:0},"Redmi 10C":{std:14600,orig:23360},"Redmi 12":{std:17520,orig:0},
-        "Redmi 12C":{std:17520,orig:18980},"Redmi 13":{std:17520,orig:0},"Redmi 13C":{std:17520,orig:26280},
+        "Redmi 10":{std:16060,orig:0},"Redmi 10C":{std:14600,orig:23360},
+        "Redmi 12":{std:17520,orig:0},"Redmi 12C":{std:17520,orig:18980},
+        "Redmi 13":{std:17520,orig:0},"Redmi 13C":{std:17520,orig:26280},
         "Redmi 14C":{std:22630,orig:26280},"Redmi 15C":{std:21900,orig:23360},
-        "Redmi A1":{std:17520,orig:21900},"Redmi A2":{std:17520,orig:21900},"Redmi A3":{std:19710,orig:24820},
-        "Redmi A5":{std:20440,orig:21900},"Note 5":{std:14600,orig:0},"Note 7":{std:14308,orig:0},
-        "Note 8":{std:13140,orig:0},"Note 8 Pro":{std:19418,orig:0},"Note 9":{std:16060,orig:0},
-        "Note 9S":{std:14600,orig:0},"Note 9 Pro":{std:21170,orig:0},"Note 10 4G":{std:45260,orig:0},
-        "Note 10 5G":{std:19710,orig:0},"Note 10S":{std:45260,orig:0},"Note 11":{std:45260,orig:0},
-        "Note 11S":{std:45260,orig:0},"Note 12":{std:45260,orig:56210},"Note 12 Pro":{std:44092,orig:61320},
-        "Note 13 4G":{std:56940,orig:64240},"Note 13 Pro":{std:87600,orig:0},"Note 14 4G":{std:65700,orig:0},
-        "Note 14 Pro":{std:84680,orig:0},"Poco M3":{std:24820,orig:21900},"Poco X3":{std:17520,orig:0},
-        "Poco F3":{std:14600,orig:0},"Poco X6 Pro":{std:52560,orig:0},"Poco X7 Pro":{std:65700,orig:0}
+        "Redmi A1":{std:17520,orig:21900},"Redmi A2":{std:17520,orig:21900},
+        "Redmi A3":{std:19710,orig:24820},"Redmi A5":{std:20440,orig:21900},
+        "Note 7":{std:14308,orig:0},"Note 8":{std:13140,orig:0},"Note 8 Pro":{std:19418,orig:0},
+        "Note 9":{std:16060,orig:0},"Note 9S":{std:14600,orig:0},"Note 9 Pro":{std:21170,orig:0},
+        "Note 10 4G":{std:45260,orig:0},"Note 10S":{std:45260,orig:0},
+        "Note 11":{std:45260,orig:0},"Note 11S":{std:45260,orig:0},
+        "Note 12":{std:45260,orig:56210},"Note 12 Pro":{std:44092,orig:61320},
+        "Note 13 4G":{std:56940,orig:64240},"Note 13 Pro":{std:87600,orig:0},
+        "Note 14 4G":{std:65700,orig:0},"Note 14 Pro":{std:84680,orig:0},
+        "Poco M3":{std:24820,orig:21900},"Poco X3":{std:17520,orig:0},
+        "Poco X6 Pro":{std:52560,orig:0},"Poco X7 Pro":{std:65700,orig:0}
       },
       bateria:{
-        "Mi A1":{std:10220,orig:0},"Mi A2":{std:11680,orig:0},"Mi A2 Lite":{std:11680,orig:0},
-        "Mi A3":{std:13140,orig:0},"Mi 7":{std:11680,orig:0},"Mi 8 Lite":{std:12410,orig:0},
-        "Mi 9":{std:12410,orig:0},"Mi 9 Lite":{std:13140,orig:0},"Mi 9T":{std:11680,orig:0},
-        "Redmi 5 Plus":{std:11680,orig:0},"Redmi 6":{std:11680,orig:0},"Redmi 6A":{std:11680,orig:0},
-        "Redmi 7A":{std:11680,orig:0},"Redmi 8":{std:14600,orig:0},"Redmi 8A":{std:12410,orig:0},
-        "Redmi 9":{std:0,orig:0},"Redmi 9A":{std:12410,orig:0},"Redmi 9C":{std:12410,orig:0},
-        "Redmi 10":{std:14600,orig:0},"Redmi 10C":{std:14600,orig:0},"Redmi 12C":{std:14600,orig:0},
-        "Redmi 13C":{std:17520,orig:0},"Redmi 14C":{std:17520,orig:0},"Note 7":{std:14600,orig:0},
-        "Note 8":{std:14600,orig:0},"Note 8 Pro":{std:11680,orig:0},"Note 9":{std:14892,orig:0},
-        "Note 9S":{std:14600,orig:0},"Note 10S":{std:14600,orig:0},"Note 11":{std:14600,orig:0},
-        "Note 11S":{std:14600,orig:0},"Note 12":{std:17520,orig:0},"Note 12 Pro":{std:17520,orig:0},
-        "Note 13 4G":{std:17520,orig:0},"Poco M3":{std:17520,orig:0},"Poco X3":{std:14600,orig:0}
+        "Mi A1":{std:10220,orig:0},"Mi A2":{std:11680,orig:0},"Mi 9":{std:12410,orig:0},
+        "Mi 9 Lite":{std:13140,orig:0},"Mi 9T":{std:11680,orig:0},
+        "Redmi 8":{std:14600,orig:0},"Redmi 8A":{std:12410,orig:0},
+        "Redmi 9A":{std:12410,orig:0},"Redmi 9C":{std:12410,orig:0},
+        "Redmi 10":{std:14600,orig:0},"Redmi 10C":{std:14600,orig:0},
+        "Redmi 12C":{std:14600,orig:0},"Redmi 13C":{std:17520,orig:0},"Redmi 14C":{std:17520,orig:0},
+        "Note 7":{std:14600,orig:0},"Note 8":{std:14600,orig:0},"Note 9":{std:14892,orig:0},
+        "Note 9S":{std:14600,orig:0},"Note 10S":{std:14600,orig:0},
+        "Note 11":{std:14600,orig:0},"Note 12":{std:17520,orig:0},"Note 13 4G":{std:17520,orig:0},
+        "Poco M3":{std:17520,orig:0},"Poco X3":{std:14600,orig:0}
       },
       pin:{
         "Note 7":{std:8000,orig:0},"Mi 9T":{std:8000,orig:0},"Mi 9T Pro":{std:8000,orig:0}
@@ -756,14 +1744,11 @@ const DB_DEFAULT={
         "K61":{std:18250,orig:0},"K62":{std:16060,orig:0}
       },
       bateria:{
-        "K22":{std:12410,orig:0},"K40":{std:11680,orig:14600},"K40S":{std:11680,orig:14600},
-        "K41S":{std:11680,orig:14600},"K42":{std:12410,orig:0},"K50":{std:11680,orig:14600},
-        "K50S":{std:11680,orig:14600},"K51S":{std:11680,orig:14600},"K52":{std:12410,orig:14600},
-        "K62":{std:12410,orig:0}
+        "K22":{std:12410,orig:0},"K40":{std:11680,orig:14600},"K41S":{std:11680,orig:14600},
+        "K42":{std:12410,orig:0},"K50":{std:11680,orig:14600},"K51S":{std:11680,orig:14600},
+        "K52":{std:12410,orig:14600},"K62":{std:12410,orig:0}
       },
-      pin:{
-        "K51S":{std:5000,orig:0}
-      }
+      pin:{"K51S":{std:5000,orig:0}}
     }
   },
   Nokia:{
@@ -773,27 +1758,21 @@ const DB_DEFAULT={
         "1.3":{std:14600,orig:0},"2.3":{std:15330,orig:0},"2.4":{std:15330,orig:0},
         "3.1 Plus":{std:17520,orig:0},"5.1 Plus":{std:15330,orig:0},"7.1 Plus":{std:14600,orig:0}
       },
-      bateria:{
-        "2.3":{std:0,orig:0}
-      },
-      pin:{}
+      bateria:{}
     }
   },
   TCL:{
-    modelos:["10SE","20B","20E","20SE","20Y","30SE","305","305i","40SE","40 NXTPaper","403","405","50 5G","50 SE","50XE 5G"],
+    modelos:["10SE","20B","20E","20SE","20Y","30SE","305","40SE","403","405","50 5G","50 SE"],
     costos:{
       modulo:{
         "10SE":{std:13140,orig:0},"20B":{std:16790,orig:0},"20E":{std:16060,orig:0},
         "20SE":{std:16790,orig:0},"20Y":{std:16060,orig:29200},"30SE":{std:17520,orig:0},
-        "305":{std:17520,orig:32120},"40SE":{std:17812,orig:0},"40 NXTPaper":{std:26280,orig:40880},
-        "403":{std:18980,orig:29200},"405":{std:16790,orig:0},"50 5G":{std:21900,orig:0},
-        "50 SE":{std:29200,orig:48180},"50XE 5G":{std:23360,orig:0}
+        "305":{std:17520,orig:32120},"40SE":{std:17812,orig:0},"403":{std:18980,orig:29200},
+        "405":{std:16790,orig:0},"50 5G":{std:21900,orig:0},"50 SE":{std:29200,orig:48180}
       },
       bateria:{
-        "20SE":{std:21900,orig:0},"30SE":{std:21900,orig:0},"305":{std:21900,orig:0},
-        "40SE":{std:17520,orig:0}
-      },
-      pin:{}
+        "20SE":{std:21900,orig:0},"30SE":{std:21900,orig:0},"305":{std:21900,orig:0},"40SE":{std:17520,orig:0}
+      }
     }
   },
   ZTE:{
@@ -808,577 +1787,26 @@ const DB_DEFAULT={
       },
       bateria:{
         "A34":{std:17520,orig:0},"A52":{std:17520,orig:0},"A53":{std:17520,orig:0}
-      },
-      pin:{}
+      }
     }
   },
   Huawei:{
-    modelos:["P8 Lite 2017","P9 Lite","P20 Lite","P30 Lite","P Smart 2018","P Smart 2019","Mate 10","Mate 10 Lite","Mate 20 Lite","Y6 2019","Y7 2017","Y7 2018","Y7 2019","Y9 2019","Y9 Prime","Honor X6","Honor X7A","Honor X7B","Honor X7D","Honor X8A"],
+    modelos:["P8 Lite 2017","P9 Lite","P20 Lite","P30 Lite","P Smart 2018","P Smart 2019","Mate 10","Mate 10 Lite","Mate 20 Lite","Y9 2019","Y9 Prime","Honor X7A","Honor X7B","Honor X8A"],
     costos:{
       modulo:{
         "P8 Lite 2017":{std:11680,orig:0},"P9 Lite":{std:11680,orig:0},"P20 Lite":{std:16060,orig:0},
         "P30 Lite":{std:21900,orig:0},"P Smart 2018":{std:13140,orig:0},"P Smart 2019":{std:15330,orig:0},
         "Mate 10":{std:20440,orig:0},"Mate 10 Lite":{std:16060,orig:0},"Mate 20 Lite":{std:16060,orig:0},
-        "Y6 2019":{std:16060,orig:0},"Y7 2017":{std:16060,orig:0},"Y7 2018":{std:13140,orig:0},
-        "Y7 2019":{std:14717,orig:0},"Y9 2019":{std:14600,orig:20440},"Y9 Prime":{std:15330,orig:0},
-        "Honor X6":{std:20440,orig:0},"Honor X7A":{std:20440,orig:0},"Honor X7B":{std:23360,orig:26280},
-        "Honor X7D":{std:26280,orig:0},"Honor X8A":{std:20440,orig:0}
+        "Y9 2019":{std:14600,orig:20440},"Y9 Prime":{std:15330,orig:0},
+        "Honor X7A":{std:20440,orig:0},"Honor X7B":{std:23360,orig:26280},"Honor X8A":{std:20440,orig:0}
       },
       bateria:{
-        "P20 Lite":{std:11680,orig:0},"Mate 10 Lite":{std:12410,orig:0},"Mate 20 Lite":{std:0,orig:0},
+        "P20 Lite":{std:11680,orig:0},"Mate 10 Lite":{std:12410,orig:0},
         "Honor X7A":{std:17520,orig:0},"Honor X7B":{std:17520,orig:0}
-      },
-      pin:{}
+      }
     }
   }
 };
-
-let tablaActual='local', cuotaNuevaActual=1, filtroActual='todas', resumenMode='hoy';
-let calidadActual='glass';
-let fotosNuevas=[]; // base64 de fotos de la orden nueva
-
-function fmt(n){return '$'+Math.round(n).toLocaleString('es-AR');}
-function tipoLabel(t){return{modulo:'Módulo/Pantalla',vidrio_plano:'Vidrio plano',vidrio_curvo:'Vidrio curvo',bateria:'Batería',pin:'Pin de carga',tapa:'Tapa trasera',otro:'Otro'}[t]||t;}
-function getPrecios(){return window._state.precios||DB_DEFAULT;}
-const s=()=>window._state;
-
-async function fbSave(path,data){try{if(window._fbSet)await window._fbSet(path,data);}catch(e){console.log('fb err',e);}}
-async function fbDel(path){try{if(window._fbRemove)await window._fbRemove(path);}catch(e){}}
-
-// LOGIN
-function doLogin(){
-  const v=document.getElementById('pinInput').value;
-  if(v===s().pin){
-    document.getElementById('loginScreen').style.display='none';
-    document.getElementById('app').style.display='block';
-    sessionStorage.setItem('li','1');
-    window._appReady=true;
-    initApp();
-  } else {
-    document.getElementById('loginError').style.display='block';
-    document.getElementById('pinInput').value='';
-  }
-}
-function logout(){
-  sessionStorage.removeItem('li');
-  window._appReady=false;
-  document.getElementById('app').style.display='none';
-  document.getElementById('loginScreen').style.display='flex';
-  document.getElementById('pinInput').value='';
-  document.getElementById('loginError').style.display='none';
-}
-function initApp(){
-  document.getElementById('topbarDate').textContent=new Date().toLocaleDateString('es-AR',{weekday:'long',day:'numeric',month:'long'});
-  document.getElementById('aj-gastos').value=s().gastosLocal;
-  document.getElementById('aj-personal').value=s().gastosPersonal;
-  document.getElementById('aj-nombre').value=s().tallerNombre;
-  renderOrdenes();renderResumen();
-}
-function showPage(id){
-  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
-  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
-  document.getElementById('page-'+id).classList.add('active');
-  const tabs=['nueva','ordenes','resumen'];
-  const idx=tabs.indexOf(id);
-  if(idx>=0)document.querySelectorAll('.tab')[idx].classList.add('active');
-  if(id==='ordenes')renderOrdenes();
-  if(id==='resumen')renderResumen();
-}
-
-// CALIDAD
-function setCalidad(cal,btn){
-  calidadActual=cal;
-  document.getElementById('cal-glass').classList.remove('sel','sel-orig','sel-glass');
-  document.getElementById('cal-std').classList.remove('sel','sel-orig','sel-glass');
-  document.getElementById('cal-orig').classList.remove('sel','sel-orig','sel-glass');
-  if(cal==='glass') btn.classList.add('sel-glass');
-  else if(cal==='orig') btn.classList.add('sel-orig');
-  else btn.classList.add('sel');
-  cargarCosto();
-}
-
-// MODELOS
-function cargarModelos(){
-  const marca=document.getElementById('n-marca').value;
-  const sel=document.getElementById('n-modelo');
-  sel.innerHTML='<option value="">— Modelo —</option>';
-  if(!marca||!getPrecios()[marca])return;
-  getPrecios()[marca].modelos.forEach(m=>{
-    const o=document.createElement('option');o.value=m;o.textContent=m;sel.appendChild(o);
-  });
-  document.getElementById('costoDbCard').style.display='none';
-  document.getElementById('precioSugerido').style.display='none';
-  document.getElementById('calidadSection').style.display='none';
-}
-
-function cargarCosto(){
-  const marca=document.getElementById('n-marca').value;
-  const modelo=document.getElementById('n-modelo').value;
-  const tipo=document.getElementById('n-tipo').value;
-  const card=document.getElementById('costoDbCard');
-  const calSec=document.getElementById('calidadSection');
-  // Notas
-  document.getElementById('notaVidrio').style.display=(tipo==='vidrio_plano'||tipo==='vidrio_curvo')?'block':'none';
-  document.getElementById('notaModulo').style.display=(tipo==='modulo')?'block':'none';
-  if(!tipo||tipo==='otro'){card.style.display='none';calSec.style.display='none';calcPrecio();return;}
-  // Vidrio: costo fijo sin necesitar modelo
-  if(tipo==='vidrio_plano'||tipo==='vidrio_curvo'){
-    const costoVidrio=tipo==='vidrio_plano'?5600:13000;
-    calSec.style.display='none';
-    document.getElementById('cc-precio').textContent=fmt(costoVidrio);
-    document.getElementById('cc-detalle').textContent=(tipo==='vidrio_plano'?'Glass plano':'Glass curvo')+' · Precio base';
-    card.style.display='block';
-    return;
-  }
-  if(!marca||!modelo){card.style.display='none';calSec.style.display='none';calcPrecio();return;}
-  const db=getPrecios();
-  if(!db[marca]?.costos?.[tipo]){card.style.display='none';calSec.style.display='none';calcPrecio();return;}
-  const costoObj=db[marca].costos[tipo][modelo];
-  if(!costoObj){card.style.display='none';calSec.style.display='none';calcPrecio();return;}
-  // Mostrar selector calidad si hay precio original o glass
-  const tieneOrig=costoObj.orig&&costoObj.orig>0;
-  calSec.style.display='block';
-  let costoFinal=costoObj.std;
-  if(calidadActual==='orig'&&tieneOrig) costoFinal=costoObj.orig;
-  else if(calidadActual==='glass') costoFinal=costoObj.std; // glass usa mismo precio base
-  if(!costoFinal){card.style.display='none';calcPrecio();return;}
-  document.getElementById('cc-precio').textContent=fmt(costoFinal);
-  const calLabel=calidadActual==='orig'&&tieneOrig?' · Original':calidadActual==='glass'?' · Glass':' · OLED';
-  document.getElementById('cc-detalle').textContent=marca+' '+modelo+' · '+tipoLabel(tipo)+calLabel;
-  card.style.display='block';
-}
-
-function confirmarCosto(){
-  const txt=document.getElementById('cc-precio').textContent.replace(/[$\s.]/g,'').replace(',','');
-  document.getElementById('n-costo').value=parseInt(txt)||0;
-  calcPrecio();toast('✓ Costo cargado');
-}
-
-function setTabla(t,btn){
-  tablaActual=t;
-  document.getElementById('tb-local').classList.remove('sel');
-  document.getElementById('tb-sueldo').classList.remove('sel');
-  btn.classList.add('sel');calcPrecio();
-}
-function setCuotaNueva(btn){
-  document.querySelectorAll('#cuotasMini .cm-btn').forEach(b=>b.classList.remove('sel'));
-  btn.classList.add('sel');cuotaNuevaActual=parseInt(btn.dataset.c);calcPrecio();
-}
-function calcPrecio(){
-  const tipo=document.getElementById('n-tipo').value;
-  const costo=parseFloat(document.getElementById('n-costo').value)||0;
-  if(!tipo||!costo){document.getElementById('precioSugerido').style.display='none';return;}
-  const cfg=CONFIGS[tipo]||CONFIGS.otro;
-  const f=tablaActual==='local'?cfg.fL:cfg.fS;
-  const mo=tablaActual==='local'?cfg.moL:cfg.moS;
-  const base=Math.max(costo*f,costo+mo);
-  const ef=Math.ceil(base/500)*500;
-  document.getElementById('ps-price').textContent=fmt(ef);
-  document.getElementById('ps-sub').textContent='Ganancia: '+fmt(ef-costo)+' · '+Math.round(((ef-costo)/costo)*100)+'%';
-  const psTarjeta=document.getElementById('ps-tarjeta');
-  if(cuotaNuevaActual>1){
-    const coef=COEF_MC[cuotaNuevaActual]||1.6524;
-    const total=Math.ceil(ef*coef/500)*500;
-    const cuota=Math.ceil(total/cuotaNuevaActual/100)*100;
-    psTarjeta.style.display='block';
-    psTarjeta.textContent=cuotaNuevaActual+' cuotas: '+fmt(total)+' total · '+fmt(cuota)+'/cuota';
-  } else psTarjeta.style.display='none';
-  document.getElementById('n-precio').value=ef;
-  document.getElementById('precioSugerido').style.display='block';
-  actualizarGanancia();
-}
-function actualizarGanancia(){
-  const c=parseFloat(document.getElementById('n-costo').value)||0;
-  const p=parseFloat(document.getElementById('n-precio').value)||0;
-  const el=document.getElementById('ganancia-preview');
-  if(c>0&&p>0){
-    const g=p-c;
-    el.style.display='block';
-    el.textContent='Ganancia: '+fmt(g)+' ('+Math.round((g/c)*100)+'%)';
-    el.style.color=g>=0?'var(--green)':'var(--red)';
-  } else el.style.display='none';
-}
-
-// FOTOS
-function agregarFotos(input){
-  const files=Array.from(input.files);
-  files.forEach(file=>{
-    const reader=new FileReader();
-    reader.onload=e=>{
-      fotosNuevas.push(e.target.result);
-      renderFotoWrap();
-    };
-    reader.readAsDataURL(file);
-  });
-  input.value='';
-}
-function renderFotoWrap(){
-  const wrap=document.getElementById('fotoWrap');
-  wrap.innerHTML='';
-  fotosNuevas.forEach((b64)=>{
-    const img=document.createElement('img');
-    img.className='foto-thumb';img.src=b64;
-    img.onclick=()=>abrirLightbox(b64);
-    wrap.appendChild(img);
-  });
-}
-function abrirLightbox(src){
-  document.getElementById('lightbox-img').src=src;
-  document.getElementById('lightbox').classList.add('show');
-}
-
-// GUARDAR ORDEN
-async function guardarOrden(){
-  const nombre=document.getElementById('n-nombre').value.trim();
-  const marca=document.getElementById('n-marca').value;
-  const modelo=document.getElementById('n-modelo').value||'—';
-  const tipo=document.getElementById('n-tipo').value;
-  const costo=parseFloat(document.getElementById('n-costo').value)||0;
-  const precio=parseFloat(document.getElementById('n-precio').value)||0;
-  if(!nombre){toast('⚠️ Ingresá el nombre del cliente');return;}
-  if(!marca){toast('⚠️ Seleccioná la marca');return;}
-  if(!tipo){toast('⚠️ Seleccioná el tipo de reparación');return;}
-  if(!precio){toast('⚠️ Ingresá el precio cobrado');return;}
-  const id='ORD-'+Date.now();
-  const o={
-    id,fecha:new Date().toISOString(),
-    nombre,telefono:document.getElementById('n-telefono').value.trim(),
-    marca,modelo,color:document.getElementById('n-color').value.trim(),
-    tipo,calidad:calidadActual,costo,precio,
-    pago:document.getElementById('n-pago').value,
-    obs:document.getElementById('n-obs').value.trim(),
-    estado:'recibido',ganancia:precio-costo,
-    fotos:fotosNuevas.length?fotosNuevas:[]
-  };
-  await fbSave('ordenes/'+id,o);
-  toast('✅ Orden guardada y sincronizada ☁️');
-  limpiarNueva();showPage('ordenes');
-}
-function limpiarNueva(){
-  ['n-nombre','n-telefono','n-modelo','n-color','n-obs','n-costo','n-precio'].forEach(id=>{
-    const el=document.getElementById(id);if(el)el.value='';
-  });
-  document.getElementById('n-marca').value='';
-  document.getElementById('n-tipo').value='';
-  document.getElementById('n-pago').value='efectivo';
-  document.getElementById('costoDbCard').style.display='none';
-  document.getElementById('precioSugerido').style.display='none';
-  document.getElementById('ganancia-preview').style.display='none';
-  document.getElementById('calidadSection').style.display='none';
-  document.getElementById('notaVidrio').style.display='none';
-  document.getElementById('notaModulo').style.display='none';
-  document.getElementById('n-modelo').innerHTML='<option value="">— Modelo —</option>';
-  fotosNuevas=[];
-  document.getElementById('fotoWrap').innerHTML='';
-  calidadActual='glass';
-  document.getElementById('cal-glass').classList.add('sel-glass');
-  document.getElementById('cal-std').classList.remove('sel','sel-orig','sel-glass');
-  document.getElementById('cal-orig').classList.remove('sel','sel-orig','sel-glass');
-}
-
-// LISTA ORDENES
-function setFiltro(btn){
-  document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
-  btn.classList.add('active');filtroActual=btn.dataset.f;renderOrdenes();
-}
-window.renderOrdenes=function(){
-  const q=(document.getElementById('searchInput')?.value||'').toLowerCase();
-  let list=s().ordenes.filter(o=>{
-    const mF=filtroActual==='todas'||o.estado===filtroActual;
-    const mQ=!q||(o.nombre+o.marca+o.modelo).toLowerCase().includes(q);
-    return mF&&mQ;
-  });
-  const cont=document.getElementById('listaOrdenes');
-  if(!list.length){
-    cont.innerHTML='<div class="empty-state"><div class="es-icon">📋</div><p>No hay órdenes todavía</p></div>';return;
-  }
-  const stM={recibido:'st-recibido',listo:'st-listo',entregado:'st-entregado'};
-  const stL={recibido:'Recibido',listo:'Listo ✓',entregado:'Entregado'};
-  cont.innerHTML=list.map(o=>`
-    <div class="orden-card" onclick="abrirDetalle('${o.id}')">
-      <div class="orden-header">
-        <div><div class="orden-num">${o.id} · ${new Date(o.fecha).toLocaleDateString('es-AR')}</div></div>
-        <span class="status-badge ${stM[o.estado]||'st-recibido'}">${stL[o.estado]||'Recibido'}</span>
-      </div>
-      <div class="orden-cliente">${o.nombre}</div>
-      <div class="orden-equipo">${o.marca} ${o.modelo} · ${tipoLabel(o.tipo)}${o.fotos&&o.fotos.length?' 📷':''}</div>
-      <div class="orden-footer">
-        <div class="orden-precio">${fmt(o.precio)}</div>
-        <div style="font-size:.62rem;color:var(--muted)">${o.telefono||''}</div>
-      </div>
-    </div>`).join('');
-};
-
-// DETALLE
-function abrirDetalle(id){
-  const o=s().ordenes.find(x=>x.id===id);if(!o)return;
-  const pagoL={efectivo:'Efectivo/Transf.',debito:'Débito',credito1:'Crédito 1 pago',cuotas:'Cuotas'};
-  const stOpts=['recibido','listo','entregado'].map(st=>
-    `<option value="${st}" ${o.estado===st?'selected':''}>${{recibido:'Recibido',listo:'Listo ✓',entregado:'Entregado'}[st]}</option>`).join('');
-  const fotosHtml=o.fotos&&o.fotos.length?`
-    <div style="font-size:.7rem;color:var(--muted);margin-top:8px;margin-bottom:4px;">📷 Fotos del equipo</div>
-    <div class="fotos-modal">${o.fotos.map(f=>`<img src="${f}" onclick="abrirLightbox('${f}')">`).join('')}</div>`:'';
-  const calLabel=o.calidad==='orig'?' · Original':o.calidad==='glass'?' · Glass':' · OLED';
-  document.getElementById('modalInner').innerHTML=`
-    <button class="modal-close" onclick="cerrarModal()">✕</button>
-    <div class="modal-title">Orden ${o.id}</div>
-    <div class="detail-row"><span class="dr-label">Fecha</span><span class="dr-val">${new Date(o.fecha).toLocaleString('es-AR')}</span></div>
-    <div class="detail-row"><span class="dr-label">Cliente</span><span class="dr-val">${o.nombre}</span></div>
-    ${o.telefono?`<div class="detail-row"><span class="dr-label">WhatsApp</span><span class="dr-val">${o.telefono}</span></div>`:''}
-    <div class="detail-row"><span class="dr-label">Equipo</span><span class="dr-val">${o.marca} ${o.modelo} ${o.color?'('+o.color+')':''}</span></div>
-    <div class="detail-row"><span class="dr-label">Reparación</span><span class="dr-val">${tipoLabel(o.tipo)}${calLabel}</span></div>
-    ${o.obs?`<div class="detail-row"><span class="dr-label">Obs.</span><span class="dr-val">${o.obs}</span></div>`:''}
-    <div class="detail-row"><span class="dr-label">Costo repuesto</span><span class="dr-val" style="color:var(--accent2)">${fmt(o.costo||0)}</span></div>
-    <div class="detail-row"><span class="dr-label">Precio cobrado</span><span class="dr-val" style="color:var(--yellow)">${fmt(o.precio)}</span></div>
-    <div class="detail-row"><span class="dr-label">Pago</span><span class="dr-val">${pagoL[o.pago]||o.pago}</span></div>
-    ${fotosHtml}
-    <div class="ganancia-highlight"><div class="gh-label">💰 Ganancia neta</div><div class="gh-val">${fmt(o.ganancia)}</div></div>
-    <label style="font-size:.68rem;color:var(--muted);text-transform:uppercase;letter-spacing:.7px;">Estado</label>
-    <select class="status-select" onchange="cambiarEstado('${o.id}',this.value)">${stOpts}</select>
-    ${o.telefono?`<button class="btn-wa-full" onclick="enviarWA('${o.id}')">📲 Enviar por WhatsApp</button>`:''}
-    <div class="print-options">
-      <button class="btn-print-therm" onclick="imprimirTermica('${o.id}')">🧾 Ticket térmico</button>
-      <button class="btn-print-a4" onclick="imprimirA4('${o.id}')">📄 A4 doble</button>
-    </div>
-    <button class="btn-delete" onclick="eliminarOrden('${o.id}')">🗑️ Eliminar orden</button>`;
-  document.getElementById('modal').classList.add('show');
-}
-function cerrarModal(){document.getElementById('modal').classList.remove('show');}
-async function cambiarEstado(id,val){
-  await fbSave('ordenes/'+id+'/estado',val);
-  toast('Estado actualizado ☁️');
-}
-async function eliminarOrden(id){
-  if(!confirm('¿Eliminar esta orden?'))return;
-  await fbDel('ordenes/'+id);
-  cerrarModal();toast('Orden eliminada');
-}
-
-// WHATSAPP
-function enviarWA(id){
-  const o=s().ordenes.find(x=>x.id===id);if(!o)return;
-  const stL={recibido:'Recibido ✓',listo:'Listo para retirar ✅',entregado:'Entregado'};
-  const msg=`📱 *${s().tallerNombre}*\n\n📋 Orden: ${o.id}\n👤 Cliente: ${o.nombre}\n📱 Equipo: ${o.marca} ${o.modelo}\n🔧 Reparación: ${tipoLabel(o.tipo)}\n💰 Precio: ${fmt(o.precio)}\n📌 Estado: ${stL[o.estado]}\n📅 Fecha: ${new Date(o.fecha).toLocaleDateString('es-AR')}\n\n¡Gracias por elegirnos! 😊`;
-  window.open(`https://wa.me/54${o.telefono.replace(/\D/g,'')}?text=${encodeURIComponent(msg)}`,'_blank');
-}
-
-// IMPRIMIR TICKET
-function imprimirTermica(id){
-  const o=s().ordenes.find(x=>x.id===id);if(!o)return;
-  const pagoL={efectivo:'Efectivo/Transf.',debito:'Débito',credito1:'Crédito 1p',cuotas:'Cuotas'};
-  document.getElementById('printArea').innerHTML=`
-    <style>@media print{@page{size:80mm auto;margin:4mm;}body{font-family:monospace;font-size:11px;background:#fff;color:#000;}
-    .tk{width:72mm;}.tkc{text-align:center;}.tkt{font-size:14px;font-weight:900;text-align:center;border-bottom:1px dashed #000;padding-bottom:4px;margin-bottom:4px;}
-    .tkr{display:flex;justify-content:space-between;padding:2px 0;border-bottom:1px dotted #ccc;font-size:10px;}
-    .tktot{font-size:14px;font-weight:900;text-align:right;border-top:2px solid #000;margin-top:5px;padding-top:4px;}
-    .tkf{text-align:center;font-size:9px;margin-top:6px;border-top:1px dashed #000;padding-top:4px;}}</style>
-    <div class="tk">
-      <div class="tkt">${s().tallerNombre}</div>
-      <div class="tkc" style="font-size:9px;margin-bottom:4px;">${new Date(o.fecha).toLocaleString('es-AR')}</div>
-      <div class="tkr"><span>Orden:</span><span>${o.id}</span></div>
-      <div class="tkr"><span>Cliente:</span><span>${o.nombre}</span></div>
-      ${o.telefono?`<div class="tkr"><span>Tel:</span><span>${o.telefono}</span></div>`:''}
-      <div class="tkr"><span>Equipo:</span><span>${o.marca} ${o.modelo}</span></div>
-      <div class="tkr"><span>Reparación:</span><span>${tipoLabel(o.tipo)}</span></div>
-      ${o.obs?`<div class="tkr"><span>Obs:</span><span style="font-size:9px">${o.obs}</span></div>`:''}
-      <div class="tkr"><span>Pago:</span><span>${pagoL[o.pago]||o.pago}</span></div>
-      <div class="tktot">TOTAL: ${fmt(o.precio)}</div>
-      ${(o.tipo==='vidrio_plano'||o.tipo==='vidrio_curvo')?`<div style="margin-top:4px;font-size:8px;border:1px dashed #000;padding:3px;">AVISO: Cambio de vidrio tiene ~10% riesgo de daño. En ese caso se ofrece módulo a precio de costo.</div>`:''}
-      ${o.tipo==='modulo'?`<div style="margin-top:4px;font-size:8px;border:1px dashed #000;padding:3px;">GARANTIA: 30 dias solo por fallas de fabrica. No cubre golpes ni daños externos.</div>`:''}
-      <div class="tkf">¡Gracias por elegirnos!</div>
-    </div>`;
-  window.print();
-}
-
-// IMPRIMIR A4 DOBLE
-function imprimirA4(id){
-  const o=s().ordenes.find(x=>x.id===id);if(!o)return;
-  const pagoL={efectivo:'Efectivo / Transferencia',debito:'Tarjeta débito',credito1:'Crédito 1 pago',cuotas:'Tarjeta en cuotas'};
-  const bloque=`<div style="width:100%;padding:10px 16px;font-family:Arial,sans-serif;font-size:11px;">
-    <div style="display:flex;justify-content:space-between;border-bottom:2px solid #000;padding-bottom:6px;margin-bottom:8px;">
-      <div><div style="font-size:14px;font-weight:900;">${s().tallerNombre}</div><div style="font-size:9px;color:#555;">ORDEN DE TRABAJO</div></div>
-      <div style="text-align:right;font-size:9px;color:#555;">${new Date(o.fecha).toLocaleString('es-AR')}</div>
-    </div>
-    <div style="display:flex;justify-content:space-between;padding:3px 0;border-bottom:1px solid #eee;"><span style="color:#666;">N° Orden:</span><strong>${o.id}</strong></div>
-    <div style="display:flex;justify-content:space-between;padding:3px 0;border-bottom:1px solid #eee;"><span style="color:#666;">Cliente:</span><span>${o.nombre}</span></div>
-    ${o.telefono?`<div style="display:flex;justify-content:space-between;padding:3px 0;border-bottom:1px solid #eee;"><span style="color:#666;">Teléfono:</span><span>${o.telefono}</span></div>`:''}
-    <div style="display:flex;justify-content:space-between;padding:3px 0;border-bottom:1px solid #eee;"><span style="color:#666;">Equipo:</span><span>${o.marca} ${o.modelo} ${o.color?'— '+o.color:''}</span></div>
-    <div style="display:flex;justify-content:space-between;padding:3px 0;border-bottom:1px solid #eee;"><span style="color:#666;">Reparación:</span><span>${tipoLabel(o.tipo)}</span></div>
-    ${o.obs?`<div style="display:flex;justify-content:space-between;padding:3px 0;border-bottom:1px solid #eee;"><span style="color:#666;">Observaciones:</span><span>${o.obs}</span></div>`:''}
-    <div style="display:flex;justify-content:space-between;padding:3px 0;border-bottom:1px solid #eee;"><span style="color:#666;">Forma de pago:</span><span>${pagoL[o.pago]||o.pago}</span></div>
-    <div style="font-size:15px;font-weight:900;text-align:right;margin-top:6px;border-top:2px solid #000;padding-top:5px;">TOTAL: ${fmt(o.precio)}</div>
-    ${(o.tipo==='vidrio_plano'||o.tipo==='vidrio_curvo')?`<div style="margin-top:8px;padding:7px;border:1px solid #cc6600;border-radius:6px;font-size:9px;color:#663300;background:#fff8f0;"><strong>⚠️ AVISO:</strong> El cambio de vidrio conlleva un riesgo aprox. del 10% de daño al módulo. En ese caso se ofrece módulo a precio de costo.</div>`:''}
-    ${o.tipo==='modulo'?`<div style="margin-top:8px;padding:7px;border:1px solid #006699;border-radius:6px;font-size:9px;color:#003355;background:#f0f8ff;"><strong>ℹ️ GARANTÍA:</strong> 30 días solo por fallas de fábrica. No cubre golpes, caídas, humedad ni daños externos.</div>`:''}
-    <div style="display:flex;justify-content:space-between;margin-top:10px;font-size:9px;color:#666;border-top:1px dashed #ccc;padding-top:5px;">
-      <span>Firma cliente: ___________________</span>
-      <span>Aclaración: ___________________</span>
-    </div>
-  </div>`;
-  document.getElementById('printArea').innerHTML=`
-    <style>@media print{@page{size:A4;margin:8mm;}body{background:#fff;color:#000;}
-    .a4c{width:100%;}.a4cut{border-top:2px dashed #999;text-align:center;font-size:9px;color:#999;padding:2px 0;margin:0;}}</style>
-    <div class="a4c"><div>${bloque}</div><div class="a4cut">✂ ─────────────────── CORTAR ─────────────────── ✂</div><div>${bloque}</div></div>`;
-  window.print();
-}
-
-// RESUMEN
-function setResumen(mode,btn){
-  resumenMode=mode;
-  document.querySelectorAll('.rt-btn').forEach(b=>b.classList.remove('active'));
-  btn.classList.add('active');renderResumen();
-}
-window.renderResumen=function(){
-  const now=new Date();
-  let list=s().ordenes;
-  if(resumenMode==='hoy'){
-    const hoy=now.toDateString();
-    list=list.filter(o=>new Date(o.fecha).toDateString()===hoy);
-  } else {
-    list=list.filter(o=>{const d=new Date(o.fecha);return d.getMonth()===now.getMonth()&&d.getFullYear()===now.getFullYear();});
-  }
-  const fac=list.reduce((a,o)=>a+o.precio,0);
-  const cos=list.reduce((a,o)=>a+(o.costo||0),0);
-  const gan=list.reduce((a,o)=>a+o.ganancia,0);
-  const diasMes=new Date(now.getFullYear(),now.getMonth()+1,0).getDate();
-  const gastoP=resumenMode==='hoy'
-    ?Math.round((s().gastosLocal+s().gastosPersonal)/diasMes)
-    :Math.round((s().gastosLocal+s().gastosPersonal)*(now.getDate()/diasMes));
-  const neta=gan-gastoP;
-  document.getElementById('resumenContent').innerHTML=`
-    <div class="stat-grid">
-      <div class="stat-box"><div class="stat-label">Facturado</div><div class="stat-val sv-yellow">${fmt(fac)}</div></div>
-      <div class="stat-box"><div class="stat-label">Órdenes</div><div class="stat-val sv-blue">${list.length}</div></div>
-      <div class="stat-box"><div class="stat-label">Ganancia bruta</div><div class="stat-val sv-green">${fmt(gan)}</div></div>
-      <div class="stat-box"><div class="stat-label">En repuestos</div><div class="stat-val sv-orange">${fmt(cos)}</div></div>
-    </div>
-    <div class="card" style="background:linear-gradient(135deg,#0a1a0a,#0d2a0d);border-color:${neta>=0?'var(--green)':'var(--red)'}">
-      <div class="card-title" style="color:${neta>=0?'var(--green)':'var(--red)'}">${resumenMode==='hoy'?'Resultado del día':'Resultado del mes'}</div>
-      <div class="detail-row"><span class="dr-label">Ganancia bruta</span><span class="dr-val" style="color:var(--green)">${fmt(gan)}</span></div>
-      <div class="detail-row"><span class="dr-label">Gastos proporcionales</span><span class="dr-val" style="color:var(--red)">− ${fmt(gastoP)}</span></div>
-      <div style="text-align:center;margin-top:10px;">
-        <div style="font-size:.64rem;text-transform:uppercase;color:${neta>=0?'var(--green)':'var(--red)'}">Ganancia neta real</div>
-        <div style="font-size:1.7rem;font-weight:900;color:${neta>=0?'var(--green)':'var(--red)'}">${fmt(neta)}</div>
-      </div>
-    </div>
-    ${list.length?`<div class="card"><div class="card-title">Detalle</div>${list.map(o=>`
-      <div class="rep-item" onclick="abrirDetalle('${o.id}')">
-        <div><div style="font-weight:600">${o.nombre}</div><div style="font-size:.68rem;color:var(--muted)">${o.marca} ${o.modelo} · ${tipoLabel(o.tipo)}</div></div>
-        <div style="text-align:right"><div class="ri-precio">${fmt(o.precio)}</div><div class="ri-gan">+${fmt(o.ganancia)}</div></div>
-      </div>`).join('')}</div>`:'<div class="empty-state"><div class="es-icon">📊</div><p>Sin órdenes en este período</p></div>'}`;
-};
-
-// IMPORTAR LISTAS
-function importarArchivo(input){
-  const file=input.files[0];if(!file)return;
-  const reader=new FileReader();
-  reader.onload=e=>{document.getElementById('listaTexto').value=e.target.result;};
-  reader.readAsText(file);
-}
-async function importarTexto(){
-  const txt=document.getElementById('listaTexto').value.trim();
-  if(!txt){toast('⚠️ Pegá o subí una lista');return;}
-  const lineas=txt.split('\n').filter(l=>l.trim());
-  let ok=0,err=0;
-  const precios=JSON.parse(JSON.stringify(getPrecios()));
-  lineas.forEach(linea=>{
-    const p=linea.split('|').map(x=>x.trim());
-    if(p.length<4){err++;return;}
-    const [marca,modelo,tipo,costoStdStr,costoOrigStr]=p;
-    const std=parseFloat(costoStdStr)||0;
-    const orig=parseFloat(costoOrigStr)||0;
-    if(!marca||!modelo||!tipo){err++;return;}
-    if(!precios[marca]){precios[marca]={modelos:[],costos:{}};}
-    if(!precios[marca].modelos.includes(modelo))precios[marca].modelos.push(modelo);
-    if(!precios[marca].costos[tipo])precios[marca].costos[tipo]={};
-    precios[marca].costos[tipo][modelo]={std,orig};
-    ok++;
-  });
-  window._state.precios=precios;
-  await fbSave('config/precios',precios);
-  document.getElementById('listaTexto').value='';
-  toast(`✅ Importados ${ok} precios${err?' · '+err+' errores':''} ☁️`);
-}
-
-// EDITAR PRECIO
-function renderDbEdit(){
-  const marca=document.getElementById('aj-dbMarca').value;
-  const cont=document.getElementById('dbEditList');
-  if(!marca){cont.innerHTML='';return;}
-  const db=getPrecios();if(!db[marca]){cont.innerHTML='';return;}
-  const tipos=['modulo','bateria','pin','tapa','vidrio_plano','vidrio_curvo'];
-  const tNom={modulo:'Módulo',bateria:'Batería',pin:'Pin de carga',tapa:'Tapa',vidrio_plano:'Vidrio plano',vidrio_curvo:'Vidrio curvo'};
-  let html='';
-  tipos.forEach(t=>{
-    const costos=db[marca].costos?.[t];if(!costos)return;
-    html+=`<div style="font-size:.68rem;font-weight:700;color:var(--accent);margin:9px 0 3px;text-transform:uppercase">${tNom[t]}</div>`;
-    Object.entries(costos).forEach(([modelo,val])=>{
-      const std=val.std||0;const orig=val.orig||0;
-      html+=`<div class="db-item">
-        <div>${modelo}</div>
-        <div style="display:flex;align-items:center;gap:5px">
-          <span style="font-size:.72rem;color:var(--muted)">Std: <span style="color:var(--yellow)">${fmt(std)}</span>${orig?` / Orig: <span style="color:var(--accent)">${fmt(orig)}</span>`:''}</span>
-          <button class="db-edit" onclick="editarPrecio('${marca}','${t}','${modelo.replace(/'/g,"\\'")}')">✏️</button>
-        </div>
-      </div>`;
-    });
-  });
-  cont.innerHTML=html||'<p style="font-size:.76rem;color:var(--muted)">Sin datos.</p>';
-}
-async function editarPrecio(marca,tipo,modelo){
-  const actual=getPrecios()[marca]?.costos[tipo]?.[modelo]||{std:0,orig:0};
-  const nuevoStd=prompt(`Costo ESTÁNDAR — ${marca} ${modelo}\nActual: ${fmt(actual.std)}`,actual.std);
-  if(nuevoStd===null)return;
-  const nuevoOrig=prompt(`Costo OLED/ORIGINAL — ${marca} ${modelo}\n(0 si no aplica)\nActual: ${fmt(actual.orig)}`,actual.orig);
-  if(nuevoOrig===null)return;
-  const precios=JSON.parse(JSON.stringify(getPrecios()));
-  if(!precios[marca])precios[marca]={modelos:[],costos:{}};
-  if(!precios[marca].costos[tipo])precios[marca].costos[tipo]={};
-  precios[marca].costos[tipo][modelo]={std:parseFloat(nuevoStd)||0,orig:parseFloat(nuevoOrig)||0};
-  window._state.precios=precios;
-  await fbSave('config/precios',precios);
-  renderDbEdit();toast('✅ Precio actualizado ☁️');
-}
-
-// AJUSTES
-function cambiarClave(){
-  const c1=document.getElementById('aj-clave1').value,c2=document.getElementById('aj-clave2').value;
-  if(!c1){toast('⚠️ Ingresá una clave');return;}
-  if(c1!==c2){toast('⚠️ Las claves no coinciden');return;}
-  window._state.pin=c1;fbSave('config/pin',c1);
-  document.getElementById('aj-clave1').value='';document.getElementById('aj-clave2').value='';
-  toast('✅ Clave actualizada ☁️');
-}
-function guardarNombreTaller(){
-  window._state.tallerNombre=document.getElementById('aj-nombre').value||'Leonel Cell (DisplayFix)';
-  fbSave('config/tallerNombre',window._state.tallerNombre);toast('✅ Nombre guardado ☁️');
-}
-function guardarGastos(){
-  window._state.gastosLocal=parseFloat(document.getElementById('aj-gastos').value)||900000;
-  window._state.gastosPersonal=parseFloat(document.getElementById('aj-personal').value)||1500000;
-  fbSave('config/gastosLocal',window._state.gastosLocal);
-  fbSave('config/gastosPersonal',window._state.gastosPersonal);
-  toast('✅ Gastos guardados ☁️');
-}
-async function borrarTodo(){
-  if(!confirm('¿Borrar TODAS las órdenes?'))return;
-  await fbDel('ordenes');toast('Registros eliminados');
-}
-
-function toast(msg){
-  const el=document.getElementById('toast');
-  el.textContent=msg;el.classList.add('show');
-  setTimeout(()=>el.classList.remove('show'),2600);
-}
-
-document.getElementById('modal').addEventListener('click',function(e){if(e.target===this)cerrarModal();});
-document.getElementById('pinInput').addEventListener('keydown',e=>{if(e.key==='Enter')doLogin();});
-
-if(sessionStorage.getItem('li')==='1'){
-  document.getElementById('loginScreen').style.display='none';
-  document.getElementById('app').style.display='block';
-  window._appReady=true;
-  setTimeout(initApp,600);
-}
 </script>
 </body>
 </html>
